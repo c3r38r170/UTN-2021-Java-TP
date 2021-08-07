@@ -8,6 +8,43 @@
 <meta charset="ISO-8859-1">
  <LINK href="estiloregistro.css" rel="stylesheet" type="text/css">
 <title>registro	Boliche</title>
+<script type="text/javascript">
+
+function sendPOST(url,data,returnType=null,otherOptions=null){
+	if(!(data instanceof FormData)){
+		let tempfd=new FormData;
+		for(let key in data){
+			let value=data[key];
+			if(value != null && !(value instanceof File) && typeof value == "object"){ //I think it works for both objects and arrays
+				for(let pair of JSONAsURLEncodedStringIterator(value,key))
+					tempfd.append(...pair);
+			}else tempfd.append(key,value);
+		}
+		data=tempfd;
+	}
+	
+	let options={
+		method:'POST'
+		,body:data
+	};
+	if(otherOptions)
+		Object.assign(options,otherOptions);
+	
+	return returnType?
+		fetch(url,options).then(r=>r[returnType]())
+		:fetch(url,options);
+}
+
+	addEventListener('DOMContentLoaded',()=>{
+		document.forms[0].onsubmit=function(e){
+			sendPOST('backend',{nombre:this.nombre.value})
+				.then(res=>res.text())
+				.then(res=>alert(res));
+			e.preventDefault();
+			return false;
+		};
+	});
+</script>
 </head>
 <body>
 
@@ -16,12 +53,12 @@
 
 <h1 id="title">resgistrate para acceder  a cualquier noche</h1> 
 <diV id= "mover">
-			<form method="post">
+			<form method="post" action="backend">
 <table >
 
   <tr>
     <td> <label class="color">Nombre </label> </td>
-    <td> <input id="input0"  placeholder="ingrese su nombre"></td>
+    <td> <input id="input0"  placeholder="ingrese su nombre" name="nombre" required></td>
    
   </tr>
 
