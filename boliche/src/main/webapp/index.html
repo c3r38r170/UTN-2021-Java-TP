@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="https://unpkg.com/@c3r38r170/c3tools"></script>
+	<script type="text/javascript">
+		addEventListener('DOMContentLoaded',()=>{
+			gEt('login').onclick=()=>{
+				sendPOST('ControladorLogin',{
+					password:gEt('user').value
+				})
+					.then(res=>res.text())
+					.then(res=>alert(res))
+			}
+		})
+	</script>
 </head>
 <body>
 
 <!-- TODO: buscar un diseño copado con esas etiquetas que se van para arriba -->
 <label for="user">Nombre de usuario</label>
-<input type="text" name="user" id=user/>
+<input type="text" name="user" id="user">
 <label for="pass">Contraseña</label>
-<input type="password" name="pass" id="pass"/>
+<input type="password" name="pass" id="pass">
+<button id=login>Entrar</button>
+<button id=registrarse>Registrarse</button>
 
 </body>
 </html>
