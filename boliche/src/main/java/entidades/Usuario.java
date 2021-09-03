@@ -2,13 +2,13 @@ package entidades;
 
 public class Usuario {
 	private String nombre;
-	private String contraseña;
+	private String contraseÃ±a;
 	private String nickname;
 	
-	public Usuario(String nombre, String contraseña, String nickname) {
+	public Usuario(String nombre, String contraseÃ±a, String nickname) {
 		super();
 		this.nombre = nombre;
-		this.contraseña = contraseña;
+		this.contraseÃ±a = contraseÃ±a;
 		this.nickname = nickname;
 	}
 	
@@ -18,11 +18,11 @@ public class Usuario {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getContraseÃ±a() {
+		return contraseÃ±a;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseÃ±a(String contraseÃ±a) {
+		this.contraseÃ±a = contraseÃ±a;
 	}
 	public String getNickname() {
 		return nickname;
