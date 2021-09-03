@@ -1,5 +1,5 @@
-package Controlador;
-import  conexiones.Conexion;
+package entidades;
+import  datos.Conexion;
 import  java.sql.*;
 
 public class Comentario {
@@ -13,7 +13,6 @@ public class Comentario {
 			
 			ResultSet rs = null;
 			PreparedStatement s= null;
-			//String  query = "INSERT INTO comentario (comentari)VALUES ("+st+");" ;
 			
 			try {
 				cn = conexio.conectar();
