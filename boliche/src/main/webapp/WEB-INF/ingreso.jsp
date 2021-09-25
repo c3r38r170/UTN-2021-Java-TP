@@ -16,5 +16,6 @@
 	mail:  <input type="text" name="correo">
     <input type="submit" value="Enviar la información">
     <p>
+    </form>
 </body>
 </html>
