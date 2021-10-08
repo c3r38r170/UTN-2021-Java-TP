@@ -6,11 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/UTN-2021-Java-TP/boliche/lib/javax.mail.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
@@ -18,8 +13,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-80.24.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="/UTN-2021-Java-TP/boliche/lib/zxing.jar"/>
+	<classpathentry kind="lib" path="/UTN-2021-Java-TP/boliche/lib/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/labar/OneDrive/Escritorio/JAVA/mysql-connector-java-8.0.24/mysql-connector-java-80.24.jar"/>
+	<classpathentry kind="lib" path="C:/Users/labar/OneDrive/Escritorio/mysql-connector-java-8.0.26.zip"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.26.zip"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

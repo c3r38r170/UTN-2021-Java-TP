@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="a" method="post">
+<form action="pruebaserv" method="post">
     Ingresa ID: <input type="text" name="id">
     ingrese comentarios  <input type="text" name="com">
 	

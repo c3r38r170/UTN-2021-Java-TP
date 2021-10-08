@@ -2,21 +2,25 @@ package servlets;
 
 import javax.sql.*;
 
+import com.mysql.cj.Session;
+import javax.servlet.http.*; 
 import datos.Conexion;
 import entidades.Usuario;
-
+import javax.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import javax .servlet.HttpConstraintElement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionActivationListener;
 
 /**
  * Servlet implementation class login
@@ -55,15 +59,18 @@ public class login extends HttpServlet {
 	Usuario  U = new Usuario();
 	String UsU= U.getByUsuarios(Usuario);
 	String contra =U.GETcontrasena(contrasena);
-
+	
 	if(UsU != "-1" && contra != "-1") 
 	{
 	  int rol = U.verifica_Usuario(contra, UsU);
 	  switch(rol) 
 	  {
-	  case 1: response.sendRedirect("Clientes.html");
-	  case 2: response.sendRedirect("SuperAdmins.html");
-	  case 3: response.sendRedirect("Seguridad.html");
+	  case 1: request.getRequestDispatcher("Cliente.jsp").forward(request, response);
+	  HttpSession session = request.getSession();
+	  Usuario sesionU = U.getUsuarioData(UsU,contra);
+	  session.setAttribute("usuarior",sesionU );
+	  case 2: request.getRequestDispatcher("SuperAdmin.jsp").forward(request, response); break;
+	  case 3: request.getRequestDispatcher("Seguridad.jsp").forward(request, response); break;
 	  
 	  }
 	  

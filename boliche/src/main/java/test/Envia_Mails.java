@@ -1,78 +1,60 @@
 package test;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.InvalidParameterException;
 import java.util.Properties;
-
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class Envia_Mails {
-
-	 String asunto = "Mail de Confirmacion Boliche";
-     String mensaje = "codigo";
-     String receptores=" mail receptro";//Usuario@gmail.com
-
+public class Envia_Mails 
+{
 	
-	//private String password;
-
-     public void enviamails(String asunto,String mensaje,String receptor) 
-     { 
-    	sendEmail(asunto,mensaje,receptor) ;
-     }
-	
-	
-
-    
-    
-     
-     private Session session;
-	private void propiedades()
+	public void enviar(String correo_receptorinput,String asunto, String Mensaje) 
 	{
-		
-		Properties props = new Properties();
-		
-		props.setProperty("mail.smtp.host", "smtp.gmail.com");
-        props.setProperty("mail.smtp.starttls.enable", "true");
-        props.setProperty("mail.smtp.port", "587");
-        props.setProperty("mail.smtp.auth", "true");
- 
-		session = Session.getDefaultInstance(props);
+
+	 try {
+	        Properties propiedades = new Properties();
+	        propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
+	        propiedades.setProperty("mail.smtp.starttls.enable", "true");
+	        propiedades.setProperty("mail.smtp.port", "587");
+	        propiedades.setProperty("mail.smtp.auth", "true");
+	        
+	        
+	        
+	        String correo_emisor = "labarbahipolito3@gmail.com";
+	        String contraseña_emisor = "operacion9";
+	        
+	        String correo_receptor = correo_receptorinput;
+	     
+	        String mensaje = "Hola , soy un mensaje desde java, puto al que le llega este mensaaje";
+	        
+	        Session sesion = Session.getDefaultInstance(propiedades);
+	        MimeMessage message = new MimeMessage(sesion);
+	        message.setFrom(new InternetAddress(correo_emisor));
+	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(correo_receptor));
+	        message.setSubject(asunto);
+	        message.setText(mensaje);
+	        
+	        Transport transporte = sesion.getTransport("smtp");
+	        transporte.connect(correo_emisor,contraseña_emisor);
+	        transporte.sendMessage(message , message.getRecipients(Message.RecipientType.TO));
+	        transporte.close();
+	        
+	       
+	        
+	        } 
+	 		  catch (AddressException ex) {
+	           System.out.print(ex);
+	        } catch (MessagingException exs) {
+		           System.out.print(exs);}
 	}
-	
-	
-	
-	
-	private void sendEmail(String asunto,String mensaje,String receptores)
-	{
-		 
-		propiedades();
-		try{
-//conostruyo mensaje
-			final String  correoRemitente =" aca va el correo ";//TODO crear el correo
-			final String passRemitente= " aca va la contrasena del mail";
-			
-			 MimeMessage message = new MimeMessage(session);
-	         message.setFrom(new InternetAddress(correoRemitente));
-	      
-	            message.addRecipients(Message.RecipientType.TO, receptores);
-	            message.setSubject(asunto);
-	            message.setText(mensaje);
-
-	            Transport t = session.getTransport("smtp");
-	            t.connect(correoRemitente, passRemitente);
-	            t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
-
-// Cierra  la conexion del puerto
-	            t.close();
-	         
-				} catch (MessagingException e)
-				{
-						
-						System.out.print("error :  "+e);
-				}
 		
-    }
 }
+
