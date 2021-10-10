@@ -62,13 +62,16 @@ public class login extends HttpServlet {
 	
 	if(UsU != "-1" && contra != "-1") 
 	{
-	  int rol = U.verifica_Usuario(contra, UsU);
+		
+	  int rol = U.verifica_Usuario(contra, UsU); 
+	
 	  switch(rol) 
 	  {
 	  case 1: request.getRequestDispatcher("Cliente.jsp").forward(request, response);
 	  HttpSession session = request.getSession();
 	  Usuario sesionU = U.getUsuarioData(UsU,contra);
 	  session.setAttribute("usuarior",sesionU );
+	  break;
 	  case 2: request.getRequestDispatcher("SuperAdmin.jsp").forward(request, response); break;
 	  case 3: request.getRequestDispatcher("Seguridad.jsp").forward(request, response); break;
 	  

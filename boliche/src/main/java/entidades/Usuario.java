@@ -71,7 +71,7 @@ public class Usuario {
 		try {
 			 Conexion1 con = new Conexion1();
 			cn = con.conectar();
-			s= cn.prepareStatement("select usuario  from usuarios  where contraseña = ? ;");
+			s= cn.prepareStatement("select contraseña  from usuarios  where contraseña = ? ;");
 			s.setString(1,pass);
 			rs=s.executeQuery();
 			while(rs.next()) 
@@ -95,37 +95,33 @@ public class Usuario {
 		
 		 String usuarios =null ;
 		 String cont = null;
-		 int rol = 0;
+		
 		 int result;
 	
 	try {
 		 Conexion1 con = new Conexion1();
 		Connection cn = null;
-		ResultSet rs = null ;
+		ResultSet rs = null ;	
+		 int rol = 0;
 		cn= con.conectar();
-			ps= cn.prepareStatement("select usuario, contraseña ,rolID from usuarios  where contraseña = ? and usuario = ? ;");
+			ps= cn.prepareStatement("select rolID from usuarios  where contraseña = ? and usuario = ? ;");
 			
 			ps.setString(1,contra);
 			ps.setString(2,usua);
 			rs=ps.executeQuery();
+			
 			while(rs.next()) 
-			{  usuarios = rs.getString(1);
-			    cont= rs.getString(2);
-			    rol= rs.getInt(3);
+			{ // usuarios = rs.getString(1);
+			    //cont= rs.getString(2);
+			    rol= (int)rs.getInt(1);
+			    
 			    return rol;
 			}
-		}
-			catch(SQLException ex) { System.out.println(ex+"error en verifica usuario"); result=-1;}
-			catch(Exception e) {System.out.println(e+"error en verifica usuario");result = -1;}
-			
 			return rol;
-			
-		
-		
-		
+		}
+			catch(SQLException ex) { System.out.println(ex+"error en verifica usuario"); return -1;}
+			catch(Exception e) {System.out.println(e+"error en verifica usuario");return -1;}
 	}
-	
-		
 	
 	public String getNombre() {
 		return nombre;

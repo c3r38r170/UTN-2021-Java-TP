@@ -11,10 +11,11 @@
 
 <form action="login" method="post">
     <p> 
-    Usuaro: <input type="text" name="usu">
-	Contrase: <input type="text" name="contrasena">
-	nickname:  <input type="email" name="nick">
-	mail:  <input type="text" name="correo">
+    Usuaro: <input type="text" name="usu"> <br>
+    
+	Contraseña: <input type="text" name="contrasena"><br>
+	nickname:  <input type="text" name="nick"><br>
+	mail:  <input type="email" name="correo"><br>
     <input type="submit" value="Enviar la información">
     <p>
     </form>
