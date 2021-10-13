@@ -16,7 +16,7 @@
 				
 
 		}
-		#k{margin-bottom: 10em;}
+		
 		#menu ul{
 			list-style: none;
 		margin-bottom: 30em;
