@@ -48,12 +48,14 @@ public class Usuario {
 			rs=s.executeQuery();
 			while(rs.next()) 
 			{  urios = rs.getString(1); }
-					
-		     }
 			
-		catch(SQLException e) {System.out.print(e+"error en getusuario"); return "-1";}
+			if(urios== null) {return "-1";}		
+		     }
 		
-		catch(Exception ex ) {System.out.print(ex+"error en getuusario");return "-1";} 
+			
+		catch(SQLException e) {System.out.print(e+"error "); return "-1";}
+		
+		catch(Exception ex ) {System.out.print(ex+"error ");return "-1";} 
 		
 		return urios;
 		
@@ -76,7 +78,8 @@ public class Usuario {
 			rs=s.executeQuery();
 			while(rs.next()) 
 			{  password = rs.getString(1); }
-			
+
+			if(password== null) {return "-1";}	
 		}
 		
 		catch(SQLException e) {System.out.print(e+"error en getcontrasena"); return "-1";}
@@ -141,43 +144,69 @@ public class Usuario {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-/*	public Usuario getCreador() {
-		// Conectar a la base de datos y traer el creador, si hay uno.
-		return null;
-	}*/
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public int getRol() {
+		return rol;
+	}
+
+	public void setRol(int rol) {
+		this.rol = rol;
+	}
+
+	public boolean isVerificado() {
+		return verificado;
+	}
+
+	public void setVerificado(boolean verificado) {
+		this.verificado = verificado;}
 
 public Usuario getUsuarioData(String usU, String contra) {
 		
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement ps= null;
-		String contras = null, 
-				usuario = null,
-				nickname = null,
-				mail = null;
-		int rolID = 0, ID , creadorID ;
-		boolean v = false;
+		
+		
+		
 		try {
 			 Conexion1 con = new Conexion1();
+			
 			cn=con.conectar();
 			ps= cn.prepareStatement("select  contraseña ,usuario,nickname,rolID,creadorID, ID ,Mails,Verificado from usuarios  where contraseña = ? and usuario = ?  ;");
-			rs=ps.executeQuery();
+			
 			ps.setString(1,contra);
 			ps.setString(2,usU);
+			rs=ps.executeQuery();
 			while(rs.next()) 
-			{  		contras= rs.getString(1);
-			     	usuario= rs.getString(2);
+			{  		contraseña= rs.getString(1);
+			     	nombre= rs.getString(2);
 			     	nickname=rs.getString(3);
-			     	rolID= rs.getInt(4);
+			     	rol= rs.getInt(4);
 			    	mail=rs.getString(5);
-			    	v=rs.getBoolean(6);
+			    	verificado=rs.getBoolean(6);
 			    	
-			    	
+			    	Usuario usus = new Usuario(nombre,contraseña,nickname,mail,verificado,rol);
+					return usus;
 		   }
-	}
+			Usuario usus = new Usuario(nombre,contraseña,nickname,mail,verificado,rol);
+			return usus;
+		}
+		    catch(SQLException ex) { System.out.println(ex+"error en usuariodata"); return null;}
+			catch(Exception e) {System.out.print("error"+ e); return null;}
+		
+	
+		 
 			
-			catch(Exception e) {System.out.print("error"+e);}
-			Usuario usus = new Usuario( usuario,contras,nickname,mail,v,rolID);
-		    return usus;
-	}
+		   
 }
+
+
+}
+
