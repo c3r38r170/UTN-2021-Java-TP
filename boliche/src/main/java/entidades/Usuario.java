@@ -1,5 +1,6 @@
 package entidades;
 import datos.Conexion1;
+import datos.PSParameter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,11 +33,29 @@ public class Usuario {
 	}
 
 	@SuppressWarnings("null")
-	public String getByUsuarios(String usu ) {
+	static public String getByUsuario(String usu ) {
+
+		 String urios = null;
+		 
+		/*Conexion conn = new Conexion();
+		try {
+			ResultSet rs = conn.preparedSelectStatement(
+				"select usuario  from usuarios  where usuario = ?  ;"
+				, new PSParameter[] {
+						new PSParameter(usu)
+				}
+			);
+			while(rs.next())
+			{  urios = rs.getString(1); }
+			
+			if(urios== null) {return "-1";}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
 		
 		Connection cn = null;
 		ResultSet rs = null;
-		 String urios = null;
 		
 		
 		try {
@@ -46,11 +65,11 @@ public class Usuario {
 			s= cn.prepareStatement("select usuario  from usuarios  where usuario = ?  ;");
 			s.setString(1,usu);
 			rs=s.executeQuery();
-			while(rs.next()) 
+			while(rs.next())
 			{  urios = rs.getString(1); }
 			
-			if(urios== null) {return "-1";}		
-		     }
+			if(urios== null) {return "-1";}
+		}
 		
 			
 		catch(SQLException e) {System.out.print(e+"error "); return "-1";}
@@ -96,7 +115,7 @@ public class Usuario {
 		
 		PreparedStatement ps= null;
 		
-		 String usuarios =null ;
+		 String usuarios =null;
 		 String cont = null;
 		
 		 int result;

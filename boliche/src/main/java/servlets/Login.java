@@ -50,15 +50,46 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doGet(request, response);
+		//doGet(request, response);
 		String contrasena = request.getParameter("contrasena");
 		String Usuario= request.getParameter("usu");
 		String nickName= request.getParameter("nick");
 		String mail= request.getParameter("correo");
+
 		
-	Usuario  U = new Usuario();
-	String UsU= U.getByUsuarios(Usuario);
-	String contra =U.GETcontrasena(contrasena);
+		
+		/*String usuario= request.getParameter("username");
+		String contrasena = request.getParameter("password");*/
+
+		Usuario  U = new Usuario();
+		String UsU= U.getByUsuario(Usuario);
+		String contra =U.GETcontrasena(contrasena);
+	
+	//Usuario u = Usuario.getUsuarioByUsername(username);
+	
+	// if(u == null){
+	//	response.getWriter().write("Nombre de usuario incorrecto.");
+	//	response.setStatus(404);
+	//	return;
+	//	}
+
+	// if(!u.getHabilitado()){
+	//	response.getWriter().write("Su usuario se encuentra deshabilitado.");
+	//	response.setStatus(403);
+	//	return;
+	//	}
+		
+		
+	//if(!u.verificarContraseña(contraseña)){
+	//	response.getWriter().write("Contraseña incorrecta.");
+	//	response.setStatus(403);
+	//	return;
+	//}
+	
+//segun el rol, redirigir
+	//u.getRol();
+	//switch(rol)
+	//	response.getWriter().write("Cliente.jsp");
 	
 	if(UsU != "-1" && contra != "-1") 
 	{

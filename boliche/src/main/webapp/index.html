@@ -7,7 +7,23 @@
 	<script type="text/javascript">
 		addEventListener('DOMContentLoaded',()=>{
 			gEt('login').onclick=()=>{
-				sendPOST('TestEndpoint',{
+				let estadoOk;
+				sendPOST('/login',{
+					username:gEt('user').value,
+					password:gEt('pass').value
+				})
+					.then(res=>{
+						estadoOk=res.ok;
+						return res.text();
+					})
+					.then(texto=>{
+						if(estadoOk)
+							W.location=texto;
+						else alert(texto);
+					})
+			}
+			gEt('registrarse').onclick=()=>{
+				sendPOST('registro',{
 					password:gEt('user').value
 				})
 					.then(res=>res.text())
@@ -21,8 +37,8 @@
 <!-- TODO: buscar un diseño copado con esas etiquetas que se van para arriba -->
 <label for="user">Nombre de usuario</label>
 <input type="text" name="user" id="user">
-<!-- <label for="pass">Contraseña</label>
-<input type="password" name="pass" id="pass">-->
+<label for="pass">Contraseña</label>
+<input type="password" name="pass" id="pass">
 <button id=login>Entrar</button>
 <button id=registrarse>Registrarse</button>
 
