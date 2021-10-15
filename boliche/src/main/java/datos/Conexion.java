@@ -29,7 +29,7 @@ public class Conexion{
 		try {
 			conn = DriverManager.getConnection(URL, USUARIO, CLAVE);
 		} catch (SQLException e) {
-			System.out.println("Error en la conexión" + e);
+			System.out.println("Error en la conexión: " + e);
 			e.printStackTrace();
 		}
 	}

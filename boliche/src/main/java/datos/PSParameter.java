@@ -19,6 +19,11 @@ public class PSParameter {
 		this.tipo=Types.STRING;
 	}
 	
+	public PSParameter(int parametro) {
+		this.parametro=parametro;
+		this.tipo=Types.INT;
+	}
+	
 	public Types getTipo() {
 		return tipo;
 	}
