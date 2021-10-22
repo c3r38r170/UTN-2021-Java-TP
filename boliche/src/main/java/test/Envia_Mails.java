@@ -23,7 +23,7 @@ public class Envia_Mails
 	        Properties propiedades = new Properties();
 	        propiedades.setProperty("mail.smtp.host", "smtp.gmail.com");
 	        propiedades.setProperty("mail.smtp.starttls.enable", "true");
-	        propiedades.setProperty("mail.smtp.port", "587");
+	        propiedades.setProperty("mail.smtp.port", "25");
 	        propiedades.setProperty("mail.smtp.auth", "true");
 	        
 	        
@@ -33,7 +33,7 @@ public class Envia_Mails
 	        
 	        String correo_receptor = correo_receptorinput;
 	     
-	        String mensaje = "Hola , soy un mensaje desde java, puto al que le llega este mensaaje";
+	        String mensaje = "Hola, soy un mensaje desde java, puto al que le llega este mensaje.";
 	        
 	        Session sesion = Session.getDefaultInstance(propiedades);
 	        MimeMessage message = new MimeMessage(sesion);

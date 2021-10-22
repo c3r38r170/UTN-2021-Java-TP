@@ -7,8 +7,8 @@ import java.util.Base64;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import javax.json.Json;
-import javax.json.JsonObject;
+/*import javax.json.Json;
+import javax.json.JsonObject;*/
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -54,7 +54,7 @@ public class Test extends HttpServlet {
 			a=e.getMessage();
 			//e.printStackTrace();
 		}
-		JsonObject value = Json.createObjectBuilder()
+		/*JsonObject value = Json.createObjectBuilder()
 		     .add("firstName", "John")
 		     .add("lastName", "Smith")
 		     .add("age", 25)
@@ -70,7 +70,7 @@ public class Test extends HttpServlet {
 		         .add(Json.createObjectBuilder()
 		             .add("type", "fax")
 		             .add("number", "646 555-4567")))
-		     .build();
+		     .build();*/
 		response.getWriter().append(a);
 	}
 
@@ -86,10 +86,10 @@ public class Test extends HttpServlet {
 		);
 	}
 	
-	/*tryPassword(hash,contraseña) va a tener toda una logica de decodificacion de Base64 a byte[]
+	/*tryPassword(hash,contraseï¿½a) va a tener toda una logica de decodificacion de Base64 a byte[]
 	 * 1) separar por :
 	 * 2) convertir la sal en byte[16]
-	 * 3) hashear la contraseña dada con la sal
+	 * 3) hashear la contraseï¿½a dada con la sal
 	 * 4) comparar el hash resultante con el guardado
 	 * 
 	 * Para esto necesitamos el algoritmo de decodificacion y eso, y hashPassword(password, salt)
