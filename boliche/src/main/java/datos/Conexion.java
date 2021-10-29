@@ -38,7 +38,10 @@ public class Conexion{
 		Statement s =conn.createStatement();
 		return s.executeQuery(query);
 	}
-	
+
+	public ResultSet preparedSelectStatement(String query,PSParameter parametroUnico) throws SQLException{
+		return this.preparedSelectStatement(query, new PSParameter[] {parametroUnico});
+	}
 	public ResultSet preparedSelectStatement(String query,PSParameter[] parametros) throws SQLException{
 		PreparedStatement s= null;
 		
