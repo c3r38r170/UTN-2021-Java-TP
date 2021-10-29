@@ -60,7 +60,10 @@ public class Conexion{
 			
 		return s.executeQuery();
 	}
-	
+
+	public int preparedStatement(String query,PSParameter parametroUnico) throws SQLException {
+		return this.preparedStatement(query, new PSParameter[] {parametroUnico});
+	}
 	public int preparedStatement(String query,PSParameter[] parametros) throws SQLException {
 		PreparedStatement s= null;
 		
