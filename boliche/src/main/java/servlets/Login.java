@@ -23,9 +23,9 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionActivationListener;
 
 /**
- * Servlet implementation class login
+ * Servlet implementation class Login
  */
-@WebServlet("/login")
+@WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -50,82 +50,83 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//doGet(request, response);
+		doGet(request, response);
 		String contrasena = request.getParameter("contrasena");
-		String Usuario= request.getParameter("usu");
-		String nickName= request.getParameter("nick");
+		String nombreUsuario= request.getParameter("user");
+		String nickName= request.getParameter("nickname");
 		String mail= request.getParameter("correo");
 
-		
-		
-		/*String usuario= request.getParameter("username");
-		String contrasena = request.getParameter("password");*/
 
-		Usuario  U = new Usuario();
-		String UsU= U.getByUsuario(Usuario);
-		String contra =U.GETcontrasena(contrasena);
-	
-	//Usuario u = Usuario.getUsuarioByUsername(username);
-	
-	// if(u == null){
-	//	response.getWriter().write("Nombre de usuario incorrecto.");
-	//	response.setStatus(404);
-	//	return;
-	//	}
+		Usuario user= (Usuario)Usuario.checkUsernameExistence(nombreUsuario);
+		if(user == null) 
+		{
+			response.getWriter().write("Nombre de usuario incorrecto.");
+			response.setStatus(404);
+			return;
+		}
+		
 
-	// if(!u.getHabilitado()){
-	//	response.getWriter().write("Su usuario se encuentra deshabilitado.");
-	//	response.setStatus(403);
-	//	return;
-	//	}
+		if(!user.isVerificado() )
+		{
+			response.getWriter().write("Su usuario se encuentra deshabilitado, verifique su mail .");
+			response.setStatus(403);
+			return;
+		}
 		
-		
-	//if(!u.verificarContraseña(contraseña)){
-	//	response.getWriter().write("Contraseña incorrecta.");
-	//	response.setStatus(403);
-	//	return;
-	//}
-	
-//segun el rol, redirigir
-	//u.getRol();
-	//switch(rol)
-	//	response.getWriter().write("Cliente.jsp");
-	
-	if(UsU != "-1" && contra != "-1") 
-	{
-		
-	  int rol = U.verifica_Usuario(contra,UsU); 
-	
-	  switch(rol) 
-	  {
-	  case 1:
-	  HttpSession session = request.getSession();
-	  Usuario sesionU = U.getUsuarioData(UsU,contra);
-	  
-	   session.setAttribute("usuarior",sesionU );
-	   System.out.println(sesionU.getNombre());
-	   request.getRequestDispatcher("Cliente.jsp").forward(request, response);
-	  break;
-	  case 2: request.getRequestDispatcher("SuperAdmin.jsp").forward(request, response); break;
-	  case 3: request.getRequestDispatcher("Seguridad.jsp").forward(request, response); break;
-	  
-	  }
-	  
-	  
+
+		if(user.getContraseña() != Usuario.checkPasswordExistence(contrasena) ) 
+		{
+			response.getWriter().write("Contraseña incorrecta.");
+			response.setStatus(403);
+			return;
+		}
+
+
+
+		if(user.getContraseña() != null && user.getNombre() !=null)
+		{
+
+			int rol = Usuario.getUserRol(contrasena,user.getNombre()); 
+
+			
+			switch(rol) 
+			{
+			case 1:
+				HttpSession session = request.getSession();
+				session.setAttribute("usuarior", user );
+				request.getRequestDispatcher("Cliente.jsp").forward(request, response);
+				break;
+			
+			
+			case 2: request.getRequestDispatcher("SuperAdmin.jsp").forward(request, response);
+			HttpSession session1 = request.getSession();
+			session1.setAttribute("usuarior", user );
+			break;
+			
+			
+			
+			case 3: request.getRequestDispatcher("Seguridad.jsp").forward(request, response);
+			HttpSession session2 = request.getSession();
+			session2.setAttribute("usuarior", user );
+			break;
+
+			}
+
+
+		}
+		else 
+		{
+			@SuppressWarnings("unused")
+			PrintWriter pw= response.getWriter();
+			pw.print("<html> <body>");
+			pw.print("<br>");
+			pw.print(" <h3>  Usuario o contraseña incorrectas  </h3> ");
+			pw.print(" <h3>  Verifique los datos  </h3> ");
+			pw.print("</html> </body>");
+		}
+
+
+
+
 	}
-	else 
-	{
-		@SuppressWarnings("unused")
-		PrintWriter pw= response.getWriter();
-		pw.print("<html> <body>");
-		pw.print("<br>");
-		pw.print(" <h3>  Usuario o contraseña incorrectas  </h3> ");
-		pw.print(" <h3>  Verifique los datos  </h3> ");
-		pw.print("</html> </body>");
-	}
-	  
-	
-	
-	
-	}
-	}
+}
