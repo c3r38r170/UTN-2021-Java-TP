@@ -1,7 +1,6 @@
 package servlets;
 
 import javax.sql.*;
-
 import com.mysql.cj.Session;
 import javax.servlet.http.*; 
 import datos.Conexion;
@@ -52,12 +51,13 @@ public class Login extends HttpServlet {
 		
 		doGet(request, response);
 		String contrasena = request.getParameter("contrasena");
-		String nombreUsuario= request.getParameter("user");
+		String nombreUsuario= request.getParameter("usu");
 		String nickName= request.getParameter("nickname");
 		String mail= request.getParameter("correo");
 
 
 		Usuario user= (Usuario)Usuario.checkUsernameExistence(nombreUsuario);
+		
 		if(user == null) 
 		{
 			response.getWriter().write("Nombre de usuario incorrecto.");
@@ -65,17 +65,28 @@ public class Login extends HttpServlet {
 			return;
 		}
 		
+		
 
-		if(!user.isVerificado() )
+
+		if(user.isVerificado() == false   )
 		{
 			response.getWriter().write("Su usuario se encuentra deshabilitado, verifique su mail .");
+			System.out.println();
 			response.setStatus(403);
 			return;
 		}
 		
-
-		if(user.getContraseña() != Usuario.checkPasswordExistence(contrasena) ) 
+			;
+		
+			String contraUsuario= user.getContraseña().strip();
+		 System.out.println(contraUsuario.contentEquals("con"));
+		if( contraUsuario.equals(contrasena) ) 
 		{
+			
+		}
+		else 
+		{
+			System.out.println(contraUsuario+contrasena);
 			response.getWriter().write("Contraseña incorrecta.");
 			response.setStatus(403);
 			return;
@@ -88,7 +99,7 @@ public class Login extends HttpServlet {
 
 			int rol = Usuario.getUserRol(contrasena,user.getNombre()); 
 
-			
+			System.out.println(rol);
 			switch(rol) 
 			{
 			case 1:
@@ -105,9 +116,13 @@ public class Login extends HttpServlet {
 			
 			
 			
-			case 3: request.getRequestDispatcher("Seguridad.jsp").forward(request, response);
+			case 3: 
+				request.getRequestDispatcher("Seguridad.jsp").forward(request, response);
 			HttpSession session2 = request.getSession();
+			HttpSession session3 = request.getSession();
 			session2.setAttribute("usuarior", user );
+			
+			session3.setAttribute("usuariosListar", Usuario.GetUsersForTheNight());
 			break;
 
 			}

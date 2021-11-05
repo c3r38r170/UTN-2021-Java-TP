@@ -50,9 +50,9 @@
 
 <div id="menu">
 		<ul>
-			<li><a href="Seguridad.jsp">Menu</a></li>
-			<li><a href="#">Cargar Ingreso</a></li>
-			<li><a href="#">Editar Estado Cliente</a></li>
+			<li><a href="Seguridad.jsp">menu</a></li>
+			<li><a href="Listados.jsp">Listado de ingresos </a></li>
+			<li><a href="#"> </a></li>
 			
 		</ul>
 	</div>
