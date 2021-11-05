@@ -116,7 +116,6 @@ public class Login extends HttpServlet {
 		}
 		else 
 		{
-			@SuppressWarnings("unused")
 			PrintWriter pw= response.getWriter();
 			pw.print("<html> <body>");
 			pw.print("<br>");

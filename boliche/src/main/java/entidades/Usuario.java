@@ -104,9 +104,7 @@ public class Usuario{
 			            rs = conn.preparedSelectStatement
 			            		(
 					          "select usuario, contraseña, nickname, rolID, correo, verificado, secreto  from usuarios  where usuario = ?  ;"
-					                  , new PSParameter[] {
-							                new PSParameter(usu,Types.STRING)
-				                                           }
+					                  , new PSParameter(usu,Types.STRING)
 			                     );
 			
 		    

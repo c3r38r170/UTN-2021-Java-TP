@@ -1,24 +1,31 @@
 package datos;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class Conexion{
 
 	private static final String CONTROLADOR = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3306/cde";
-	private static final String USUARIO = "root";
-	private static final String CLAVE = "";
-	
+	private static String URL = "jdbc:mysql://localhost:3306/";
+	private static String USUARIO;
+	private static String CLAVE;
 	private Connection conn;
 	
 	static {
-		try {
+		try(Scanner s=new Scanner(Thread.currentThread().getContextClassLoader().getResourceAsStream("credenciales/base-de-datos.credenciales"))){
+		//try(Scanner s=new Scanner(new File("./base-de-datos.credenciales"))){
 			Class.forName(CONTROLADOR);
+			Conexion.URL+=s.nextLine();//nombre de la base de datos
+			Conexion.USUARIO=s.nextLine();
+			Conexion.CLAVE=s.nextLine();
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error al cargar el controlador" + e);
 			e.printStackTrace();

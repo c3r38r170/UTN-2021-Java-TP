@@ -23,12 +23,18 @@
 					})
 			}
 			gEt('registrarse').onclick=()=>{
+			};
+			gEt('modal-form').onsubmit=function(){
 				sendPOST('registro',{
-					password:gEt('user').value
+					usuario:this['modal-user'].value
+					,contrasena:this['modal-pass'].value
+					,nickname:this['modal-name'].value
+					,correo:this['modal-mail'].value
 				})
 					.then(res=>res.text())
-					.then(res=>alert(res))
-			}
+					.then(res=>alert(res));
+				return false;
+			};
 		})
 	</script>
 </head>
@@ -41,6 +47,20 @@
 <input type="password" name="pass" id="pass">
 <button id=login>Entrar</button>
 <button id=registrarse>Registrarse</button>
+
+<div id=modal>
+	<form id=modal-form>
+		<label for="modal-name">Nombre y Apellido</label>
+		<input type="text" name="modal-name" id="modal-name" minlength=4 required>
+		<label for="modal-user">Nombre de usuario</label>
+		<input type="text" name="modal-user" id="modal-user" pattern="^[^\s]*$" minlength=4 required>
+		<label for="modal-pass">Contraseña</label>
+		<input type="password" name="modal-pass" id="modal-pass" minlength=8 required>
+		<label for="modal-mail">Correo Electrónico</label>
+		<input type="email" name="modal-mail" id="modal-mail" required>
+		<button id=modal-registrarse>Registrarse</button>
+	</form>
+</div>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List" %>
-<%@ page import="servlets.login" %>
+<%@ page import="servlets.Login" %>
 <%@ page import= "javax.servlet.http.*" %>
 <%@ page import= "entidades.Usuario" %>
 <!DOCTYPE html>

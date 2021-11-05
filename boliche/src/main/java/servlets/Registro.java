@@ -1,10 +1,11 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import datos.Conexion;
 import datos.PSParameter;
+import utils.Correo;
 
 /**
  * Servlet implementation class Registro
  */
 @WebServlet("/registro")
+@MultipartConfig
 public class Registro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +34,26 @@ public class Registro extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		return;
+		var secreto=request.getParameter("secreto");
+		if(secreto==null)
+			response.sendRedirect("/");
+		else{
+			var con=new Conexion();
+			try {
+				var usuarioAVerificar=con.preparedSelectStatement("SELECT `ID` FROM `usuarios` WHERE `verificado`=0 AND `secreto`=?;", new PSParameter(secreto));
+				usuarioAVerificar.last();
+				if(usuarioAVerificar.getRow()>1) {
+					request.getRequestDispatcher("/");
+					return;
+				}
+					
+				con.preparedStatement("UPDATE `usuarios` SET `verificado`=1 WHERE `ID`=?;", new PSParameter(usuarioAVerificar.getInt(1)));
+				request.getRequestDispatcher("/registrado.jsp");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -39,14 +61,19 @@ public class Registro extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nombreUsuario=request.getParameter("usuario");
-		String contraseña=request.getParameter("contraseña");
+		String contraseña=request.getParameter("contrasena");
 		String nickname=request.getParameter("nickname");
 		if(nombreUsuario.length()<4) {
 			response.getWriter().write("El nombre de usuario no puede tener menos de 4 caracteres.");
 			response.setStatus(400);
 			return;
 		}
-		if(nombreUsuario.length()<4) {
+		if(Pattern.matches(nombreUsuario, "\s")) {
+			response.getWriter().write("El nombre de usuario no puede tener espacios en blanco.");
+			response.setStatus(400);
+			return;
+		}
+		if(nickname.length()<4) {
 			response.getWriter().write("El nick no puede tener menos de 4 caracteres.");
 			response.setStatus(400);
 			return;
@@ -58,9 +85,8 @@ public class Registro extends HttpServlet {
 		var con = new Conexion();
 		
 		try {
-			var usuarios=con.preparedSelectStatement("SELECT COUNT(*) FROM usuarios WHERE `usuario`=?", new PSParameter[] {
-					new PSParameter(nombreUsuario, PSParameter.Types.STRING)
-			});
+			var usuarios=con.preparedSelectStatement("SELECT COUNT(*) FROM `usuarios` WHERE `usuario`=?",new PSParameter(nombreUsuario));
+			usuarios.next();
 			if(usuarios.getInt(1)>0) {
 				response.getWriter().write("El nombre de usuario ya existe.");
 				response.setStatus(400);
@@ -68,14 +94,20 @@ public class Registro extends HttpServlet {
 			}
 			var secreto=new StringBuilder();
 			for(int i=0;i<75;i++)
-				secreto.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz".charAt((int)Math.floor(Math.random()*75)));
-			con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`secreto`) VALUES (?,?,?,4,?,"+secreto.toString()+")", new PSParameter[] {
+				secreto.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz".charAt((int)Math.floor(Math.random()*62)));
+			var correo=request.getParameter("correo");
+			con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`secreto`) VALUES (?,?,?,4,?,'"+secreto.toString()+"')", new PSParameter[] {
 					new PSParameter(nombreUsuario)
 					,new PSParameter(contraseña)
 					,new PSParameter(nickname)
-					,new PSParameter(request.getParameter("correo"))
+					,new PSParameter(correo)
 			});
-			//TODO masndar correo
+			try{				
+				Correo.enviar(correo, "Registro en el sistema del boliche", "Para completar el registro, diríjase al siguiente <a href=\""+request.getServerName()+"/Registro?secreto="+secreto+"\">enlace</a>.");
+				response.getWriter().write("¡Registro completado! Confirme la dirección de correo electrónico para continuar.");
+			}catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

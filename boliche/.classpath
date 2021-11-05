@@ -27,5 +27,7 @@
 	<classpathentry kind="lib" path="lib/simplejavamail dependencies/jakarta.xml.bind-api-2.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/simplejavamail dependencies/jetbrains-runtime-annotations-1.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/simplejavamail dependencies/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="lib/commons-email-1.5.jar"/>
+	<classpathentry kind="lib" path="lib/javax.mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
