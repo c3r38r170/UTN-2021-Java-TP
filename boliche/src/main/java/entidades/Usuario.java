@@ -270,15 +270,12 @@ public class Usuario{
 	public static   LinkedList<Usuario>  GetUsersForTheNight()
 	{
 		 LinkedList<Usuario> linkusuario = new    LinkedList<Usuario> ();
-		    Connection con = null;
 			ResultSet rs = null;
 			PreparedStatement ps= null;
 			try 
 			{
-				Conexion1 cn = new Conexion1();
-				String query="select u.ID,u.usuario,u.nickname,u.correo from usuarios u join acceso ac on ac.clienteID = u.ID where  ac.fecha = CURDATE();";
-				ps= cn.conectar().prepareStatement(query);
-				rs= ps.executeQuery();
+				Conexion cn = new Conexion();
+				rs=cn.executeSelect("select u.ID,u.usuario,u.nickname,u.correo from usuarios u join acceso ac on ac.clienteID = u.ID where  ac.fecha = CURDATE()");
 				
 			 		while(rs.next())
 			 		{
@@ -287,7 +284,7 @@ public class Usuario{
 			 		}
 			 		return linkusuario;
 			}
-			catch(Exception e){System.out.println("e");}
+			catch(Exception e){System.out.println(e.getMessage());}
 		 
 		      return linkusuario;
 	}
