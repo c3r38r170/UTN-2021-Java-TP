@@ -1,14 +1,17 @@
 package entidades;
 import datos.Conexion1;
-import datos.PSParameter;
-import datos.PSParameter.Types;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 import datos.Conexion;
+import datos.Conexion1;
+import datos.PSParameter;
+import datos.PSParameter.Types;
 
 public class Usuario{
 	private  String nombre;
@@ -17,9 +20,16 @@ public class Usuario{
 	private String mail;
 	private int rol;
 	private boolean verificado;
+	private int ID;
 	
 	
 
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -62,7 +72,7 @@ public class Usuario{
 		this.verificado = verificado;}
 	
 	
-	public Usuario(String nombre, String contraseña, String nickname, String mail, boolean verificado,int rol) {
+	public Usuario(int ID,String nombre, String contraseña, String nickname, String mail, boolean verificado,int rol) {
 		super();
 		this.nombre = nombre;
 		this.rol=rol;
@@ -70,6 +80,7 @@ public class Usuario{
 		this.nickname = nickname;
 		this.mail= mail;
 		this.verificado = verificado;
+		this.ID = ID;
 	}
 	
 	public Usuario() {
@@ -89,48 +100,47 @@ public class Usuario{
 		 String urios = null;
 
   	   
-		
-		
-		try {
-			
-			String nombre = null ;
-		  	   String contraseña = null ;
-		  	   String nickname = null; 
-		  	   int rol = 0;
-		  	   String email = null;
-		  	   boolean verificado = false; 
-			
-			     Conexion conn=new Conexion();
-			            rs = conn.preparedSelectStatement
-			            		(
-					          "select usuario, contraseña, nickname, rolID, correo, verificado, secreto  from usuarios  where usuario = ?  ;"
-					                  , new PSParameter[] {
-							                new PSParameter(usu,Types.STRING)
-				                                           }
-			                     );
-			
-		    
-			       while(rs.next()) 
-			     {  
-			    	    nombre = rs.getString(1);
-			    	    contraseña =rs.getString(2);
-			    	    nickname =rs.getString(3);
-			    	    rol= rs.getInt(4);
-			    	    email= rs.getString(5);
-			    	    verificado = rs.getBoolean(6);
+		 try {
 				
+				String nombre = null ;
+			  	   String contraseña = null ;
+			  	   String nickname = null; 
+			  	   int rol = 0;
+			  	   String email = null;
+			  	   boolean verificado = false; 
+				
+				     Conexion conn=new Conexion();
+				            rs = conn.preparedSelectStatement
+				            		(
+						          "select usuario, contraseña, nickname, rolID, correo, verificado, secreto  from usuarios  where usuario = ?  ;"
+						                  , new PSParameter[] {
+								                new PSParameter(usu,Types.STRING)
+					                                           }
+				                     );
+				
+				           System.out.println(rs);
+				       while(rs.next()) 
+				     {  
+				    	    nombre = rs.getString(1);
+				    	    contraseña =rs.getString(2);
+				    	    nickname =rs.getString(3);
+				    	    rol= rs.getInt(4);
+				    	    email= rs.getString(5);
+				    	   verificado = rs.getBoolean(6);
+				    	  
+				    	   
+				     }
+		                                   
+				       Usuario usuario = new Usuario(0,nombre,contraseña,nickname,email,verificado,rol);
+			    	   return usuario;
+				      
+				
+			}	
 			
-			     }
-			       Usuario usuario = new Usuario(nombre,contraseña,nickname,email,verificado,rol);
-			       return usuario;
+			catch(SQLException e) {System.out.print(e+"error "); return null;}
 			
-		}	
-		
-		catch(SQLException e) {System.out.print(e+"error "); return null;}
-		
-		catch(Exception ex ) {System.out.print(ex+"error ");return null;} 
-		
-		
+			catch(Exception ex ) {System.out.print(ex+"error ");return null;} 
+		 
 	}
 	
 	
@@ -138,9 +148,8 @@ public class Usuario{
 	
 	
 	
-	
 	@SuppressWarnings("null")
-	public static  String checkPasswordExistence(String pass ) {
+	public static  String checkPasswordExistence(String pass ,String nombre) {
 		
 		Connection cn = null;
 		ResultSet rs = null;
@@ -149,11 +158,11 @@ public class Usuario{
 		 
 		try {
 			Conexion conn=new Conexion();
-            conn.preparedSelectStatement
+            rs=conn.preparedSelectStatement
             		(
-            				"select contraseña  from usuarios  where contraseña = ? ;"
+            				"select contraseña  from usuarios  where contraseña = ? and usuario =? ;"
 		                  , new PSParameter[] {
-				                new PSParameter(pass,Types.STRING)
+				                new PSParameter(pass,Types.STRING),new PSParameter(nombre,Types.STRING)
 	                                           }
                      );
             
@@ -161,14 +170,14 @@ public class Usuario{
             {  
             	password = rs.getString(1); 
             }
-		    
+            return password;
 		}
 		
 		catch(SQLException e) {System.out.print(e+"error en getcontrasena"); return "-1";}
 		
 		catch(Exception ex) {System.out.print(ex+"error en getcontrasena"); return "-1";}
 		
-		return password;
+		
 	}
 	
 	
@@ -191,6 +200,7 @@ public class Usuario{
 
 		try {
 			Conexion conn=new Conexion();
+			
             ResultSet rs = conn.preparedSelectStatement
             		(
             				"select rolID from usuarios  where contraseña = ? and usuario = ? ;"
@@ -243,24 +253,56 @@ public class Usuario{
 			     	nombre= rs.getString(2);
 			     	nickname=rs.getString(3);
 			     	rol= rs.getInt(4);
-			    	mail=rs.getString(5);
-			    	verificado=rs.getBoolean(6);
+			    	mail=rs.getString(7);
+			    	verificado=rs.getBoolean(8);
 			    	
-			    	Usuario usus = new Usuario(nombre,contraseña,nickname,mail,verificado,rol);
+			    	Usuario usus = new Usuario(0,nombre,contraseña,nickname,mail,verificado,rol);
 					return usus;
 		   }
-			Usuario usus = new Usuario(nombre,contraseña,nickname,mail,verificado,rol);
+			Usuario usus = new Usuario(0,nombre,contraseña,nickname,mail,verificado,rol);
 			return usus;
 		}
 		    catch(SQLException ex) { System.out.println(ex+"error en usuariodata"); return null;}
 			catch(Exception e) {System.out.print("error"+ e); return null;}
 		
 	
-		 
-			
 		   
-}
+  }
+	public static   LinkedList<Usuario>  GetUsersForTheNight()
+	{
+		 LinkedList<Usuario> linkusuario = new    LinkedList<Usuario> ();
+		    Connection con = null;
+			ResultSet rs = null;
+			PreparedStatement ps= null;
+			try 
+			{
+				Conexion1 cn = new Conexion1();
+				String query="select u.ID,u.usuario,u.nickname,u.correo from usuarios u join acceso ac on ac.clienteID = u.ID where  ac.fecha = CURDATE();";
+				ps= cn.conectar().prepareStatement(query);
+				rs= ps.executeQuery();
+				
+			 		while(rs.next())
+			 		{
+			 			Usuario u = new Usuario(rs.getInt(1),rs.getString(2),null,rs.getString(3),rs.getString(4),false,0);
+			 			linkusuario.add(u);
+			 		}
+			 		return linkusuario;
+			}
+			catch(Exception e){System.out.println("e");}
+		 
+		      return linkusuario;
+	}
+	public static void main(String[] args) 
+	{
+		try {
 
+					for(Usuario U :Usuario.GetUsersForTheNight() ) 
+					{
+						System.out.println(U.getID());
+					}
+		}
+		catch(Exception e) {System.out.println(e+"eee");}
+	}
 
 }
 

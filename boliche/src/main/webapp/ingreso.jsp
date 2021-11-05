@@ -9,9 +9,9 @@
 <body>
 
 
-<form action="login" method="post">
+<form action="Login" method="post">
     <p> 
-    Usuaro: <input type="text" name="usu"> <br>
+    Usuario: <input type="text" name="usu"> <br>
     
 	Contraseña: <input type="text" name="contrasena"><br>
 	nickname:  <input type="text" name="nick"><br>
