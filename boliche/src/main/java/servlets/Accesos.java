@@ -35,11 +35,26 @@ public class Accesos extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int usuarioID=Integer.parseInt(request.getParameter("usuarioID"));
 		String comentario=request.getParameter("comentario");
-		String accion=request.getParameter("accion");
+		int accion= Integer.parseInt(   request.getParameter("accion")  );
+		entidades.Accesos ac = new entidades.Accesos();
+		
+	try {
+		if(accion == 1) 
+			{
+
+				ac.DeleteUsersThatGotAcces(usuarioID);
+			}
+
+		if(accion == 0 ) 
+			{
+				ac.SendCommentToGil(usuarioID, comentario);
+			}
+		}
+	catch(Exception e) {System.out.println(e);}
 		
 	}
-
 }
