@@ -17,8 +17,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script type="text/javascript" src="https://unpkg.com/@c3r38r170/c3tools"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BoliSystem - Accesos</title>
+
+	<%@include file="templates/libs.html" %>
 	<script type="text/javascript">
 	addEventListener('DOMContentLoaded',()=>{
 		gEt('usuarios-noche').onclick=function(e){
@@ -41,10 +43,17 @@
 		    if(e.target==this)
 		        this.style.display='none';
 		}
+		gEt('modal-botones').onclick=function(e){
+			let t=e.target;
+			if(t.tagName=='SPAN')
+				t=t.parentNode;
+			if(t.tagName=='BUTTON')
+				t.form.accionValue=t.value;
+		}
 		gEt('modal-form').onsubmit=function(){
 			sendPOST('accesos',{
 				comentario:this.comentario.value.trim()
-				,accion:this.accion.value
+				,accion:this.accionValue
 				,usuarioID:this.usuario.value
 			})
 				.then(res=>{
@@ -82,116 +91,43 @@
 	});
 	</script>
 
-
-<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
-<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bttn.css/0.2.4/bttn.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<%@include file="templates/nav-css.html" %>
 <style>
-		body{padding: -1em;font-family: Arial;
-		}
-		
-		#menu{
-		position:relative;
-			background-color: #000;
-			
-			
-			
-				
-
-		}
-		
-		.tablefix
-		{
-		margin-botton: 5em;
-		margin-top: 2em;
-		}
-		
-		table, th, td 
-		{
-  				border: 1px solid black;
- 				table-layout: fixed;
-  				width: 100%;
- 				border-collapse: collapse;
- 		}
-		
-		#menu ul{
-			list-style: none;
-		
-			padding: 0;
-		}
-
-		#menu ul li{
-			display: inline-block;
-			
-		}
-
-		#menu ul li a{
-			color: white;
-			display: block;
-			padding: 20px 20px;
-		
-			text-decoration: none;
-		}
-
-		#menu ul li a:hover{
-			background-color: #42B881;
-		}
-	
-	#fixTextArea
-	{
-		display:block;
-		margin-left: 50%;
-		margin-left: 50%;
+	/*Modal*/
+	#modal{
+	  position: absolute;
+    inset: 0px;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
 	}
-		
-		/*Modal*/
-		#modal{
-		  position: absolute;
-	    inset: 0px;
-	    background: rgba(0, 0, 0, 0.3);
-	    display: none;
-		}
-			#modal-form{
-		    margin: auto;
-		    background: white;
-		    padding: 1.5rem;
-		    border-radius: 1rem;
-    	}
-    		#modal-comentario{
-    			resize:vertical;
-    			display:block;
-    			margin:.5rem auto;
-    		}
-    		#modal-botones{
-		    	display: flex;
-		    	justify-content: space-evenly;
-		    }
-		    	#modal-botones > button{
-				    width: 5rem;
-		    	}
+		#modal-form{
+	    margin: auto;
+	    background: white;
+	    padding: 1.5rem;
+	    border-radius: 1rem;
+   	}
+   		#modal-comentario{
+   			resize:vertical;
+   			display:block;
+   			margin:.5rem auto;
+   		}
+   		#modal-botones{
+	    	display: flex;
+	    	justify-content: space-evenly;
+	    }
+	    	#modal-botones > button{
+			    width: 5rem;
+	    	}
 		
 	</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
-
-<div id="menu">
-		<ul>
-			<li><a href="Seguridad.jsp">menu</a></li>
-			<li><a href="Listados.jsp">Listado de ingresos </a></li>
-			
-			
-		</ul>
-	</div>
 	
+	<%@include file="templates/nav-seguridad.html" %>
 	
-	
-	
-	 <!-- <form action="ListadoDarAcceso" method="post"> -->
-	 <div class="tablefix">
+	<div class="tablefix">
     <table class="tableStyle">
     <thead>
      <tr>

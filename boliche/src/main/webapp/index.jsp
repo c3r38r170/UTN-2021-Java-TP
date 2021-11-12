@@ -1,10 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>BoliSystem</title>
-	
-	<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+
+	<%@include file="templates/libs.html" %>
 	<style type="text/css">
 
 	#modal{
@@ -35,7 +38,6 @@
 
 	</style>
 	
-	<script type="text/javascript" src="https://unpkg.com/@c3r38r170/c3tools"></script>
 	<script type="text/javascript">
 		/*funciones registro*/
 		function abrirRegistro(){
@@ -110,8 +112,8 @@
 		<input type="password" name="pass" id="pass" minlength=8 required>
 	</form>
 	<div id=main-botones>
-		<button id=login form=main-form>Entrar</button>
-		<button id=registrarse>Registrarse</button>
+		<button form=main-form class="bttn-pill bttn-primary">Entrar</button>
+		<button id=registrarse class="bttn-pill bttn-primary">Registrarse</button>
 	</div>
 </fieldset>
 
@@ -126,7 +128,7 @@
 			<input type="password" name="modal-pass" id="modal-pass" minlength=8 required>
 			<label for="modal-mail">Correo Electrónico</label>
 			<input type="email" name="modal-mail" id="modal-mail" required>
-			<button id=modal-registrarse>Registrarse</button>
+			<button id=modal-registrarse class="bttn-pill bttn-primary">Registrarse</button>
 		</fieldset>
 	</form>
 </div>

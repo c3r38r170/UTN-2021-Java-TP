@@ -90,19 +90,17 @@ public class Login extends HttpServlet {
 			switch(rol) 
 			{
 			case 1:
-				
+				redirección="SuperAdmin.jsp";
+				break;
+			case 2:
+				redirección="Administrador.jsp";
+			break;
+			case 3:
+				redirección="Seguridad.jsp";
+			break;
+			case 4:
 				redirección="Cliente.jsp";
 				break;
-			
-			
-			case 2:
-				redirección="SuperAdmin.jsp";
-			break;
-			case 3: 
-				redirección="Seguridad.jsp";
-			
-			//session.setAttribute("usuariosListar", Usuario.GetUsersForTheNight());
-			break;
 
 			}
 			response.getWriter().write(redirección);
