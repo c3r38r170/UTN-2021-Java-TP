@@ -2,11 +2,13 @@ package servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Accesos
@@ -42,17 +44,24 @@ public class Accesos extends HttpServlet {
 		int accion= Integer.parseInt(   request.getParameter("accion")  );
 		entidades.Accesos ac = new entidades.Accesos();
 		
+		HttpSession sessio = request.getSession();
+
+		
+		
 	try {
 		if(accion == 1) 
 			{
-
-				ac.DeleteUsersThatGotAcces(usuarioID);
+			int idseguridad= (int) sessio.getAttribute("idseguridad");
+				ac.DeleteUsersThatGotAcces(usuarioID,idseguridad);
 			}
 
 		if(accion == 0  && comentario!=null && comentario.trim() != "" &&  comentario.trim() != " ") 
 			{
-				ac.SendCommentToGil(usuarioID, comentario);
+			    int idseguridad= (int) sessio.getAttribute("idseguridad");
+				ac.SendCommentToGil(usuarioID, comentario,idseguridad);
 			}
+			
+		
 		
 		}
 	catch(Exception e) {System.out.println(e);}

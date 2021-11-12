@@ -5,7 +5,7 @@ import datos.PSParameter;
 import datos.PSParameter.Types;
 public class Accesos {
 
-	public void DeleteUsersThatGotAcces(int idUsuario) 
+	public void DeleteUsersThatGotAcces(int idUsuario, int seguridadID) 
 	{
 		@SuppressWarnings("unused")
 		ResultSet rs = null;
@@ -14,10 +14,12 @@ public class Accesos {
 			  @SuppressWarnings("unused")
 			int k = conn.preparedStatement
 			 		(
-			              "DELETE FROM acceso WHERE clienteID = ?    ;"
+			              "Update acceso set=estadoID=1  , seguridadID=? where clienteID = ?    ;"
 			                  , new PSParameter[] 
 			                		  {
+			                			new PSParameter(seguridadID,Types.INT),
 					                    new PSParameter(idUsuario,Types.INT)
+					                   
 			                          }
 			          );
 		} catch (SQLException e) {
@@ -26,7 +28,7 @@ public class Accesos {
 		}
 	}
 	
-	public void SendCommentToGil(int IDusuario,String comentario) 
+	public void SendCommentToGil(int IDusuario,String comentario, int idseguridad) 
 	{//inserta comentario
 		@SuppressWarnings("unused")
 		int  columnsafected;
@@ -35,7 +37,7 @@ public class Accesos {
         try {
         	columnsafected  = conn.preparedStatement
 			 		(
-			              "INSERT INTO comentario(comentario) VALUE (?) ;"
+			              "INSERT INTO comentario(comentario) VALUES (?) ;"
 			                  , new PSParameter[] 
 			                		  {
 					                     new PSParameter(comentario,Types.STRING)
@@ -57,7 +59,7 @@ public class Accesos {
 			  
 			   columnsafected = conn.preparedStatement
 				 		(
-				              "INSERT INTO acceso (comentarioID) value( ? ) where clienteID = ?  "
+				              "INSERT INTO acceso (comentarioID) value( ? ) where clienteID = ?   "
 				                  , new PSParameter[] 
 				                		  {
 						                     new PSParameter(lastid,Types.INT),
@@ -65,6 +67,17 @@ public class Accesos {
 				                          }
 				          );		  
 			  
+			   
+			   //instarar id seguridad que hiso comentario
+			   int k = conn.preparedStatement
+				 		(
+				              "Update acceso set seguridadID =? where clienteID = ?    ;"
+				                  , new PSParameter[] 
+				                		  {
+						                    new PSParameter(IDusuario,Types.INT),
+						                    new PSParameter(idseguridad,Types.INT)
+				                          }
+				          );
 			  
 		} catch (SQLException e) {e.printStackTrace();}
 			
