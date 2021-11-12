@@ -1,7 +1,6 @@
 <%@page import="java.util.Iterator"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@page import="java.sql.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.sql.Date"%>
 
 <%@ page import="java.util.List" %>
 <%@ page import="servlets.Login" %>
@@ -9,6 +8,12 @@
 <%@ page import= "entidades.Usuario" %>
 <%@ page import= "java.util.LinkedList" %>
 <%@ page import= "java.util.HashMap" %>
+<%
+	if(session.getAttribute("usuarior")==null || ((Usuario)session.getAttribute("usuarior")).getRol()!=3){
+		
+		response.sendRedirect("/");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,6 +82,8 @@
 	});
 	</script>
 
+
+<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
 <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bttn.css/0.2.4/bttn.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -161,15 +168,8 @@
 		    	justify-content: space-evenly;
 		    }
 		    	#modal-botones > button{
-				    width: 3rem;
-				    height: 2rem;
+				    width: 5rem;
 		    	}
-		    		/*#modal-pasa{
-		    			background:lime;
-		    		}
-		    		#modal-queda{
-		    			background:red;
-		    		}*/
 		
 	</style>
 <meta charset="UTF-8">

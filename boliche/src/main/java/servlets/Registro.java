@@ -18,7 +18,7 @@ import utils.Correo;
 /**
  * Servlet implementation class Registro
  */
-@WebServlet("/registro")
+@WebServlet("/Registro")
 @MultipartConfig
 public class Registro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -60,6 +60,8 @@ public class Registro extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		
 		String nombreUsuario=request.getParameter("usuario");
 		String contraseña=request.getParameter("contrasena");
 		String nickname=request.getParameter("nickname");
@@ -92,22 +94,25 @@ public class Registro extends HttpServlet {
 				response.setStatus(400);
 				return;
 			}
-			var secreto=new StringBuilder();
+			/*var secreto=new StringBuilder();
 			for(int i=0;i<75;i++)
-				secreto.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz".charAt((int)Math.floor(Math.random()*62)));
+				secreto.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz".charAt((int)Math.floor(Math.random()*62)));*/
 			var correo=request.getParameter("correo");
-			con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`secreto`) VALUES (?,?,?,4,?,'"+secreto.toString()+"')", new PSParameter[] {
+			//con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`secreto`) VALUES (?,?,?,4,?,'"+secreto.toString()+"')", new PSParameter[] {
+			con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`verificado`) VALUES (?,?,?,4,?,1)", new PSParameter[] {
 					new PSParameter(nombreUsuario)
 					,new PSParameter(contraseña)
 					,new PSParameter(nickname)
 					,new PSParameter(correo)
 			});
-			try{				
+			response.getWriter().write("¡Registro completado! Ya puede ingresar al sistema.");
+			/*try{
+				//Le enviaríamos un correo electrónico con un link que verifique el "secreto", y le mostraríamos un mensaje diciendo que debe revisar su casilla de correo.
 				Correo.enviar(correo, "Registro en el sistema del boliche", "Para completar el registro, diríjase al siguiente <a href=\""+request.getServerName()+"/Registro?secreto="+secreto+"\">enlace</a>.");
 				response.getWriter().write("¡Registro completado! Confirme la dirección de correo electrónico para continuar.");
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
-			}
+			}*/
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

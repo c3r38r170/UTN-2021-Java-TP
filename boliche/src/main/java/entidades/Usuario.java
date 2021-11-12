@@ -89,51 +89,36 @@ public class Usuario{
 
 	public  static  Usuario checkUsernameExistence(String usu ) {
 		
-		Connection cn = null;
-		ResultSet rs = null;
-		 String urios = null;
-
-		 try {
-				
-				String nombre = null ;
-			  	   String contraseña = null ;
-			  	   String nickname = null; 
-			  	   int rol = 0;
-			  	   String email = null;
-			  	   boolean verificado = false; 
+     Usuario usuario=null;
+		 try{
 				
 				     Conexion conn=new Conexion();
-				            rs = conn.preparedSelectStatement
+				     ResultSet rs = conn.preparedSelectStatement
 				            		(
-						          "select usuario, contraseña, nickname, rolID, correo, verificado, secreto,ID  from usuarios  where usuario = ?  ;"
-						                  , new PSParameter[] {
-								                new PSParameter(usu,Types.STRING)
-					                                           }
+						          "select ID,usuario, contraseña, nickname, correo, verificado,rolID from usuarios  where usuario = ? AND verificado=1  ;"
+						                  ,new PSParameter(usu,Types.STRING)
 				                     );
-				
-				           System.out.println(rs);
-				       while(rs.next()) 
-				     {  
-				    	    nombre = rs.getString(1);
-				    	    contraseña =rs.getString(2);
-				    	    nickname =rs.getString(3);
-				    	    rol= rs.getInt(4);
-				    	    email= rs.getString(5);
-				    	   verificado = rs.getBoolean(6);
-				    	  
+			       System.out.println(usu);
+				       if(rs.next()) 
+				     {
+					       usuario = new Usuario(
+					      		 rs.getInt(1)
+					      		 ,rs.getString(2)
+					      		 ,rs.getString(3)
+					      		 ,rs.getString(4)
+					      		 ,rs.getString(5)
+					      		 ,rs.getBoolean(6)
+					      		 ,rs.getInt(7)
+					      	);
 				    	   
 				     }
 
-				       Usuario usuario = new Usuario(rs.getInt(7),nombre,contraseña,nickname,email,verificado,rol);
-			    	   return usuario;
 				      
 				
-			}	
-			
-			catch(SQLException e) {System.out.print(e+"error "); return null;}
-			
-			catch(Exception ex ) {System.out.print(ex+"error ");return null;} 
-		 
+			}
+			catch(SQLException ex ) {System.out.print(ex.getMessage()+"error ");}
+		 return usuario;
+
 	}
 	
 	public static  String checkPasswordExistence(String pass ,String nombre) {

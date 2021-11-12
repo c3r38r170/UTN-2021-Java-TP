@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax .servlet.HttpConstraintElement;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpSessionActivationListener;
  * Servlet implementation class Login
  */
 @WebServlet("/Login")
+@MultipartConfig
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,15 +50,13 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		
-		//doGet(request, response);
-		String contrasena = request.getParameter("contrasena");
-		String nombreUsuario= request.getParameter("usu");
-		String nickName= request.getParameter("nickname");
-		String mail= request.getParameter("correo");
+		String contrasena = request.getParameter("password");
+		String nombreUsuario= request.getParameter("username");
 
 
-		Usuario user= (Usuario)Usuario.checkUsernameExistence(nombreUsuario);
+		Usuario user= Usuario.checkUsernameExistence(nombreUsuario);
 		
 		if(user == null) 
 		{
@@ -78,65 +78,41 @@ public class Login extends HttpServlet {
 		
 			;
 		
-			String contraUsuario= user.getContraseña().strip();
-		 System.out.println(contraUsuario.contentEquals("con"));
+			String contraUsuario= user.getContraseña();
 		if( contraUsuario.equals(contrasena) ) 
-		{
-			
-		}
-		else 
-		{
-			System.out.println(contraUsuario+contrasena);
-			response.getWriter().write("Contraseña incorrecta.");
-			response.setStatus(403);
-			return;
-		}
-
-
-
-		if(user.getContraseña() != null && user.getNombre() !=null)
 		{
 
 			int rol = Usuario.getUserRol(contrasena,user.getNombre()); 
-
-			System.out.println(rol);
+			HttpSession session = request.getSession();
+			session.setAttribute("usuarior", user );
+			String redirección="";
+			
 			switch(rol) 
 			{
 			case 1:
-				HttpSession session = request.getSession();
-				session.setAttribute("usuarior", user );
-				request.getRequestDispatcher("Cliente.jsp").forward(request, response);
+				
+				redirección="Cliente.jsp";
 				break;
 			
 			
-			case 2: request.getRequestDispatcher("SuperAdmin.jsp").forward(request, response);
-			HttpSession session1 = request.getSession();
-			session1.setAttribute("usuarior", user );
+			case 2:
+				redirección="SuperAdmin.jsp";
 			break;
-			
-			
-			
 			case 3: 
-				request.getRequestDispatcher("Seguridad.jsp").forward(request, response);
-			HttpSession session2 = request.getSession();
-			HttpSession session3 = request.getSession();
-			session2.setAttribute("usuarior", user );
+				redirección="Seguridad.jsp";
 			
-			session3.setAttribute("usuariosListar", Usuario.GetUsersForTheNight());
+			//session.setAttribute("usuariosListar", Usuario.GetUsersForTheNight());
 			break;
 
 			}
-
+			response.getWriter().write(redirección);
 
 		}
 		else 
 		{
-			PrintWriter pw= response.getWriter();
-			pw.print("<html> <body>");
-			pw.print("<br>");
-			pw.print(" <h3>  Usuario o contraseña incorrectas  </h3> ");
-			pw.print(" <h3>  Verifique los datos  </h3> ");
-			pw.print("</html> </body>");
+			response.getWriter().write("Contraseña incorrecta.");
+			response.setStatus(403);
+			return;
 		}
 
 
