@@ -49,7 +49,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doGet(request, response);
+		//doGet(request, response);
 		String contrasena = request.getParameter("contrasena");
 		String nombreUsuario= request.getParameter("usu");
 		String nickName= request.getParameter("nickname");
@@ -70,7 +70,7 @@ public class Login extends HttpServlet {
 
 		if(user.isVerificado() == false   )
 		{
-			response.getWriter().write("Su usuario se encuentra deshabilitado, verifique su mail .");
+			response.getWriter().write("Su usuario se encuentra deshabilitado, verifique su mail.");
 			System.out.println();
 			response.setStatus(403);
 			return;
