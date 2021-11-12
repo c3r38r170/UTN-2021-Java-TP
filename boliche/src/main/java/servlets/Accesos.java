@@ -49,10 +49,11 @@ public class Accesos extends HttpServlet {
 				ac.DeleteUsersThatGotAcces(usuarioID);
 			}
 
-		if(accion == 0 ) 
+		if(accion == 0  && comentario!=null && comentario.trim() != "" &&  comentario.trim() != " ") 
 			{
 				ac.SendCommentToGil(usuarioID, comentario);
 			}
+		
 		}
 	catch(Exception e) {System.out.println(e);}
 		
