@@ -87,12 +87,6 @@ public class Usuario{
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	
-	
-	
-	@SuppressWarnings("null")
 	public  static  Usuario checkUsernameExistence(String usu ) {
 		
 		Connection cn = null;
@@ -111,7 +105,7 @@ public class Usuario{
 				     Conexion conn=new Conexion();
 				            rs = conn.preparedSelectStatement
 				            		(
-						          "select usuario, contraseña, nickname, rolID, correo, verificado, secreto  from usuarios  where usuario = ?  ;"
+						          "select usuario, contraseña, nickname, rolID, correo, verificado, secreto,ID  from usuarios  where usuario = ?  ;"
 						                  , new PSParameter[] {
 								                new PSParameter(usu,Types.STRING)
 					                                           }
@@ -129,8 +123,8 @@ public class Usuario{
 				    	  
 				    	   
 				     }
-		                                   
-				       Usuario usuario = new Usuario(0,nombre,contraseña,nickname,email,verificado,rol);
+
+				       Usuario usuario = new Usuario(rs.getInt(7),nombre,contraseña,nickname,email,verificado,rol);
 			    	   return usuario;
 				      
 				
@@ -142,12 +136,6 @@ public class Usuario{
 		 
 	}
 	
-	
-	
-	
-	
-	
-	@SuppressWarnings("null")
 	public static  String checkPasswordExistence(String pass ,String nombre) {
 		
 		Connection cn = null;
@@ -179,12 +167,6 @@ public class Usuario{
 		
 	}
 	
-	
-	
-	
-	
-	
-	@SuppressWarnings({ "unused", "null" })
 	public static int getUserRol(String contra , String usua)  
 	{	
 		
@@ -229,7 +211,7 @@ public class Usuario{
 	
 	
 	
-	
+	//TODO wtf???
 	public Usuario getUsuarioData(String usU, String contra) {
 		
 		Connection cn = null;
@@ -239,6 +221,7 @@ public class Usuario{
 		
 		
 		try {
+			//TODO no
 			 Conexion1 con = new Conexion1();
 			
 			cn=con.conectar();
@@ -255,9 +238,10 @@ public class Usuario{
 			    	mail=rs.getString(7);
 			    	verificado=rs.getBoolean(8);
 			    	
-			    	Usuario usus = new Usuario(0,nombre,contraseña,nickname,mail,verificado,rol);
+			    	Usuario usus = new Usuario(rs.getInt(6),nombre,contraseña,nickname,mail,verificado,rol);
 					return usus;
 		   }
+			//TODO wtf?
 			Usuario usus = new Usuario(0,nombre,contraseña,nickname,mail,verificado,rol);
 			return usus;
 		}
@@ -282,12 +266,13 @@ public class Usuario{
 			 			Usuario u = new Usuario(rs.getInt(1),rs.getString(2),null,rs.getString(3),rs.getString(4),false,0);
 			 			linkusuario.add(u);
 			 		}
-			 		return linkusuario;
 			}
 			catch(Exception e){System.out.println(e.getMessage());}
 		 
 		      return linkusuario;
 	}
+	
+	//TODO sacar, las pruebas se hacen en la clase testing
 	public static void main(String[] args) 
 	{
 		try {
