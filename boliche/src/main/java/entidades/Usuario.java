@@ -98,7 +98,6 @@ public class Usuario{
 						          "select ID,usuario, contraseña, nickname, correo, verificado,rolID from usuarios  where usuario = ? AND verificado=1  ;"
 						                  ,new PSParameter(usu,Types.STRING)
 				                     );
-			       System.out.println(usu);
 				       if(rs.next()) 
 				     {
 					       usuario = new Usuario(
