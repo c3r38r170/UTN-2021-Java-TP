@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>BoliSystem</title>
+	<title>BoliSystem - Acceso</title>
 
 	<%@include file="templates/libs.html" %>
 	<style type="text/css">

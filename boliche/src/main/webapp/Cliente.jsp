@@ -1,6 +1,6 @@
 <%@page import="java.sql.Date"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="servlets.Login" %>
 <%@ page import= "javax.servlet.http.*" %>
@@ -9,7 +9,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Bienvenidos</title>
+<title>BoliSystem - Bienvenidos</title>
+	<%@include file="templates/libs.html" %>
 </head>
 <body>
 <% 
@@ -22,7 +23,7 @@
 <h3>
  Desde  las  3:00 AM estamos esperandolo </h3>
  
-<h3><a href="entradas.html" target="_blank">Reserva tu entrada aqui!</a></h3>
+<h3><a href="Entradas.jsp" target="_blank">Reserva tu entrada aqui!</a></h3>
 
 <footer>
 
