@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +16,8 @@ public class Conexion{
 
 	private static final String CONTROLADOR = "com.mysql.jdbc.Driver";
 	private static String URL = "jdbc:mysql://localhost:3306/";
-	private static String USUARIO;
-	private static String CLAVE;
+	private static String USUARIO ;
+	private static String CLAVE ;
 	private Connection conn;
 	
 	static {
@@ -32,7 +33,7 @@ public class Conexion{
 		}
 	}
 	
-	public Conexion() {
+	public Conexion() {//TODO probar date y boolean
 		try {
 			conn = DriverManager.getConnection(URL, USUARIO, CLAVE);
 		} catch (SQLException e) {
@@ -61,6 +62,14 @@ public class Conexion{
 				case INT:
 			    s.setInt(i+1, (int)param.getParametro());
 					break;
+			case BOOLEAN: s.setBoolean(i+1, (boolean)param.getParametro());
+				break;
+			case DATE:s.setDate(i+1, (Date)param.getParametro());
+				break;
+			default:
+				break;
+					
+				
 			}
 		}
 			

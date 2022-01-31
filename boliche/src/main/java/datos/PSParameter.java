@@ -1,10 +1,15 @@
 package datos;
 
+import java.util.Date;
+
 public class PSParameter {
 	
 	public enum Types{
 		INT
 		,STRING
+		,DATE
+		,BOOLEAN
+		
 	}
 	private Types tipo;
 	private Object parametro;
@@ -23,6 +28,18 @@ public class PSParameter {
 		this.parametro=parametro;
 		this.tipo=Types.INT;
 	}
+	
+	public PSParameter(Date parametro) {
+		
+		this.parametro=new java.sql.Date(parametro.getTime());
+		this.tipo=Types.DATE;
+	}
+	
+	public PSParameter(boolean parametro) {
+		this.parametro=parametro;
+		this.tipo=Types.BOOLEAN;
+	}
+	
 	
 	public Types getTipo() {
 		return tipo;
