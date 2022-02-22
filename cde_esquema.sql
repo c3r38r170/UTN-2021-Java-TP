@@ -148,10 +148,10 @@ CREATE TABLE `usuarios` (
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
 INSERT INTO `usuarios` VALUES
-	(1,'dueño','duenio','dueño',1,NULL,'dueño@duenio.due',1,NULL)
-	,(2,'admin','admin','admin',2,1,'admin@admin.adm',1,NULL)
+	(1,'dueño','duenio12','dueño',1,NULL,'dueño@duenio.due',1,NULL)
+	,(2,'admin','admin123','admin',2,1,'admin@admin.adm',1,NULL)
 	,(3,'seguridad','seguridad','seguridad',3,1,'seguridad@seguridad.seg',1,NULL)
-	,(4,'cliente','cliente','cliente',4,NULL,'cliente@cliente.cli',1,NULL);
+	,(4,'cliente','cliente12','cliente',4,NULL,'cliente@cliente.cli',1,NULL);
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
