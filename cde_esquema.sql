@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `acceso`;
 CREATE TABLE `acceso` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `clienteID` int NOT NULL,
-  `fiestaID` int NOT NULL,
+  `nocheID` int NOT NULL,
   `seguridadID` int DEFAULT NULL,
   `comentarioID` int DEFAULT NULL,
   `estadoID` int NOT NULL DEFAULT '1',
@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `noche`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `noche` (
-  `ID` int NOT NULL,
+  `ID` int NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
   `inscripcion` tinyint DEFAULT '1',
   PRIMARY KEY (`ID`),
