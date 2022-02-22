@@ -14,7 +14,7 @@ public class Accesos {
 			  @SuppressWarnings("unused")
 			int k = conn.preparedStatement
 			 		(
-			              "Update acceso set=estadoID=1  , seguridadID=? where clienteID = ?    ;"
+			              "Update acceso set estadoID=1  , seguridadID=? where clienteID = ?    ;"
 			                  , new PSParameter[] 
 			                		  {
 			                			new PSParameter(seguridadID,Types.INT),
@@ -52,7 +52,7 @@ public class Accesos {
 			  {
 				lastid= rs.getInt(1);  
 			  }
-			  rs=null;
+			  rs=null;//TODO close?
 			  
 	//inserta comentario en el usuario que accede
 			  
@@ -88,6 +88,7 @@ public class Accesos {
 	
 	
 	
+	//TODO nocheID
 	@SuppressWarnings("unused")
 	public void AddPeopleToQueue(int IDusuario) 
 	{
@@ -108,6 +109,36 @@ public class Accesos {
 				  
 	}
 	
-	
-	
+	public void completarAcceso(int usuarioID,int nocheID,int seguridadID,int estado) {
+		 Conexion conn=new Conexion();
+        try {
+				conn.executeQuery(
+			              "Update acceso set"
+				              + " seguridadID="+seguridadID
+				              +",estadoID="+estado
+			              + " where clienteID = "+usuarioID
+			              	+" AND nocheID="+nocheID
+			          );
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	public void completarAcceso(int clienteID,int nocheID,int seguridadID,int estado,String comentario) {
+		completarAcceso(clienteID,nocheID,seguridadID,estado);
+		if(comentario==null || comentario.isBlank())
+			return;
+		Conexion conn=new Conexion();
+		try {
+			conn.preparedStatement("INSERT INTO comentario (comentario) VALUES (?)",new PSParameter(comentario));
+			ResultSet rs=conn.executeSelect("SELECT LAST_INSERT_ID()");
+			rs.next();
+			int comentarioID=rs.getInt(1);
+			conn.executeQuery("UPDATE acceso SET comentarioID="+comentarioID+" WHERE clienteID="+clienteID+" AND nocheID="+nocheID);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

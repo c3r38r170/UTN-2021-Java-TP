@@ -51,10 +51,11 @@
 				t.form.accionValue=t.value;
 		}
 		gEt('modal-form').onsubmit=function(){
+			let usuarioID=this.usuario.value;
 			sendPOST('accesos',{
 				comentario:this.comentario.value.trim()
 				,accion:this.accionValue
-				,usuarioID:this.usuario.value
+				,usuarioID
 			})
 				.then(res=>{
 					this.firstElementChild.disabled=false;
@@ -69,7 +70,7 @@
 							}
 						}).showToast();
 						this.parentNode.style.display='none';
-						SqS('tr[data-id="'+this.dataset.id+'"]').remove();
+						SqS('tr[data-id="'+usuarioID+'"]').remove();
 					}else{
 						Toastify({
 							text: "Ha ocurrido un error, intente nuevamente.",
@@ -137,7 +138,7 @@
   </thead>
     <tbody id=usuarios-noche>
 	<%
-		List<Usuario> lisUsus = Usuario.GetUsersForTheNight();
+		List<Usuario> lisUsus = Usuario.GetUsersForTheNight(1);//En espera
 	Iterator<Usuario>it = lisUsus.iterator();
 	Usuario us = null;
 	

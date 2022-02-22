@@ -235,7 +235,7 @@ public class Usuario{
 	
 		   
   }
-	public static   LinkedList<Usuario>  GetUsersForTheNight()
+	public static   LinkedList<Usuario>  GetUsersForTheNight(int estado)
 	{
 		 LinkedList<Usuario> linkusuario = new    LinkedList<Usuario> ();
 			ResultSet rs = null;
@@ -243,7 +243,13 @@ public class Usuario{
 			try 
 			{
 				Conexion cn = new Conexion();
-				rs=cn.executeSelect("select u.ID,u.usuario,u.nickname,u.correo from usuarios u join acceso ac on ac.clienteID = u.ID where  ac.fecha = CURDATE()");
+				String query="select u.ID,u.usuario,u.nickname,u.correo"
+						+ " from usuarios u"
+						+ " join acceso ac on ac.clienteID = u.ID"
+						+ " join noche nox on nox.ID = ac.nocheID"
+						+ " where  nox.fecha = CURDATE()"
+						+" AND ac.estadoID="+estado;
+				rs=cn.executeSelect(query);
 				
 			 		while(rs.next())
 			 		{
@@ -256,18 +262,5 @@ public class Usuario{
 		      return linkusuario;
 	}
 	
-	//TODO sacar, las pruebas se hacen en la clase testing
-	public static void main(String[] args) 
-	{
-		try {
-
-					for(Usuario U :Usuario.GetUsersForTheNight() ) 
-					{
-						System.out.println(U.getID());
-					}
-		}
-		catch(Exception e) {System.out.println(e+"eee");}
-	}
-
 }
 
