@@ -1,6 +1,7 @@
 .indice{
 	display:flex;
 	flex-direction:column;
+	gap: 1rem;
 }
 	.indice > *{
     padding: 2rem .5rem;
