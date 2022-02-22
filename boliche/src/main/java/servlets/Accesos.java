@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidades.Noche;
+import entidades.Usuario;
+
 /**
  * Servlet implementation class Accesos
  */
@@ -46,25 +49,20 @@ public class Accesos extends HttpServlet {
 		
 		HttpSession sessio = request.getSession();
 
+		ac.completarAcceso(usuarioID,Noche.hoy().getID(), ((Usuario) sessio.getAttribute("usuario")).getID(), accion==1?2:3, comentario);
 		
-		
-	try {
-		if(accion == 1) 
-			{
-			int idseguridad= (int) sessio.getAttribute("idseguridad");
-				ac.DeleteUsersThatGotAcces(usuarioID,idseguridad);
-			}
-
-		if(accion == 0  && comentario!=null && comentario.trim() != "" &&  comentario.trim() != " ") 
-			{
-			    int idseguridad= (int) sessio.getAttribute("idseguridad");
-				ac.SendCommentToGil(usuarioID, comentario,idseguridad);
-			}
-			
-		
-		
-		}
-	catch(Exception e) {System.out.println(e);}
+		/*
+		 * try { int idseguridad= ((Usuario) sessio.getAttribute("usuario")).getID();
+		 * if(accion == 1) { ac.DeleteUsersThatGotAcces(usuarioID,idseguridad); }
+		 * 
+		 * if(accion == 0 && comentario!=null && comentario.trim() != "" &&
+		 * comentario.trim() != " ") { ac.SendCommentToGil(usuarioID,
+		 * comentario,idseguridad); }
+		 * 
+		 * 
+		 * 
+		 * } catch(Exception e) {System.out.println(e);}
+		 */
 		
 	}
 }

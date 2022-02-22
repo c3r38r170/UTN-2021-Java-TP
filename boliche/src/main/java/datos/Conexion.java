@@ -45,6 +45,10 @@ public class Conexion{
 		Statement s =conn.createStatement();
 		return s.executeQuery(query);
 	}
+	public int executeQuery(String query) throws SQLException {
+		Statement s =conn.createStatement();
+		return s.executeUpdate(query);
+	}
 
 	public ResultSet preparedSelectStatement(String query,PSParameter parametroUnico) throws SQLException{
 		return this.preparedSelectStatement(query, new PSParameter[] {parametroUnico});

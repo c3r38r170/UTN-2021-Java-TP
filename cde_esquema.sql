@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `acceso`;
 CREATE TABLE `acceso` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `clienteID` int NOT NULL,
-  `fiestaID` int NOT NULL,
+  `nocheID` int NOT NULL,
   `seguridadID` int DEFAULT NULL,
   `comentarioID` int DEFAULT NULL,
   `estadoID` int NOT NULL DEFAULT '1',
@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `noche`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `noche` (
-  `ID` int NOT NULL,
+  `ID` int NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
   `inscripcion` tinyint DEFAULT '1',
   PRIMARY KEY (`ID`),
@@ -139,6 +139,21 @@ CREATE TABLE `usuarios` (
   CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`creadorID`) REFERENCES `usuarios` (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES
+	(1,'dueño','duenio12','dueño',1,NULL,'dueño@duenio.due',1,NULL)
+	,(2,'admin','admin123','admin',2,1,'admin@admin.adm',1,NULL)
+	,(3,'seguridad','seguridad','seguridad',3,1,'seguridad@seguridad.seg',1,NULL)
+	,(4,'cliente','cliente12','cliente',4,NULL,'cliente@cliente.cli',1,NULL);
+/*!40000 ALTER TABLE `rol` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

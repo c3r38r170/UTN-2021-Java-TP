@@ -1,4 +1,5 @@
 package entidades;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -102,6 +103,25 @@ public class Noche {
 	}
 	
 
+	public static Noche hoy() {
+		Conexion con=new Conexion();
+		ResultSet rs;
+		Noche hoy=null;
+		try {
+			rs = con.executeSelect("SELECT * FROM noche WHERE fecha=CURDATE()");
+			rs.next();
+			hoy=new Noche(rs.getInt(1),rs.getDate(2),rs.getDate(3));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return hoy;
+	}
+
+	public int getID() {
+		return id;
+	}
+	
 
 }
 

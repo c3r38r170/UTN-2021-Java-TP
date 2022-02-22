@@ -208,31 +208,42 @@ public class Usuario {
 			System.out.print("error" + e);
 			return null;
 		}
-
-	}
-
-	
-	
-	public static LinkedList<Usuario> GetUsersForTheNight() {
+		    catch(SQLException ex) { System.out.println(ex+"error en usuariodata"); return null;}
+			catch(Exception e) {System.out.print("error"+ e); return null;}
 		
-		LinkedList<Usuario> linkusuario = new LinkedList<Usuario>();
-		ResultSet rs = null;
-
-		try {
-			Conexion cn = new Conexion();
-			rs = cn.executeSelect(
-					"select u.ID,u.usuario,u.nickname,u.correo from usuarios u join acceso ac on ac.clienteID = u.ID where  ac.fecha = CURDATE()");
-
-			while (rs.next()) {
-				Usuario u = new Usuario(rs.getInt(1), rs.getString(2), null, rs.getString(3), rs.getString(4), false,
-						0);
-				linkusuario.add(u);
+	
+		   
+  }public static   LinkedList<Usuario>  GetUsersForTheNight()
+	{
+    return GetUsersForTheNight(0);
+  }
+	public static   LinkedList<Usuario>  GetUsersForTheNight(int estado)
+	{
+		 LinkedList<Usuario> linkusuario = new    LinkedList<Usuario> ();
+			ResultSet rs = null;
+			PreparedStatement ps= null;
+			try 
+			{
+				Conexion cn = new Conexion();
+				String query="select u.ID,u.usuario,u.nickname,u.correo"
+						+ " from usuarios u"
+						+ " join acceso ac on ac.clienteID = u.ID"
+						+ " join noche nox on nox.ID = ac.nocheID"
+						+ " where  nox.fecha = CURDATE()";
+        if(estado!=0)
+						query+=" AND ac.estadoID="+estado
+				rs=cn.executeSelect(query);
+				
+			 		while(rs.next())
+			 		{
+			 			Usuario u = new Usuario(rs.getInt(1),rs.getString(2),null,rs.getString(3),rs.getString(4),false,0);
+			 			linkusuario.add(u);
+			 		}
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-		return linkusuario;
+			catch(Exception e){System.out.println(e.getMessage());}
+		 
+		      return linkusuario;
 	}
 
+	
 }

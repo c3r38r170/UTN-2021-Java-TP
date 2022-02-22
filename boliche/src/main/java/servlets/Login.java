@@ -52,6 +52,8 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		
+		// TODO no funciona dueño
+		
 		String contrasena = request.getParameter("password");
 		String nombreUsuario= request.getParameter("username");
 
@@ -85,6 +87,7 @@ public class Login extends HttpServlet {
 			int rol = Usuario.getUserRol(contrasena,user.getNombre()); 
 			HttpSession session = request.getSession();
 			session.setAttribute("usuarior", user );
+			session.setAttribute("usuario", user );
 			String redirección="";
 			
 			switch(rol) 
