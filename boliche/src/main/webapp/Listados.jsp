@@ -91,7 +91,7 @@
 	});
 	</script>
 
-	<%@include file="templates/nav-css.html" %>
+	<%@include file="templates/seguridad-css.html" %>
 <style>
 	/*Modal*/
 	#modal{
