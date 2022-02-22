@@ -1,0 +1,10 @@
+:root{
+	--color-advertencia-rgb:240,173,78;
+	--color-peligro-rgb:187,33,36;
+	--color-exito-rgb:34,187,51;
+	--color-info-rgb:91,192,222;
+	--color-advertencia:rgb(var(--color-advertencia-rgb));
+	--color-peligro:rgb(var(--color-peligro-rgb));
+	--color-exito:rgb(var(--color-exito-rgb));
+	--color-info:rgb(var(--color-info-rgb));
+}
