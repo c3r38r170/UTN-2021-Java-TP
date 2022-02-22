@@ -1,0 +1,7 @@
+.mensaje{
+    text-align: center;
+    border-radius: var(--border-radius);
+    border: solid 3px var(--color-advertencia);
+    background:rgba(var(--color-advertencia-rgb),.3);
+    padding: 1rem;
+}

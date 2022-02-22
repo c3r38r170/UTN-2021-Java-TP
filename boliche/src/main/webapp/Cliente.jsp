@@ -5,28 +5,39 @@
 <%@ page import="servlets.Login" %>
 <%@ page import= "javax.servlet.http.*" %>
 <%@ page import= "entidades.Usuario" %>
+<% 
+		HttpSession sessio = request.getSession();
+		Usuario us =(Usuario)session.getAttribute("usuarior");
+		if(us==null)
+			response.sendRedirect("/");
+		else{
+		
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>BoliSystem - Bienvenidos</title>
 	<%@include file="templates/libs.html" %>
+	<link rel=stylesheet href=css/indice.css type="text/css">
+	<link rel=stylesheet href=css/mensaje.css type="text/css">
 </head>
 <body>
-<% 
-		HttpSession sessio = request.getSession();
-		Usuario us =(Usuario)session.getAttribute("usuarior");
-		
-%>
-<h1>Bienvendos al boliche "good vibes" <%= us.getNombre()%> </h1>
+<h1>¡Bienvendo al boliche "good vibes", <%= us.getNombre()%>!</h1>
 
-<h3>
- Desde  las  3:00 AM estamos esperandolo </h3>
- 
-<h3><a href="Entradas.jsp" target="_blank">Reserva tu entrada aqui!</a></h3>
+<p class=mensaje>
+ Desde  las  3:00 AM estamos esperandolo </p>
+
+<div class=indice>
+<a href="Entradas.jsp" target="_blank">Reserva tu entrada aquí!</a>
+</div> 
+
 
 <footer>
 
 </footer>
 </body>
 </html>
+<% 
+		}
+%>

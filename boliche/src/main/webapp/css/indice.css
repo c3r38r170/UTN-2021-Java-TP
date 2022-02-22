@@ -1,0 +1,11 @@
+.indice{
+	display:flex;
+	flex-direction:column;
+}
+	.indice > *{
+    padding: 2rem .5rem;
+    text-align: center;
+    font-weight: bolder;
+    border-radius:var(--border-radius);
+    background:rgba(var(--color-normal-rgb),.3);
+	}
