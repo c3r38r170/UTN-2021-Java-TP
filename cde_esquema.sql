@@ -141,6 +141,21 @@ CREATE TABLE `usuarios` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES
+	(1,'dueño','duenio','dueño',1,NULL,'dueño@duenio.due',1,NULL)
+	,(2,'admin','admin','admin',2,1,'admin@admin.adm',1,NULL)
+	,(3,'seguridad','seguridad','seguridad',3,1,'seguridad@seguridad.seg',1,NULL)
+	,(4,'cliente','cliente','cliente',4,NULL,'cliente@cliente.cli',1,NULL);
+/*!40000 ALTER TABLE `rol` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
