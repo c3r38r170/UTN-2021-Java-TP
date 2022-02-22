@@ -1,9 +1,9 @@
-<%@page import="java.util.Iterator"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
   <%@page import="java.sql.Date"%>
-
+<%@page import="java.util.Iterator"%>
 <%@ page import="java.util.List" %>
 <%@ page import="servlets.Login" %>
 <%@ page import= "javax.servlet.http.*" %>
@@ -89,7 +89,9 @@ height: 25vh;
 </tr>
 </thead>
 <tbody>
-<% LinkedList<Noche> noches = Noche.listar();   
+<%
+Noche no = new Noche();
+LinkedList<Noche> noches = no.listar();   
 Iterator<Noche> it =  noches.iterator();
 Noche ns = null;
 String estado= null;
@@ -98,7 +100,7 @@ while(it.hasNext())
 	ns= it.next();
 
 %>
-<tr data-id= <%= ns.getId()%> >
+<tr  >
 
 			<td><%= ns.getFecha() %> </td>
 			<% if( ns.isInscripciones()==true){estado= "Habilitado";} else{estado= " No habilitado";} %>

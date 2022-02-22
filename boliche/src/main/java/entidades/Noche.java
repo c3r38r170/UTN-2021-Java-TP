@@ -12,6 +12,20 @@ import datos.PSParameter.Types;
 
 public class Noche {
 
+	public int getId() {
+		return id;
+	}
+
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+
+	public boolean isInscripciones() {
+		return inscripciones;
+	}
+
 	int id;
 	Date fecha;
 	boolean inscripciones;
@@ -22,6 +36,12 @@ public class Noche {
 		this.fecha = fecha;
 		this.inscripciones = inscripciones;
 	}
+	
+	
+	public Noche() {}
+
+		
+	
 
 	public void Agregar(Date fecha, boolean estado) {
 
@@ -57,7 +77,7 @@ public class Noche {
 
 	}
 
-	public LinkedList<Noche> listar() {
+	public static LinkedList<Noche> listar() {
 
 		LinkedList<Noche> listFiesta = new LinkedList<Noche>();
 		try {
@@ -72,7 +92,9 @@ public class Noche {
 				boolean inscripciones = rs.getBoolean(3);
 				Noche f = new Noche(id, fecha, inscripciones);
 				listFiesta.add(f);
+				
 			}
+			if(listFiesta== null) {System.out.println("es nulo");}
 			return listFiesta;
 
 		} catch (Exception e) {
