@@ -5,6 +5,7 @@ Elige dar de alta personal de seguridad
 Sale el administrador
 Accede el personal de seguridad
 Sale el personal de seguridad
+#Aplicable a admin desde dueño
 
 - Acceso completo
 Accede el administrador
