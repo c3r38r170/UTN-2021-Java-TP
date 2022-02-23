@@ -34,3 +34,11 @@ Sale el segundo cliente
 - Registro
 Se registra un nuevo cliente
 Se accede
+
+- Modificación de datos personales
+Accede el cliente
+Ve la opción en el menú
+Entra
+Edita nombre
+Sale
+Mostrar que está la misma opción para seguridad
