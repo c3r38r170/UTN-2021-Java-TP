@@ -201,12 +201,6 @@ public class Usuario {
 
 			}
 			return usus;
-		} catch (SQLException ex) {
-			System.out.println(ex);
-			return null;
-		} catch (Exception e) {
-			System.out.print("error" + e);
-			return null;
 		}
 		    catch(SQLException ex) { System.out.println(ex+"error en usuariodata"); return null;}
 			catch(Exception e) {System.out.print("error"+ e); return null;}
@@ -231,7 +225,7 @@ public class Usuario {
 						+ " join noche nox on nox.ID = ac.nocheID"
 						+ " where  nox.fecha = CURDATE()";
         if(estado!=0)
-						query+=" AND ac.estadoID="+estado
+						query+=" AND ac.estadoID="+estado;
 				rs=cn.executeSelect(query);
 				
 			 		while(rs.next())

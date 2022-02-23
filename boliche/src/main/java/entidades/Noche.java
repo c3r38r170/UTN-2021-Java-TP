@@ -110,7 +110,7 @@ public class Noche {
 		try {
 			rs = con.executeSelect("SELECT * FROM noche WHERE fecha=CURDATE()");
 			rs.next();
-			hoy=new Noche(rs.getInt(1),rs.getDate(2),rs.getDate(3));
+			hoy=new Noche(rs.getInt(1),rs.getDate(2),rs.getBoolean(3));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
