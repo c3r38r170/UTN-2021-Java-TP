@@ -94,7 +94,7 @@
 
 	<%@include file="templates/seguridad-css.html" %>
 	
-	<link rel=stylesheet href=css/modal.css type="text/css">
+	<link rel=stylesheet href=css/sistema-de-disenio/modal.css type="text/css">
 <style>
 
 	/*Modal*/

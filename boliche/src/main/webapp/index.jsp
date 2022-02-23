@@ -9,7 +9,7 @@
 
 	<%@include file="templates/libs.html" %>
 	
-	<link rel=stylesheet href=css/modal.css type="text/css">
+	<link rel=stylesheet href=css/sistema-de-disenio/modal.css type="text/css">
 	<style type="text/css">
 
 #modal-form > fieldset{

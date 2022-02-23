@@ -19,9 +19,9 @@
 <meta charset="UTF-8">
 <title>BoliSystem - Bienvenidos</title>
 	<%@include file="templates/libs.html" %>
-	<link rel=stylesheet href=css/indice.css type="text/css">
-	<link rel=stylesheet href=css/mensaje.css type="text/css">
-	<link rel=stylesheet href=css/salir.css type="text/css">
+	<link rel=stylesheet href=css/sistema-de-disenio/indice.css type="text/css">
+	<link rel=stylesheet href=css/sistema-de-disenio/mensaje.css type="text/css">
+	<link rel=stylesheet href=css/sistema-de-disenio/salir.css type="text/css">
 </head>
 <body>
 <h1>¡Bienvendo al boliche "good vibes", <%= us.getNombre()%>!</h1>
