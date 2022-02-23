@@ -22,7 +22,7 @@ Un segundo cliente realiza las mismas acciones
 Accede el personal de seguridad
 Va a ver los accesos disponibles (solo puede ver los del día de la fecha)
 Permite al primer cliente
-Rechaza al segundo cliente
+Rechaza al segundo cliente con comentario
 Sale el personal de seguridad
 Entra el cliente
 El cliente puede ver que ha sido aceptado
