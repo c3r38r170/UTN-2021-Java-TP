@@ -45,7 +45,7 @@ public class Registro extends HttpServlet {
 				if(usuarioAVerificar.getRow()>1) {
 					request.getRequestDispatcher("/");
 					return;
-				}
+				} 
 					
 				con.preparedStatement("UPDATE `usuarios` SET `verificado`=1 WHERE `ID`=?;", new PSParameter(usuarioAVerificar.getInt(1)));
 				request.getRequestDispatcher("/registrado.jsp");
