@@ -93,32 +93,23 @@
 	</script>
 
 	<%@include file="templates/seguridad-css.html" %>
+	
+	<link rel=stylesheet href=css/modal.css type="text/css">
 <style>
+
 	/*Modal*/
-	#modal{
-	  position: absolute;
-    inset: 0px;
-    background: rgba(0, 0, 0, 0.3);
-    display: none;
+#modal-comentario{
+	resize:vertical;
+	display:block;
+	margin:.5rem auto;
+}
+#modal-botones{
+	display: flex;
+	justify-content: space-evenly;
+}
+	#modal-botones > button{
+  	width: 5rem;
 	}
-		#modal-form{
-	    margin: auto;
-	    background: white;
-	    padding: 1.5rem;
-	    border-radius: 1rem;
-   	}
-   		#modal-comentario{
-   			resize:vertical;
-   			display:block;
-   			margin:.5rem auto;
-   		}
-   		#modal-botones{
-	    	display: flex;
-	    	justify-content: space-evenly;
-	    }
-	    	#modal-botones > button{
-			    width: 5rem;
-	    	}
 		
 	</style>
 <meta charset="UTF-8">
