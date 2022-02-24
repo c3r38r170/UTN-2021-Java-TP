@@ -19,7 +19,7 @@
 
 
 
-    <%@include file="templates/libs.html" %>
+    <%@include file="../templates/libs.html" %>
 
 
 
