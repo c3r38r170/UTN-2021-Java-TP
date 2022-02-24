@@ -35,7 +35,7 @@ public class Noches extends HttpServlet {
 		
 		String fecha=  request.getParameter("fecha");
 		 Boolean b = Boolean.parseBoolean (request.getParameter("estado"));
-         System.out.println(fecha+' '+b.toString());
+		 response.getWriter().append(fecha+' '+b.toString());
         
          // response.getWriter().append(fecha);
          
