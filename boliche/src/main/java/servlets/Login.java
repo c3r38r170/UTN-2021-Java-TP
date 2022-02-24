@@ -92,16 +92,16 @@ public class Login extends HttpServlet {
 			switch(rol) 
 			{
 			case 1:
-				redirección="SuperAdmin.jsp";
+				redirección="SuperAdmin";
 				break;
 			case 2:
-				redirección="Administrador.jsp";
+				redirección="Administrador";
 			break;
 			case 3:
-				redirección="Seguridad.jsp";
+				redirección="Seguridad";
 			break;
 			case 4:
-				redirección="Cliente.jsp";
+				redirección="Cliente";
 				break;
 
 			}
