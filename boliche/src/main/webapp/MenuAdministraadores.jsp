@@ -115,9 +115,9 @@ while(it.hasNext())
 
 </table> 
 
-<button class="alta"  >Agregar</button>
+<button class="alta">Agregar</button>
 
- <button> Eliminar</button>
+
  
 <br>
 <br>
@@ -143,7 +143,7 @@ float:right;
  <label>Habilitda para inscripcion : </label> <input type="checkbox" name = habilitar  >
  <br>
 
-<input type="submit"   class="boton"  onclick="Agregar()" value="Aceptar">  
+<input type="submit"   class="boton"   value="Aceptar">  
 
 
 

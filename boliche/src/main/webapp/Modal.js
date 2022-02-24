@@ -32,7 +32,7 @@ submit.onsubmit = function(e) {
 	sendPOST('Noches', {
 		fecha: valuefecha,
 		estado: habilitado,
-		accion: 1
+		accion: 2
 	})
 		.then(res => {
 			if (res.ok) {
@@ -41,7 +41,9 @@ submit.onsubmit = function(e) {
 						addElement(SqS("tbody"), ["TR", {
 							dataset: { id: idfecha }, children: [
 								["TD", { innerText: valuefecha }],
-								["TD", { innerText: habilitado ? "habilitado" : "No habilitado " }]
+								["TD", { innerText: habilitado ? "habilitado" : "No habilitado "  }],
+								["TD",{children:[["i",{classList:["fa-solid","fa-pen-to-square"],onclick:function(){editar(this)} }]]}],
+								["TD",{children:[["i",{classList:["fa-solid","fa-trash-can"],onclick:function(){eliminar(this)} }]]}],
 							]
 						}])
 					})
@@ -59,7 +61,7 @@ function eliminar(icono) {
 
 	sendPOST('Noches', {
 		id: tr.dataset.id
-		, accion: 2
+		, accion: 1
 
 
 	})
@@ -83,15 +85,15 @@ let modal = gEt("modal-form-editar")
 
 }
 
-function Agregar()
+/*function Agregar()
 {
 		let modal = gEt("modal-form")
 	sendPOST('Noches', {
-		id: modal.parentNode.dataset.id
-		, accion: 2
+		
+		 accion: 2
 		, fecha: modal["fecha-noche"].value
 		, estado:  modal["habilitar"].ckecked
 
 	})
 }
-
+*/

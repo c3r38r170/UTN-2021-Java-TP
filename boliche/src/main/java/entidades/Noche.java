@@ -49,7 +49,7 @@ public class Noche {
 		var con = new Conexion();
 
 		try {
-			int columnsafected = con.preparedStatement("INSERT INTO noche (fecha,inscripcion) value(fecha,estado) ;  ",
+			int columnsafected = con.preparedStatement("INSERT INTO noche (fecha,inscripcion) value(?,?) ;  ",
 					new PSParameter[] { new PSParameter(fecha, Types.DATE), new PSParameter(estado, Types.BOOLEAN) });
 		} catch (SQLException e) {
 

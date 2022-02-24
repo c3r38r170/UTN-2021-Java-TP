@@ -37,12 +37,11 @@ public class Noches extends HttpServlet {
 		
 		
 		
-		String fecha=  request.getParameter("fecha");
-		 Boolean b = Boolean.parseBoolean (request.getParameter("estado"));
-		 int  acceso = Integer.parseInt ( (request.getParameter("acceso") )) ;
+		
+		 int  acceso = Integer.parseInt ( (request.getParameter("accion") )) ;
 		 
-		 response.getWriter().append(fecha+' '+b.toString());
-
+	
+		 	
 			switch (acceso) {
 			case 1:
 				try {
@@ -60,11 +59,11 @@ public class Noches extends HttpServlet {
 					String fechaNoche = request.getParameter("fecha");
 					Boolean estado = Boolean.parseBoolean((request.getParameter("estado")));
 
-					SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
+					SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 
 					Noche.Agregar(sd.parse(fechaNoche), estado);
 				} catch (Exception e) {
-
+					e.printStackTrace();
 				}
 				break;
 
@@ -74,7 +73,7 @@ public class Noches extends HttpServlet {
 					int id = Integer.parseInt((request.getParameter("id")));
 					String fechaNoche = request.getParameter("fecha");
 					Boolean estado = Boolean.parseBoolean((request.getParameter("estado")));
-					SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
+					SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 
 					Noche.Editar(id, sd.parse(fechaNoche), estado);
 				} catch (ParseException e) {
