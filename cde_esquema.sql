@@ -35,12 +35,12 @@ CREATE TABLE `acceso` (
   KEY `seguridadID` (`seguridadID`),
   KEY `estadoID` (`estadoID`),
   KEY `comentarioID` (`comentarioID`),
-  KEY `acceso_ibfk_5_idx` (`fiestaID`),
+  KEY `acceso_ibfk_5_idx` (`nocheID`),
   CONSTRAINT `acceso_ibfk_1` FOREIGN KEY (`clienteID`) REFERENCES `usuarios` (`ID`),
   CONSTRAINT `acceso_ibfk_2` FOREIGN KEY (`seguridadID`) REFERENCES `usuarios` (`ID`),
   CONSTRAINT `acceso_ibfk_3` FOREIGN KEY (`estadoID`) REFERENCES `estado` (`ID`),
   CONSTRAINT `acceso_ibfk_4` FOREIGN KEY (`comentarioID`) REFERENCES `comentario` (`ID`),
-  CONSTRAINT `acceso_ibfk_5` FOREIGN KEY (`fiestaID`) REFERENCES `noche` (`ID`)
+  CONSTRAINT `acceso_ibfk_5` FOREIGN KEY (`nocheID`) REFERENCES `noche` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
