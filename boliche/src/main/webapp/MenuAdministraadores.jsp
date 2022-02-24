@@ -143,7 +143,7 @@ float:right;
  <label>Habilitda para inscripcion : </label> <input type="checkbox" name = habilitar  >
  <br>
 
-<input type="submit" class="boton"  value="Aceptar">  
+<input type="submit"   class="boton"  onclick="Agregar()" value="Aceptar">  
 
 
 
@@ -159,41 +159,36 @@ float:right;
 
 
 
-<div class="modal" id="modal-editar">
+	<div class="modal" id="modal-editar">
 
-<form class="modal-form" id="modal-form-editar">
+		<form class="modal-form" id="modal-form-editar">
 
-<fieldset class=modal-fieldset>
- <input type="submit" class="close"  value="X" style=" display: block;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-color: #FFFFFF;
-float:right;
-"> 
-<br>
-<label> Ingrese Fecha de la fiesta : </label> <input type="date"  name=fecha-noche> <!--  esta linea no la soporta el navegador de eclipse --> 
-<br>
-<br>
- <label>Habilitda para inscripcion : </label> <input type="checkbox" name = habilitar  >
- <br>
-
-<input type="submit" class="boton"  value="Aceptar">  
+			<fieldset class=modal-fieldset>
+			
+				<input type="submit" class="close" value="X"
+					style="display: block; width: 25px; height: 25px; border-radius: 50%; background-color: #FFFFFF; float: right;">
+				<br> <label> Ingrese Fecha de la fiesta : </label> <input
+					type="date" name=fecha-noche>
+				<!--  esta linea no la soporta el navegador de eclipse -->
+				<br> <br> <label>Habilitda para inscripcion : </label> <input
+					type="checkbox" name=habilitar> <br> <input
+					type="submit" id="editarBtn" class="boton" onclick=" modificar()"
+					value="Aceptar">
 
 
 
 
 
-</fieldset>
+			</fieldset>
 
-</form>
-
-
-</div>
+		</form>
 
 
+	</div>
 
 
-<script src="Modal.js" defer></script>
+
+
+	<script src="Modal.js" defer></script>
 </body>
 </html>

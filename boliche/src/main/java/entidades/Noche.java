@@ -44,7 +44,7 @@ public class Noche {
 		
 	
 
-	public void Agregar(Date fecha, boolean estado) {
+	public static void Agregar(Date fecha, boolean estado) {
 
 		var con = new Conexion();
 
@@ -58,7 +58,7 @@ public class Noche {
 
 	}
 
-	public int Editar(int id, Date fecha, boolean estado) {
+	public static  int Editar(int id, Date fecha, boolean estado) {
 		int columns = 0;
 		var conn = new Conexion();
 		try {
@@ -105,7 +105,7 @@ public class Noche {
 
 	}
 
-	public void eliminar(int id) {
+	public  static void eliminar(int id) {
 
 		ResultSet rs = null;
 		Conexion conn = new Conexion();
