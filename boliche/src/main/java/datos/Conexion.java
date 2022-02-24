@@ -96,6 +96,14 @@ public class Conexion{
 				case INT:
 			    s.setInt(i+1, (int)param.getParametro());
 					break;
+				case BOOLEAN:
+			    s.setBoolean(i+1, (boolean)param.getParametro());
+					break;
+				case DATE:
+			    s.setDate(i+1, (Date)param.getParametro());
+					break;
+				default:
+				break;
 			}
 		}
 		
