@@ -20,7 +20,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>BoliSystem - Accesos</title>
 
-	<%@include file="templates/libs.html" %>
+	<%@include file="../templates/libs.html" %>
 	<script type="text/javascript">
 	addEventListener('DOMContentLoaded',()=>{
 		gEt('usuarios-noche').onclick=function(e){
@@ -92,9 +92,9 @@
 	});
 	</script>
 
-	<%@include file="templates/seguridad-css.html" %>
+	<%@include file="../templates/seguridad-css.html" %>
 	
-	<link rel=stylesheet href=css/sistema-de-disenio/modal.css type="text/css">
+	<link rel=stylesheet href=../css/sistema-de-disenio/modal.css type="text/css">
 <style>
 
 	/*Modal*/
@@ -117,7 +117,7 @@
 </head>
 <body>
 	
-	<%@include file="templates/nav-seguridad.html" %>
+	<%@include file="../templates/nav-seguridad.html" %>
 	
 	<div class="tablefix">
     <table class="tableStyle">

@@ -18,10 +18,10 @@
 <head>
 <meta charset="UTF-8">
 <title>BoliSystem - Bienvenidos</title>
-	<%@include file="templates/libs.html" %>
-	<link rel=stylesheet href=css/sistema-de-disenio/indice.css type="text/css">
-	<link rel=stylesheet href=css/sistema-de-disenio/mensaje.css type="text/css">
-	<link rel=stylesheet href=css/sistema-de-disenio/salir.css type="text/css">
+	<%@include file="../templates/libs.html" %>
+	<link rel=stylesheet href=../css/sistema-de-disenio/indice.css type="text/css">
+	<link rel=stylesheet href=../css/sistema-de-disenio/mensaje.css type="text/css">
+	<link rel=stylesheet href=../css/sistema-de-disenio/salir.css type="text/css">
 </head>
 <body>
 <h1>¡Bienvendo al boliche "good vibes", <%= us.getNombre()%>!</h1>
@@ -30,8 +30,10 @@
  Desde  las  3:00 AM estamos esperandolo </p>
 
 <div class=indice>
-<a href="Entradas.jsp" target="_blank">Reserva tu entrada aquí!</a>
-<a href="Logout" class=salir>Salir</a>
+	<a href="Entradas.jsp">Reserva tu entrada aquí!</a>
+	<a href="Historial.jsp">Historial</a>
+	<a href="/">Editar datos</a>
+	<a href="../Logout" class=salir>Salir</a>
 </div> 
 
 
