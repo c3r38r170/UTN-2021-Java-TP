@@ -112,7 +112,7 @@ public class Noche {
 		try {
 
 			@SuppressWarnings("unused")
-			int columns = conn.preparedStatement("Update noche set inscripcion= 0 where ID = ?    ;",
+			int columns = conn.preparedStatement("Delete from noches where ID = ?;",
 					new PSParameter[] { new PSParameter(id, Types.INT)
 
 					});
