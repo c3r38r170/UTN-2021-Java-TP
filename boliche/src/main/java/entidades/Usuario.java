@@ -241,11 +241,11 @@ public class Usuario {
 
 	public static Rol intToRol(int num) {
 		switch(num) {
-		case 2:
+		case 1:
 			return Rol.Administrador;
-		case 3:
+		case 2:
 			return Rol.Seguridad;
-		case 4:
+		case 3:
 			return Rol.Cliente;
 		default:
 			return Rol.Desconocido;

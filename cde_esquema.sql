@@ -109,7 +109,7 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (2,'Administrador'),(3,'Seguridad'),(4,'Cliente');
+INSERT INTO `rol` VALUES (1,'Administrador'),(2,'Seguridad'),(3,'Cliente');
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -148,9 +148,9 @@ CREATE TABLE `usuarios` (
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
 INSERT INTO `usuarios` VALUES
-	(1,'admin','admin123','admin',2,1,'admin@admin.adm',1,NULL)
-	,(2,'seguridad','seguridad','seguridad',3,1,'seguridad@seguridad.seg',1,NULL)
-	,(3,'cliente','cliente123','cliente',4,NULL,'cliente@cliente.cli',1,NULL);
+	(1,'admin','admin123','admin',1,NULL,'admin@admin.adm',1,NULL)
+	,(2,'seguridad','seguridad','seguridad',2,1,'seguridad@seguridad.seg',1,NULL)
+	,(3,'cliente','cliente123','cliente',3,NULL,'cliente@cliente.cli',1,NULL);
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
