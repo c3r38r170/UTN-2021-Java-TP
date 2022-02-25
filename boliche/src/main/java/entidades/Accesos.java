@@ -5,21 +5,6 @@ import datos.PSParameter;
 import datos.PSParameter.Types;
 public class Accesos {
 	
-	@SuppressWarnings("unused")
-	public void AddPeopleToQueue(int IDusuario) {
-		Conexion conn = new Conexion();
-		try {
-			int columnsafected = conn.preparedStatement(
-					"INSERT INTO acceso (clienteID,fecha,hora) values ( ? , current_date() , current_time() );",
-					new PSParameter[] { new PSParameter(IDusuario, Types.INT)
-
-					});
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-	
 	public void completarAcceso(int usuarioID,int nocheID,int seguridadID,int estado) {
 		 Conexion conn=new Conexion();
         try {
