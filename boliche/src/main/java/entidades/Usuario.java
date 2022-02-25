@@ -73,6 +73,15 @@ public class Usuario {
 		this.verificado = verificado;
 	}
 
+	public Usuario(int ID) throws SQLException {
+		this((new Conexion()).primerFila("SELECT ID,usuario, contraseña, nickname, correo, verificado,rolID FROM usuarios WHERE ID="+ID));
+	}
+
+	public Usuario(ResultSet rs) throws SQLException {
+		this(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+				rs.getBoolean(6), rs.getInt(7));
+	}
+	
 	public Usuario(int ID, String nombre, String contraseña, String nickname, String mail, boolean verificado,
 			int rol) {
 		super();
@@ -226,6 +235,8 @@ public class Usuario {
 						+ " where  nox.fecha = CURDATE()";
         if(estado!=0)
 						query+=" AND ac.estadoID="+estado;
+        query+=" ORDER BY ac.hora ASC";
+        
 				rs=cn.executeSelect(query);
 				
 			 		while(rs.next())
@@ -249,6 +260,42 @@ public class Usuario {
 			return Rol.Cliente;
 		default:
 			return Rol.Desconocido;
+		}
+	}
+	
+	public static void ActualizarUsuario(int id , String Usuario,String nickname,String Contrasena,String email) 
+	{
+		
+		try {
+			int columns;
+			Conexion conn = new Conexion();
+
+			columns = conn.preparedStatement("Update usuarios u set u.contraseña =? , u.usuario =?, u.nickname =?,u.correo=?   where u.ID = ?",
+					new PSParameter[] { new PSParameter(Contrasena , Types.STRING), new PSParameter(Usuario, Types.STRING),
+							new PSParameter(nickname, Types.STRING), new PSParameter( email, Types.STRING) ,new PSParameter(id , Types.INT)
+
+					});
+		}
+		catch(Exception ex) {ex.printStackTrace();}
+		
+		
+	}
+	
+	
+	
+	public static  void agregar( String Usuario,String nickname,String Contrasena,String email, boolean verificado, int creador,int rol) 
+	{
+		var con = new Conexion();
+
+		try {
+			int columnsafected = con.preparedStatement("INSERT INTO usuarios (usuario,nickname,contraseña,correo,verificado,creadorID,rolID) value(?,?,?,?,?,?,?) ;  ",
+					new PSParameter[] { new PSParameter( Usuario, Types.STRING),new PSParameter( nickname , Types.STRING) ,
+							new PSParameter( Contrasena , Types.STRING), new PSParameter(email , Types.STRING),
+							new PSParameter( verificado, Types.BOOLEAN),new PSParameter( creador, Types.INT) ,new PSParameter( rol, Types.INT)
+			});
+		} catch (SQLException e) {
+
+			e.printStackTrace();
 		}
 	}
 	

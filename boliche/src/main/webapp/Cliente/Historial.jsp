@@ -27,6 +27,11 @@
 <link rel=stylesheet href=../css/sistema-de-disenio/mensaje.css type="text/css">
 
 <style>
+
+.indice small{
+	display:block;
+}
+
 <%
 
 List<Estado> estados= Estado.listar();
@@ -64,6 +69,7 @@ while(estIt.hasNext()){
 			ac=it.next();
 			%><div class="estado<%=ac.getEstadoID()%>">
 				<h2><%=new SimpleDateFormat("dd/MM/yyyy").format(ac.getNoche().getFecha()) %></h2>
+				<small><%=ac.getHora()%></small>
 				<span></span>
 			<%
 				String comentario=ac.getComentario();

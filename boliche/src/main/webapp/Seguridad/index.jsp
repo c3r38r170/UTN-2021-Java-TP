@@ -5,7 +5,7 @@
 <head>
 	
 	<%@include file="../templates/libs.html" %>
-	<%@include file="../templates/seguridad-css.html" %>
+	<%@include file="css/index.html" %>
 	
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<%@include file="../templates/nav-seguridad.html" %>
+	<%@include file="templates/nav.html" %>
 
 </body>
 </html>

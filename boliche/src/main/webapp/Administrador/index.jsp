@@ -11,6 +11,10 @@
 <%@ page import= "java.util.LinkedList" %>
 <%@ page import= "java.util.HashMap" %>  
 
+<%
+	// TODO evitar usuarios no logueados y que no sean admins 
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,35 +22,17 @@
 <title>Administradores</title>
 
 
-
     <%@include file="../templates/libs.html" %>
-	<%@ include file ="../templates/navbarAdmin.html" %>
+	<%@ include file ="templates/nav.html" %>
 
+<link rel=stylesheet type=text/css href=../css/sistema-de-disenio/modal.css>
 
 <style>
 
-
-
 .modal
 {
- 
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
- display: none;
-   
+ display: none;  
 }
-
-.modal-form
-{
-width:30em;
-height: 25vh;
-  position: absolute;
-  
-   
-}
-
  .boton
 {
 	width:6em;
@@ -74,8 +60,8 @@ height: 25vh;
 
 </head>
 <body>
-<%@ include file ="../templates/navbarAdmin-css.html" %>
 
+<center> <button class="alta" style="margin-bottom:50px;"  >Agregar</button></center>
 
 
  <table>
@@ -103,8 +89,9 @@ while(it.hasNext())
 <tr data-id=<%= ns.getId() %>>
 
 			<td><%= ns.getFecha() %> </td>
-			<% if( ns.isInscripciones()==true){estado= "Habilitado";} else{estado= " No habilitado";} %>
-			<td> <%= estado %>  </td>
+			<% // TODO reemplazar por un tick y ordenar de mayor a menor %>
+			<% if( ns.isInscripciones()){estado= "Habilitado";} else{estado= " No habilitado";} %>
+			<td data-habilitado=<%= ns.isInscripciones()?1:0 %>> <%= estado %>  </td>
 									
 			<td > <i class="fa-solid fa-pen-to-square" onclick="editar(this)"></i> </td>
 			<td><i class="fa-solid fa-trash-can" onclick="eliminar(this)"></i></td>
@@ -114,9 +101,6 @@ while(it.hasNext())
 </tbody>
 
 </table> 
-
-<center> <button class="alta" style="margin-top:50px;"  >Agregar</button></center>
-
 
  
 <br>
@@ -172,7 +156,7 @@ float:right;
 				<!--  esta linea no la soporta el navegador de eclipse -->
 				<br> <br> <label>Habilitda para inscripcion : </label> <input
 					type="checkbox" name=habilitar> <br> <input
-					type="submit" id="editarBtn" class="boton" onclick="modificar()"
+					type="submit" id="editarBtn" class="boton"
 					value="Aceptar">
 
 

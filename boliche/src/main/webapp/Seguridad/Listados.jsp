@@ -6,6 +6,7 @@
 <%@ page import="servlets.Login" %>
 <%@ page import= "javax.servlet.http.*" %>
 <%@ page import= "entidades.Usuario" %>
+<%@ page import= "entidades.Acceso" %>
 <%@ page import= "entidades.Rol" %>
 <%@ page import= "java.util.LinkedList" %>
 <%@ page import= "java.util.HashMap" %>
@@ -14,6 +15,10 @@
 		
 		response.sendRedirect("/");
 	}
+	String mensajeNoHay=
+		"<tr id=no-hay>"
+			+"<td colspan=2> No hay ingresos en espera. </td>"
+		+"</tr>";
 %>
 <!DOCTYPE html>
 <html>
@@ -26,10 +31,10 @@
 	addEventListener('DOMContentLoaded',()=>{
 		gEt('usuarios-noche').onclick=function(e){
 			let tr=e.target.closest('tr');
-			if(!tr)
+			if(!tr || tr.id=='no-hay')
 				return;
 			
-			gEt('modal-form').usuario.value=tr.dataset.id;
+			gEt('modal-form').acceso.value=tr.dataset.id;
 			
 			gEt('modal-nombre').innerText=tr.children[0].innerText;
 			gEt('modal-form').checkbox.checked=false;
@@ -52,11 +57,11 @@
 				t.form.accionValue=t.value;
 		}
 		gEt('modal-form').onsubmit=function(){
-			let usuarioID=this.usuario.value;
-			sendPOST('accesos',{
+			let accesoID=this.acceso.value;
+			sendPOST('../accesos',{
 				comentario:this.comentario.value.trim()
 				,accion:this.accionValue
-				,usuarioID
+				,accesoID
 			})
 				.then(res=>{
 					this.firstElementChild.disabled=false;
@@ -71,7 +76,10 @@
 							}
 						}).showToast();
 						this.parentNode.style.display='none';
-						SqS('tr[data-id="'+usuarioID+'"]').remove();
+						SqS('tr[data-id="'+accesoID+'"]').remove();
+						let tbody=SqS('tbody')
+						if(!tbody.children.length)
+							tbody.innerHTML=`<%=mensajeNoHay%>`;
 					}else{
 						Toastify({
 							text: "Ha ocurrido un error, intente nuevamente.",
@@ -93,7 +101,7 @@
 	});
 	</script>
 
-	<%@include file="../templates/seguridad-css.html" %>
+	<%@include file="css/index.html" %>
 	
 	<link rel=stylesheet href=../css/sistema-de-disenio/modal.css type="text/css">
 <style>
@@ -112,13 +120,18 @@
   	width: 5rem;
 	}
 		
+#no-hay{
+	background:#BBB;
+  text-align: center;
+}
+		
 	</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	
-	<%@include file="../templates/nav-seguridad.html" %>
+	<%@include file="templates/nav.html" %>
 	
 	<div class="tablefix">
     <table class="tableStyle">
@@ -130,22 +143,26 @@
   </thead>
     <tbody id=usuarios-noche>
 	<%
-		List<Usuario> lisUsus = Usuario.GetUsersForTheNight(1);//En espera
-	Iterator<Usuario>it = lisUsus.iterator();
-	Usuario us = null;
-	
-	while(it.hasNext())
-	{
-		us=it.next();
-	
-	
-	 %>
-    <tr data-id=<%=us.getID() %>>
-    <td><%=us.getNombre() %> </td>
-    <td> <%=us.getNickname() %> </td>
-     </tr>
-  
-       <%} %>
+		List<Acceso> lisUsus = Acceso.pendientesEstaNoche();
+	Iterator<Acceso>it = lisUsus.iterator();
+	Acceso ac = null;
+	if(it.hasNext()){
+		while(it.hasNext()){
+			ac=it.next();
+			Usuario us = new Usuario(ac.getClienteID());
+	%>
+	    <tr data-id=<%=ac.getID() %>>
+		    <td><%=us.getNombre() %> </td>
+		    <td> <%=us.getNickname() %> </td>
+	    </tr>
+	<%
+	  }
+	}else{
+	%>
+	<%=mensajeNoHay%>
+	<%
+	}
+	%>
     </tbody>
     </table>    
    
@@ -153,7 +170,7 @@
        <!-- </form> -->
        <div id=modal>
        	<form id=modal-form>
-       		<input type=hidden name=usuario>
+       		<input type=hidden name=acceso>
        		<fieldset id=modal-fieldset>
        			<h3 id=modal-nombre></h3>
        			<label>
