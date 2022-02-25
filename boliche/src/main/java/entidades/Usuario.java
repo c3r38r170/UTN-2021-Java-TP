@@ -252,4 +252,40 @@ public class Usuario {
 		}
 	}
 	
+	public static void ActualizarUsuario(int id , String Usuario,String nickname,String Contrasena,String email) 
+	{
+		
+		try {
+			int columns;
+			Conexion conn = new Conexion();
+
+			columns = conn.preparedStatement("Update usuarios u set u.contraseña =? , u.usuario =?, u.nickname =?,u.correo=?   where u.ID = ?",
+					new PSParameter[] { new PSParameter(Contrasena , Types.STRING), new PSParameter(Usuario, Types.STRING),
+							new PSParameter(nickname, Types.STRING), new PSParameter( email, Types.STRING) ,new PSParameter(id , Types.INT)
+
+					});
+		}
+		catch(Exception ex) {ex.printStackTrace();}
+		
+		
+	}
+	
+	
+	
+	public static  void agregar( String Usuario,String nickname,String Contrasena,String email, boolean verificado, int creador,int rol) 
+	{
+		var con = new Conexion();
+
+		try {
+			int columnsafected = con.preparedStatement("INSERT INTO usuarios (usuario,nickname,contraseña,correo,verificado,creadorID,rolID) value(?,?,?,?,?,?,?) ;  ",
+					new PSParameter[] { new PSParameter( Usuario, Types.STRING),new PSParameter( nickname , Types.STRING) ,
+							new PSParameter( Contrasena , Types.STRING), new PSParameter(email , Types.STRING),
+							new PSParameter( verificado, Types.BOOLEAN),new PSParameter( creador, Types.INT) ,new PSParameter( rol, Types.INT)
+			});
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+	}
+	
 }
