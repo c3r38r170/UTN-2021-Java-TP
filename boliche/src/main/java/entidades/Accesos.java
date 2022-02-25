@@ -83,6 +83,7 @@ public class Accesos {
 			              "Update acceso set"
 				              + " seguridadID="+seguridadID
 				              +",estadoID="+estado
+				              +",hora=current_time()"
 			              + " where clienteID = "+usuarioID
 			              	+" AND nocheID="+nocheID
 			          );

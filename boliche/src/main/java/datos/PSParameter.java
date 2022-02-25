@@ -1,5 +1,6 @@
 package datos;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class PSParameter {
@@ -8,7 +9,7 @@ public class PSParameter {
 		INT
 		,STRING
 		,DATE
-		,BOOLEAN
+		,BOOLEAN, TIME
 		
 	}
 	private Types tipo;
@@ -33,6 +34,12 @@ public class PSParameter {
 		
 		this.parametro=new java.sql.Date(parametro.getTime());
 		this.tipo=Types.DATE;
+	}
+
+	public PSParameter(Time parametro) {
+		
+		this.parametro=parametro;
+		this.tipo=Types.TIME;
 	}
 	
 	public PSParameter(boolean parametro) {

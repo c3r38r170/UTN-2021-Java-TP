@@ -34,8 +34,7 @@
 	<a href="Historial.jsp">Historial</a>
 	<a href="/">Editar datos</a>
 	<a href="../Logout" class=salir>Salir</a>
-</div> 
-
+</div>
 
 <footer>
 

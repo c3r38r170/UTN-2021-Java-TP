@@ -13,7 +13,7 @@ public class Usuario {
 	private String contraseña;
 	private String nickname;
 	private String mail;
-	private int rol;
+	private Rol rol;
 	private boolean verificado;
 	private int ID;
 
@@ -57,11 +57,11 @@ public class Usuario {
 		this.mail = mail;
 	}
 
-	public int getRol() {
+	public Rol getRol() {
 		return rol;
 	}
 
-	public void setRol(int rol) {
+	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
 
@@ -77,7 +77,7 @@ public class Usuario {
 			int rol) {
 		super();
 		this.nombre = nombre;
-		this.rol = rol;
+		this.rol = Usuario.intToRol(rol);
 		this.contraseña = contraseña;
 		this.nickname = nickname;
 		this.mail = mail;
@@ -193,7 +193,7 @@ public class Usuario {
 				contraseña = rs.getString(1);
 				nombre = rs.getString(2);
 				nickname = rs.getString(3);
-				rol = rs.getInt(4);
+				int rol = rs.getInt(4);
 				mail = rs.getString(7);
 				verificado = rs.getBoolean(8);
 
@@ -239,6 +239,18 @@ public class Usuario {
 		      return linkusuario;
 	}
 
+	public static Rol intToRol(int num) {
+		switch(num) {
+		case 2:
+			return Rol.Administrador;
+		case 3:
+			return Rol.Seguridad;
+		case 4:
+			return Rol.Cliente;
+		default:
+			return Rol.Desconocido;
+		}
+	}
 	
 	public static void ActualizarUsuario(int id , String Usuario,String nickname,String Contrasena,String email) 
 	{

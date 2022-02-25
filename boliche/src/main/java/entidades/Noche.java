@@ -45,6 +45,21 @@ public class Noche {
 		
 	
 
+	public Noche(int ID) {
+		this.id=ID;
+		Conexion con=new Conexion();
+		try {
+			ResultSet rs = con.executeSelect("SELECT * FROM noche where ID="+ID);
+			rs.next();
+			this.fecha=rs.getDate("fecha");
+			this.inscripciones=rs.getBoolean("inscripcion");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
 	public static void Agregar(java.util.Date fecha, boolean estado) {
 
 		var con = new Conexion();
