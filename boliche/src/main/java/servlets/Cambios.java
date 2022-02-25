@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,35 +55,34 @@ public class Cambios extends HttpServlet {
 			return;
 		}
 		String contraseña = request.getParameter("ContreasenaActual");
-		if(contraseña!= usuario.getContraseña() ) 
-		{
-			response.getWriter().write("Contraseña incorrecta.");
-			response.setStatus(403);
-			return;	
-		}
 		
 		
 		
+
 		
 		if (usuario.getRol() == Rol.Seguridad || usuario.getRol() == Rol.Cliente ) {
 
-			if (ContreasenaActual == nuevaContrasena) {
+			
 
 				String nombre = request.getParameter("nombre");
 				String nickname = request.getParameter("nickname");
 				String email = request.getParameter("email");
 
-				Usuario.ActualizarUsuario(usuario.getID(), nickname, nuevaContrasena, email, nombre);
-				response.getWriter().write("Sus Datos han cambiado 🤠");
-			} 
-			else 
-				{response.getWriter().write("Su Contraseñas son distintas, verifique que sean igales");}
+				Usuario.ActualizarUsuario(usuario.getID(),nombre,nickname,nuevaContrasena,email);
+				response.sendRedirect("index.jsp");
+				response.getWriter().write("Sus Datos han cambiado");
+				
+			
+			
 				
 			
 
 		}
 		else 
 		{
+		
+		try {
+			
 			String nombre = request.getParameter("nombre");
 			String nickname = request.getParameter("nickname");
 			String email = request.getParameter("email");
@@ -91,6 +92,16 @@ public class Cambios extends HttpServlet {
 			
 			Usuario.agregar(nombre,nickname,contraseña11,email,true,usuario.getID(),rol);
 					
+			response.setContentType("text/html");
+			
+			
+				Thread.sleep(5*1000);
+				response.sendRedirect("index.jsp");
+			} catch (InterruptedException e) {
+			
+				e.printStackTrace();
+			}
+			
 			
 			
 			
