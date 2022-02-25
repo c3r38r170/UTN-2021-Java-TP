@@ -20,7 +20,7 @@
 
 
     <%@include file="../templates/libs.html" %>
-	<%@ include file ="../templates/navbarAdmin.html" %>
+	<%@ include file ="templates/nav.html" %>
 
 
 <style>
@@ -74,7 +74,6 @@ height: 25vh;
 
 </head>
 <body>
-<%@ include file ="../templates/navbarAdmin-css.html" %>
 
 
 
