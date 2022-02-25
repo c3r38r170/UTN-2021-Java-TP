@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.Instant;
 import java.util.LinkedList;
 
 import datos.Conexion;
+import datos.PSParameter;
 
 public class Acceso {
 
@@ -34,6 +36,10 @@ public class Acceso {
 
 	private Time hora;
 	
+	public Time getHora() {
+		return hora;
+	}
+
 	public Acceso(int ID) {
 		this.ID=ID;
 		Conexion con=new Conexion();
@@ -60,10 +66,12 @@ public class Acceso {
 	public Acceso(int clienteID, int nocheID) {
 		this.clienteID=clienteID;
 		this.noche=new Noche(nocheID);
+		Time t=new Time(Instant.now().toEpochMilli());
+		this.hora=t;
 		
 		Conexion con=new Conexion();
 		try {
-			con.executeQuery("INSERT INTO acceso (clienteID,nocheID) VALUES ("+clienteID+","+nocheID+")");
+			con.preparedStatement("INSERT INTO acceso (clienteID,nocheID,hora) VALUES ("+clienteID+","+nocheID+",?)",new PSParameter(t));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,8 +95,7 @@ public class Acceso {
 			String query="select ac.ID"
 					+ " from acceso ac"
 					+ " INNER JOIN noche nox ON ac.nocheID = nox.ID"
-					+ " WHERE ac.estadoID!=1"
-					+ " AND ac.clienteID="+clienteID
+					+ " WHERE ac.clienteID="+clienteID
 					+ " ORDER BY nox.fecha DESC, ac.hora DESC";
 			rs=cn.executeSelect(query);
 			
