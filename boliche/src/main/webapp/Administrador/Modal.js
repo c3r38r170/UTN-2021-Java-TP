@@ -1,9 +1,6 @@
 var modal = document.getElementById('modal')
 var alta = document.querySelector('.alta').addEventListener('click', function() { modal.style.display = 'flex' })
 
-var submit = document.getElementById('modal-form')
-var idmodi;
-
 //var close = document.getElementById('close').addEventListener('click',function(){ modal.style.display='none'})
 function cerrarModalPropio() {
 	this.closest(".modal").style.display = "none";
@@ -17,39 +14,43 @@ function editar(icono) {
 	var tr = icono.closest("[data-id]")
 	let modal = gEt("modal-editar")
 	modal.dataset.id = tr.dataset.id
-		idmodi=tr.dataset.id;
+		
 	let formulario = gEt("modal-form-editar")
 	formulario["fecha-noche"].value = tr.children[0].innerText
-	modal.style.display = "flex";
+	formulario["habilitar"].checked = !!+tr.children[1].dataset.habilitado
 	
-
+	modal.style.display = "flex";
 }
 var datosformularios = new FormData();
 
-submit.onsubmit = function(e) {
+document.getElementById('modal-form').onsubmit = function(e) {
 	var habilitado = this['habilitar'].checked;
 	var valuefecha = this['fecha-noche'].value;
+	let ok;
 	sendPOST('../Noches', {
 		fecha: valuefecha,
 		estado: habilitado,
 		accion: 2
 	})
 		.then(res => {
-			if (res.ok) {
-				res.text()
-					.then(idfecha => {
+			ok=res.ok;
+			return res.text();
+					
+		})
+		.then(idfecha => {
+			if(ok){
 						addElement(SqS("tbody"), ["TR", {
 							dataset: { id: idfecha }, children: [
 								["TD", { innerText: valuefecha }],
-								["TD", { innerText: habilitado ? "habilitado" : "No habilitado "  }],
+								["TD", { innerText: habilitado ? "Habilitado" : "No habilitado " , dataset:{habilitado:+habilitado} }],
 								["TD",{children:[["i",{classList:["fa-solid","fa-pen-to-square"],onclick:function(){editar(this)} }]]}],
 								["TD",{children:[["i",{classList:["fa-solid","fa-trash-can"],onclick:function(){eliminar(this)} }]]}],
 							]
 						}])
-					})
+						
 			}
 			else { }//TODO
-		})
+		});
 	return false;
 }
 function eliminar(icono) {
@@ -73,28 +74,33 @@ function eliminar(icono) {
 }
 
 
-function modificar() {
-	console.log(idmodi)
-let modal = gEt("modal-form-editar")
+document.getElementById('modal-form-editar').onsubmit = function() {
+	let id=this.parentNode.dataset.id
+		,fecha=this["fecha-noche"].value
+		,estado=this["habilitar"].checked;
 	sendPOST('../Noches', {
-		id: idmodi
+		id
 		, accion: 3
-		, fecha: modal["fecha-noche"].value
-		, estado:  modal["habilitar"].ckecked
+		, fecha
+		, estado
 
 	})
-
-}
-
-/*function Agregar()
-{
-		let modal = gEt("modal-form")
-	sendPOST('Noches', {
+		.then(res => {
+			if(res.ok){
+				let editado=SqS('tr[data-id="'+id+'"]');
+				editado.children[0].innerText=fecha;
+				editado.children[1].dataset.habilitado=+estado;
+				editado.children[1].innerText=estado?'Habilitado':'No habilitado';
+						
+			}
+			else {
+				res.text().then(txt=>{		
+					toast.error(txt);
+				})
+			}//TODO
+		});
 		
-		 accion: 2
-		, fecha: modal["fecha-noche"].value
-		, estado:  modal["habilitar"].ckecked
-
-	})
+		this.parentNode.style.display='none';
+		
+		return false;
 }
-*/

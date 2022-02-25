@@ -1,10 +1,10 @@
-#modal{
+#modal,.modal{
   position: absolute;
   inset: 0px;
   background: rgba(0, 0, 0, 0.3);
   display: none;
 }
-	#modal-form{
+	#modal-form,.modal-form{
     margin: auto;
     background: white;
     padding: 1.5rem;
