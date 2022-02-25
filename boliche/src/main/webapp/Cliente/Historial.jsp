@@ -8,7 +8,7 @@
 <%@ page import= "entidades.Rol" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
-	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Administrador){
+	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Cliente){
 		
 		response.sendRedirect("/");
 	}
