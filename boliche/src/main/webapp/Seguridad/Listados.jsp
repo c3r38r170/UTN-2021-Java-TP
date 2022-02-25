@@ -6,10 +6,11 @@
 <%@ page import="servlets.Login" %>
 <%@ page import= "javax.servlet.http.*" %>
 <%@ page import= "entidades.Usuario" %>
+<%@ page import= "entidades.Rol" %>
 <%@ page import= "java.util.LinkedList" %>
 <%@ page import= "java.util.HashMap" %>
 <%
-	if(session.getAttribute("usuarior")==null || ((Usuario)session.getAttribute("usuarior")).getRol()!=3){
+	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Seguridad){
 		
 		response.sendRedirect("/");
 	}

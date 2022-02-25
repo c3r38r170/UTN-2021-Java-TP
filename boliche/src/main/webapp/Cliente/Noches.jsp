@@ -3,10 +3,11 @@
 <%@page import="java.util.Iterator"%>
 <%@ page import="java.util.List" %>
 <%@ page import= "entidades.Usuario" %>
+<%@ page import= "entidades.Rol" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import= "entidades.Noche" %>
 <%
-	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=4){
+	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Administrador){
 		
 		response.sendRedirect("/");
 	}

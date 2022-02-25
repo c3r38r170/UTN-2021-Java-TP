@@ -1,18 +1,7 @@
 package servlets;
 
-import javax.sql.*;
-import com.mysql.cj.Session;
-import javax.servlet.http.*; 
-import datos.Conexion;
-import entidades.Usuario;
-import javax.servlet.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax .servlet.HttpConstraintElement;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionActivationListener;
+
+import entidades.Rol;
+import entidades.Usuario;
 
 /**
  * Servlet implementation class Login
@@ -80,31 +71,34 @@ public class Login extends HttpServlet {
 			;
 		
 			String contraUsuario= user.getContraseña();
+			// TODO hashing y eso
 		if( contraUsuario.equals(contrasena) ) 
 		{
 
-			int rol = Usuario.getUserRol(contrasena,user.getNombre()); 
+			Rol rol = user.getRol(); 
 			HttpSession session = request.getSession();
-			//TODO eliminar usuarior
+			//TODO eliminar "usuarior"
 			session.setAttribute("usuarior", user );
 			session.setAttribute("usuario", user );
 			String redirección="";
 			
 			switch(rol) 
 			{
-			case 1:
-				redirección="SuperAdmin";
-				break;
-			case 2:
+			case Administrador:
 				redirección="Administrador";
 			break;
-			case 3:
+			case Seguridad:
 				redirección="Seguridad";
 			break;
-			case 4:
+			case Cliente:
 				redirección="Cliente";
 				break;
-
+			case Desconocido:
+					response.setStatus(500);
+					break;
+			default: // Para que pase esto esta clase tiene que estar desactualizada.
+				response.setStatus(501);
+				break;
 			}
 			response.getWriter().write(redirección);
 
