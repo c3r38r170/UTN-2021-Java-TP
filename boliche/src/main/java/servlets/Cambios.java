@@ -85,10 +85,11 @@ public class Cambios extends HttpServlet {
 			String nombre = request.getParameter("nombre");
 			String nickname = request.getParameter("nickname");
 			String email = request.getParameter("email");
-			String contraseña = request.getParameter("ContreasenaActual");
+			String contraseña11 = request.getParameter("ContreasenaActual");
 			int rol = Integer.parseInt(request.getParameter("rol")) ;
 			
-			Usuario.agregar(nombre,nickname,contraseña,email,true,usuario.getID(),rol);
+			
+			Usuario.agregar(nombre,nickname,contraseña11,email,true,usuario.getID(),rol);
 					
 			
 			
