@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidades.Rol;
 import entidades.Usuario;
 
 
@@ -57,7 +58,7 @@ public class Cambios extends HttpServlet {
 		
 		
 		
-		if (usuario.getRol() == 2 || usuario.getRol() == 3 || usuario.getRol() == 4) {
+		if (usuario.getRol() == Rol.Seguridad || usuario.getRol() == Rol.Cliente ) {
 
 			if (ContreasenaActual == nuevaContrasena) {
 
