@@ -16,35 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `acceso`
---
-
-DROP TABLE IF EXISTS `acceso`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `acceso` (
-  `ID` int NOT NULL AUTO_INCREMENT,
-  `clienteID` int NOT NULL,
-  `nocheID` int NOT NULL,
-  `seguridadID` int DEFAULT NULL,
-  `comentarioID` int DEFAULT NULL,
-  `estadoID` int NOT NULL DEFAULT '1',
-  `hora` time DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `clienteID` (`clienteID`),
-  KEY `seguridadID` (`seguridadID`),
-  KEY `estadoID` (`estadoID`),
-  KEY `comentarioID` (`comentarioID`),
-  KEY `acceso_ibfk_5_idx` (`nocheID`),
-  CONSTRAINT `acceso_ibfk_1` FOREIGN KEY (`clienteID`) REFERENCES `usuarios` (`ID`),
-  CONSTRAINT `acceso_ibfk_2` FOREIGN KEY (`seguridadID`) REFERENCES `usuarios` (`ID`),
-  CONSTRAINT `acceso_ibfk_3` FOREIGN KEY (`estadoID`) REFERENCES `estado` (`ID`),
-  CONSTRAINT `acceso_ibfk_4` FOREIGN KEY (`comentarioID`) REFERENCES `comentario` (`ID`),
-  CONSTRAINT `acceso_ibfk_5` FOREIGN KEY (`nocheID`) REFERENCES `noche` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `comentario`
 --
 
@@ -72,6 +43,17 @@ CREATE TABLE `estado` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estado`
+--
+
+LOCK TABLES `estado` WRITE;
+/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+INSERT INTO `estado` VALUES (1,'En espera','FFFF00'),(2,'Aceptado','00FF00'),(3,'Rechazado','FF0000');
+/*!40000 ALTER TABLE `estado` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 --
 -- Table structure for table `noche`
@@ -146,12 +128,12 @@ CREATE TABLE `usuarios` (
 --
 
 LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` VALUES
 	(1,'admin','admin123','admin',1,NULL,'admin@admin.adm',1,NULL)
 	,(2,'seguridad','seguridad','seguridad',2,1,'seguridad@seguridad.seg',1,NULL)
 	,(3,'cliente','cliente123','cliente',3,NULL,'cliente@cliente.cli',1,NULL);
-/*!40000 ALTER TABLE `rol` ENABLE KEYS */;
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -162,5 +144,34 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+--
+-- Table structure for table `acceso`
+--
+
+DROP TABLE IF EXISTS `acceso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `acceso` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `clienteID` int NOT NULL,
+  `nocheID` int NOT NULL,
+  `seguridadID` int DEFAULT NULL,
+  `comentarioID` int DEFAULT NULL,
+  `estadoID` int NOT NULL DEFAULT '1',
+  `hora` time DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `clienteID` (`clienteID`),
+  KEY `seguridadID` (`seguridadID`),
+  KEY `estadoID` (`estadoID`),
+  KEY `comentarioID` (`comentarioID`),
+  KEY `acceso_ibfk_5_idx` (`nocheID`),
+  CONSTRAINT `acceso_ibfk_1` FOREIGN KEY (`clienteID`) REFERENCES `usuarios` (`ID`),
+  CONSTRAINT `acceso_ibfk_2` FOREIGN KEY (`seguridadID`) REFERENCES `usuarios` (`ID`),
+  CONSTRAINT `acceso_ibfk_3` FOREIGN KEY (`estadoID`) REFERENCES `estado` (`ID`),
+  CONSTRAINT `acceso_ibfk_4` FOREIGN KEY (`comentarioID`) REFERENCES `comentario` (`ID`),
+  CONSTRAINT `acceso_ibfk_5` FOREIGN KEY (`nocheID`) REFERENCES `noche` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 -- Dump completed on 2022-01-30 10:44:40
