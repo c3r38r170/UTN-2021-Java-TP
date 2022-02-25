@@ -61,6 +61,7 @@
 </head>
 <body>
 
+<center> <button class="alta" style="margin-bottom:50px;"  >Agregar</button></center>
 
 
  <table>
@@ -100,9 +101,6 @@ while(it.hasNext())
 </tbody>
 
 </table> 
-
-<center> <button class="alta" style="margin-top:50px;"  >Agregar</button></center>
-
 
  
 <br>

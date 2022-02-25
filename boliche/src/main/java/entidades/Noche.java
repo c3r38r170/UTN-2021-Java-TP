@@ -101,7 +101,7 @@ public class Noche {
 
 			ResultSet rs = null;
 			Conexion cn = new Conexion();
-			rs = cn.executeSelect("select * from noche");
+			rs = cn.executeSelect("select * from noche ORDER BY fecha DESC");
 
 			while (rs.next()) {
 				int id = rs.getInt(1);

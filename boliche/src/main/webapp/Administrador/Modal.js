@@ -39,18 +39,22 @@ document.getElementById('modal-form').onsubmit = function(e) {
 		})
 		.then(idfecha => {
 			if(ok){
-						addElement(SqS("tbody"), ["TR", {
+			// TODO lógica de posicionamiento según fecha, ir de arriba a abajo preguntando si es menor
+						SqS("tbody").prepend(createElement(["TR", {
 							dataset: { id: idfecha }, children: [
 								["TD", { innerText: valuefecha }],
 								["TD", { innerText: habilitado ? "Habilitado" : "No habilitado " , dataset:{habilitado:+habilitado} }],
 								["TD",{children:[["i",{classList:["fa-solid","fa-pen-to-square"],onclick:function(){editar(this)} }]]}],
 								["TD",{children:[["i",{classList:["fa-solid","fa-trash-can"],onclick:function(){eliminar(this)} }]]}],
 							]
-						}])
+						}]))
 						
 			}
 			else { }//TODO
 		});
+		
+		this.parentNode.style.display='none';
+		
 	return false;
 }
 function eliminar(icono) {
