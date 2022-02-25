@@ -52,8 +52,13 @@ public class Cambios extends HttpServlet {
 			response.setStatus(403);
 			return;
 		}
-		
-		
+		String contraseña = request.getParameter("ContreasenaActual");
+		if(contraseña!= usuario.getContraseña() ) 
+		{
+			response.getWriter().write("Contraseña incorrecta.");
+			response.setStatus(403);
+			return;	
+		}
 		
 		
 		
