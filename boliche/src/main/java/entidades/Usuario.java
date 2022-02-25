@@ -73,6 +73,15 @@ public class Usuario {
 		this.verificado = verificado;
 	}
 
+	public Usuario(int ID) throws SQLException {
+		this((new Conexion()).primerFila("SELECT ID,usuario, contraseña, nickname, correo, verificado,rolID FROM usuarios WHERE ID="+ID));
+	}
+
+	public Usuario(ResultSet rs) throws SQLException {
+		this(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+				rs.getBoolean(6), rs.getInt(7));
+	}
+	
 	public Usuario(int ID, String nombre, String contraseña, String nickname, String mail, boolean verificado,
 			int rol) {
 		super();

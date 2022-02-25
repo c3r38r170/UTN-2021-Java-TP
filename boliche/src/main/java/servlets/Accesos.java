@@ -1,8 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidades.Acceso;
 import entidades.Noche;
 import entidades.Usuario;
 
@@ -42,27 +44,22 @@ public class Accesos extends HttpServlet {
 	 */
 	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int usuarioID=Integer.parseInt(request.getParameter("usuarioID"));
+		int accesoID=Integer.parseInt(request.getParameter("accesoID"));
 		String comentario=request.getParameter("comentario");
 		int accion= Integer.parseInt(   request.getParameter("accion")  );
-		entidades.Accesos ac = new entidades.Accesos();
 		
+		//TODO revisar parámetros y sesión
 		HttpSession sessio = request.getSession();
 
-		ac.completarAcceso(usuarioID,Noche.hoy().getID(), ((Usuario) sessio.getAttribute("usuario")).getID(), accion==1?2:3, comentario);
-		
-		/*
-		 * try { int idseguridad= ((Usuario) sessio.getAttribute("usuario")).getID();
-		 * if(accion == 1) { ac.DeleteUsersThatGotAcces(usuarioID,idseguridad); }
-		 * 
-		 * if(accion == 0 && comentario!=null && comentario.trim() != "" &&
-		 * comentario.trim() != " ") { ac.SendCommentToGil(usuarioID,
-		 * comentario,idseguridad); }
-		 * 
-		 * 
-		 * 
-		 * } catch(Exception e) {System.out.println(e);}
-		 */
+		Acceso ac= new Acceso(accesoID);
+		try {
+			ac.setEstado(accion==1?2:3,((Usuario) sessio.getAttribute("usuario")).getID());
+			if(!(comentario==null || comentario.isBlank()))
+				ac.setComentario(comentario);
+		} catch (SQLException e) {
+			response.setStatus(500);
+			response.getWriter().write(e.getMessage());
+		}
 		
 	}
 }
