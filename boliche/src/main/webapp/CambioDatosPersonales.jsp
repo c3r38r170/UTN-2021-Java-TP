@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat.Style"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="entidades.Usuario" %>
@@ -9,23 +10,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-	<%
-	HttpSession sesionUsuario = (HttpSession) request.getSession();
-	Usuario usuario=(Usuario) sesionUsuario.getAttribute("usuario"); 
-	
-	if(usuario.getRol()==Rol.Administrador)
-	{%>
-	<style >
-	.rol
-	{
-		visibility: visible;
-	} </style>
-	<%} %>
-	
-
-	<style >
-	
-	#Titulo
+<style >
+#Titulo
 	{
 	margin-left: 4.2em;
 	}
@@ -46,11 +32,41 @@
 	font-size: 20px;
 	font-weight: 900;
 	}
+	.nuevac{display:block;}
+	
 	.rol
 	{
-		visibility: hidden;
+		display: none;
+		
+	} 
+</style>
+
+	<%
+	HttpSession sesionUsuario = (HttpSession) request.getSession();
+	Usuario usuario=(Usuario) sesionUsuario.getAttribute("usuario"); 
+	
+	
+
+	
+	if(usuario.getRol()==Rol.Administrador)
+	{%>
+	
+	<style >
+	.rol
+	{
+		visibility: visible;
+		
+	} 
+	
+	.nuevac
+	{
+		display:none;
 	}
+	
 	</style>
+	<%} %>
+	
+
 
 
  <%@include file="../templates/libs.html" %>
@@ -59,17 +75,17 @@
 
 <body>
 				<h1 id="Titulo">😈Actualizar datos 😈</h1>
- <form action="Cambios" id="formulario">
+ <form action="Cambios" id="formulario" method="post">
  <fieldset>
- <label>Ingrese nuevo nombre completo :  </label> <input type="text"  minlength="5" name="nombre"  value ="<%=usuario.getNombre() %> ">
+ <label>Ingrese nuevo nombre completo :  </label> <input type="text"  minlength="5" name="nombre"  value ="<%=usuario.getNombre()%>">
  
- <label>Ingrese nuevo nickname🍆:  </label> <input type="text"  minlength="5" name="nickname" value ="<%=usuario.getNickname() %> "      >
+ <label>Ingrese nuevo nickname🍆:  </label> <input type="text"  minlength="3" name="nickname" value ="<%=usuario.getNickname()%>"      >
  <br>
- <label>Ingrese nuevo email asociado:   </label> <input type="email"  minlength="8" name="email"  value ="<%=usuario.getMail() %> " >
+ <label>Ingrese nuevo email asociado:   </label> <input type="email"  minlength="8" name="email"  value ="<%=usuario.getMail()%>" >
  <br>
  <label>Ingrese contraseña actual:  </label> <input type="text"  minlength="8" name="ContreasenaActual" value ="<%=usuario.getContraseña() %> "   >
  <br>
- <label>Ingrese nueva contraseña:  </label> <input type="text"  minlength="8" name="nuevaContrasena">
+ <label class="nuevac">Ingrese nueva contraseña:  </label> <input type="text"  minlength="8" name="nuevaContrasena" class="nuevac">
  <br>
  
  <label class="rol">Ingrese Rol del nuevo usuario:  </label> <input type="number" min="1" max="4"  name="rol" class="rol">
