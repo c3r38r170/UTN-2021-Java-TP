@@ -20,7 +20,7 @@
 
 
     <%@include file="templates/libs.html" %>
-
+	<%@ include file ="templates/navbarAdmin.html" %>
 
 
 <style>
@@ -74,7 +74,7 @@ height: 25vh;
 
 </head>
 <body>
-
+<%@ include file ="templates/navbarAdmin-css.html" %>
 
 
 
@@ -115,7 +115,7 @@ while(it.hasNext())
 
 </table> 
 
-<button class="alta">Agregar</button>
+<center> <button class="alta" style="margin-top:50px;"  >Agregar</button></center>
 
 
  
@@ -124,7 +124,7 @@ while(it.hasNext())
 
 
 
-<div class="modal" id="modal">
+<div class="modal" id="modal" >
 
 <form class="modal-form" id="modal-form">
 
@@ -159,7 +159,7 @@ float:right;
 
 
 
-	<div class="modal" id="modal-editar">
+	<div class="modal" id="modal-editar"    >
 
 		<form class="modal-form" id="modal-form-editar">
 
@@ -172,7 +172,7 @@ float:right;
 				<!--  esta linea no la soporta el navegador de eclipse -->
 				<br> <br> <label>Habilitda para inscripcion : </label> <input
 					type="checkbox" name=habilitar> <br> <input
-					type="submit" id="editarBtn" class="boton" onclick=" modificar()"
+					type="submit" id="editarBtn" class="boton" onclick="modificar()"
 					value="Aceptar">
 
 

@@ -2,10 +2,10 @@ package entidades;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+
 import java.util.LinkedList;
 import java.util.List;
-
+import java.sql.Date;
 import datos.Conexion;
 import datos.PSParameter;
 import datos.PSParameter.Types;
@@ -18,7 +18,7 @@ public class Noche {
 	}
 
 
-	public Date getFecha() {
+	public java.util.Date getFecha() {
 		return fecha;
 	}
 
@@ -28,10 +28,10 @@ public class Noche {
 	}
 
 	int id;
-	Date fecha;
+	java.util.Date fecha;
 	boolean inscripciones;
 
-	public Noche(int id, Date fecha, boolean inscripciones) {
+	public Noche(int id,java.util.Date fecha, boolean inscripciones) {
 
 		this.id = id;
 		this.fecha = fecha;
@@ -44,13 +44,13 @@ public class Noche {
 		
 	
 
-	public static void Agregar(Date fecha, boolean estado) {
+	public static void Agregar(java.util.Date fecha, boolean estado) {
 
 		var con = new Conexion();
 
 		try {
 			int columnsafected = con.preparedStatement("INSERT INTO noche (fecha,inscripcion) value(?,?) ;  ",
-					new PSParameter[] { new PSParameter(fecha, Types.DATE), new PSParameter(estado, Types.BOOLEAN) });
+					new PSParameter[] { new PSParameter( new java.sql.Date(fecha.getTime()), Types.DATE), new PSParameter(estado, Types.BOOLEAN) });
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -58,13 +58,13 @@ public class Noche {
 
 	}
 
-	public static  int Editar(int id, Date fecha, boolean estado) {
+	public static  int Editar(int id, java.util.Date fecha, boolean estado) {
 		int columns = 0;
 		var conn = new Conexion();
 		try {
 
 			columns = conn.preparedStatement("Update noche set fecha=?  , inscripcion = ? where id = ?    ;",
-					new PSParameter[] { new PSParameter(fecha, Types.DATE), new PSParameter(estado, Types.BOOLEAN),
+					new PSParameter[] { new PSParameter( new java.sql.Date(fecha.getTime()), Types.DATE), new PSParameter(estado, Types.BOOLEAN),
 							new PSParameter(id, Types.INT)
 
 					});
@@ -89,7 +89,7 @@ public class Noche {
 
 			while (rs.next()) {
 				int id = rs.getInt(1);
-				Date fecha = rs.getDate(2);
+				java.util.Date fecha = rs.getDate(2);
 				boolean inscripciones = rs.getBoolean(3);
 				Noche f = new Noche(id, fecha, inscripciones);
 				listFiesta.add(f);
@@ -112,7 +112,7 @@ public class Noche {
 		try {
 
 			@SuppressWarnings("unused")
-			int columns = conn.preparedStatement("Delete from noches where ID = ?;",
+			int columns = conn.preparedStatement("Delete from noche where ID = ?;",
 					new PSParameter[] { new PSParameter(id, Types.INT)
 
 					});
@@ -134,7 +134,7 @@ public class Noche {
 			rs.next();
 			hoy=new Noche(rs.getInt(1),rs.getDate(2),rs.getBoolean(3));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return hoy;

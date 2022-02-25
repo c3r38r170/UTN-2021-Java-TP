@@ -2,8 +2,7 @@ var modal = document.getElementById('modal')
 var alta = document.querySelector('.alta').addEventListener('click', function() { modal.style.display = 'flex' })
 
 var submit = document.getElementById('modal-form')
-
-
+var idmodi;
 
 //var close = document.getElementById('close').addEventListener('click',function(){ modal.style.display='none'})
 function cerrarModalPropio() {
@@ -18,10 +17,11 @@ function editar(icono) {
 	var tr = icono.closest("[data-id]")
 	let modal = gEt("modal-editar")
 	modal.dataset.id = tr.dataset.id
+		idmodi=tr.dataset.id;
 	let formulario = gEt("modal-form-editar")
 	formulario["fecha-noche"].value = tr.children[0].innerText
 	modal.style.display = "flex";
-
+	
 
 }
 var datosformularios = new FormData();
@@ -74,9 +74,10 @@ function eliminar(icono) {
 
 
 function modificar() {
+	console.log(idmodi)
 let modal = gEt("modal-form-editar")
 	sendPOST('Noches', {
-		id: modal.parentNode.dataset.id
+		id: idmodi
 		, accion: 3
 		, fecha: modal["fecha-noche"].value
 		, estado:  modal["habilitar"].ckecked

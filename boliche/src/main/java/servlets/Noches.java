@@ -45,7 +45,9 @@ public class Noches extends HttpServlet {
 			switch (acceso) {
 			case 1:
 				try {
+					
 					int id = Integer.parseInt((request.getParameter("id")));
+				
 					Noche.eliminar(id);
 				} catch (Exception e) {
 					e.printStackTrace();
