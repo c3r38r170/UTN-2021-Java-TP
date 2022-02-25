@@ -4,23 +4,6 @@ import datos.Conexion;
 import datos.PSParameter;
 import datos.PSParameter.Types;
 public class Accesos {
-
-	public void DeleteUsersThatGotAcces(int idUsuario, int seguridadID) {
-		@SuppressWarnings("unused")
-		ResultSet rs = null;
-		Conexion conn = new Conexion();
-		try {
-			@SuppressWarnings("unused")
-			int k = conn.preparedStatement("Update acceso set estadoID=1  , seguridadID=? where clienteID = ?    ;",
-					new PSParameter[] { new PSParameter(seguridadID, Types.INT), new PSParameter(idUsuario, Types.INT)
-
-					});
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-	}
-
 	
 	
 	public void SendCommentToGil(int IDusuario, String comentario, int idseguridad) {// inserta comentario
