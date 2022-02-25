@@ -29,7 +29,7 @@ var datosformularios = new FormData();
 submit.onsubmit = function(e) {
 	var habilitado = this['habilitar'].checked;
 	var valuefecha = this['fecha-noche'].value;
-	sendPOST('Noches', {
+	sendPOST('../Noches', {
 		fecha: valuefecha,
 		estado: habilitado,
 		accion: 2
@@ -59,7 +59,7 @@ function eliminar(icono) {
 
 	let tr = icono.closest("tr");
 
-	sendPOST('Noches', {
+	sendPOST('../Noches', {
 		id: tr.dataset.id
 		, accion: 1
 
@@ -76,7 +76,7 @@ function eliminar(icono) {
 function modificar() {
 	console.log(idmodi)
 let modal = gEt("modal-form-editar")
-	sendPOST('Noches', {
+	sendPOST('../Noches', {
 		id: idmodi
 		, accion: 3
 		, fecha: modal["fecha-noche"].value
