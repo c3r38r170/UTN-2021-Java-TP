@@ -7,7 +7,7 @@
 <%@ page import= "entidades.Usuario" %>
 <% 
 		HttpSession sessio = request.getSession();
-		Usuario us =(Usuario)session.getAttribute("usuarior");
+		Usuario us =(Usuario)session.getAttribute("usuario");
 		if(us==null)
 			response.sendRedirect("/");
 		else{
