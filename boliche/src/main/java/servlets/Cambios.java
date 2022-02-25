@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidades.Rol;
 import entidades.Usuario;
 
 
@@ -51,13 +52,18 @@ public class Cambios extends HttpServlet {
 			response.setStatus(403);
 			return;
 		}
+		String contraseña = request.getParameter("ContreasenaActual");
+		if(contraseña!= usuario.getContraseña() ) 
+		{
+			response.getWriter().write("Contraseña incorrecta.");
+			response.setStatus(403);
+			return;	
+		}
 		
 		
 		
 		
-		
-		
-		if (usuario.getRol() == 2 || usuario.getRol() == 3 || usuario.getRol() == 4) {
+		if (usuario.getRol() == Rol.Seguridad || usuario.getRol() == Rol.Cliente ) {
 
 			if (ContreasenaActual == nuevaContrasena) {
 
@@ -79,10 +85,11 @@ public class Cambios extends HttpServlet {
 			String nombre = request.getParameter("nombre");
 			String nickname = request.getParameter("nickname");
 			String email = request.getParameter("email");
-			String contraseña = request.getParameter("ContreasenaActual");
+			String contraseña11 = request.getParameter("ContreasenaActual");
 			int rol = Integer.parseInt(request.getParameter("rol")) ;
 			
-			Usuario.agregar(nombre,nickname,contraseña,email,true,usuario.getID(),rol);
+			
+			Usuario.agregar(nombre,nickname,contraseña11,email,true,usuario.getID(),rol);
 					
 			
 			

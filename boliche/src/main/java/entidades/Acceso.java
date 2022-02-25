@@ -15,6 +15,11 @@ public class Acceso {
 
 	private int ID;
 	private int clienteID;
+	public int getClienteID() {
+		return clienteID;
+	}
+
+
 	private Noche noche;
 	public Noche getNoche() {
 		return noche;
@@ -38,6 +43,17 @@ public class Acceso {
 	
 	public Time getHora() {
 		return hora;
+	}
+
+	public Acceso(int iD, int clienteID, Noche noche, int seguridadID, String comentario, int estadoID, Time hora) {
+		super();
+		ID = iD;
+		this.clienteID = clienteID;
+		this.noche = noche;
+		this.seguridadID = seguridadID;
+		this.comentario = comentario;
+		this.estadoID = estadoID;
+		this.hora = hora;
 	}
 
 	public Acceso(int ID) {
@@ -108,6 +124,53 @@ public class Acceso {
 		catch(Exception e){System.out.println(e.getMessage());}
 	 
 	      return historial;
+	}
+	
+	public static LinkedList<Acceso> pendientesEstaNoche(){
+		LinkedList<Acceso> pendientesEstaNoche = new    LinkedList<> ();
+		ResultSet rs = null;
+		PreparedStatement ps= null;
+		try 
+		{
+			Conexion cn = new Conexion();
+			String query="select ac.ID,ac.clienteID,ac.nocheID,ac.seguridadID,com.comentario,ac.hora"
+					+ " FROM acceso ac"
+					+ " INNER JOIN noche nox on nox.ID = ac.nocheID"
+					+ " LEFT JOIN comentario com ON ac.comentarioID = com.ID"
+					+ " where  nox.fecha = CURDATE()"
+	      	+" AND ac.estadoID=1"
+	      	+" ORDER BY ac.hora ASC";
+      
+			rs=cn.executeSelect(query);
+			
+		 		while(rs.next())
+		 		{
+		 			//TODO índices asociativos
+		 			Acceso a = new Acceso(rs.getInt(1),rs.getInt(2),new Noche(rs.getInt("nocheID")),rs.getInt(4),rs.getString(5),1,rs.getTime(6));
+		 			pendientesEstaNoche.add(a);
+		 		}
+		}
+		catch(Exception e){System.out.println(e.getMessage());}
+	 
+	      return pendientesEstaNoche;
+	}
+
+	public void setComentario(String comentario) throws SQLException {
+		Conexion conn=new Conexion();
+		conn.preparedStatement("INSERT INTO comentario (comentario) VALUES (?)",new PSParameter(comentario));
+		int comentarioID=conn.lastInsertID();
+		conn.executeQuery("UPDATE acceso SET comentarioID="+comentarioID+" WHERE ID="+this.ID);
+	}
+
+	public void setEstado(int estadoID, int quien) throws SQLException {
+		Conexion conn=new Conexion();
+		conn.executeQuery(
+      "Update acceso set"
+        + " seguridadID="+quien
+        +",estadoID="+estadoID
+        +",hora=current_time()"
+      + " where ID = "+this.ID
+	   );
 	}
 	
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="entidades.Usuario" %>
+     <%@ page import="entidades.Rol" %>
     
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@
 	HttpSession sesionUsuario = (HttpSession) request.getSession();
 	Usuario usuario=(Usuario) sesionUsuario.getAttribute("usuario"); 
 	
-	if(usuario.getRol()==1||usuario.getRol()==2)
+	if(usuario.getRol()==Rol.Administrador)
 	{%>
 	<style >
 	.rol

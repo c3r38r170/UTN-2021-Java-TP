@@ -32,9 +32,9 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		var session=request.getSession();
-		var user = (Usuario)session.getAttribute("usuarior");
+		var user = (Usuario)session.getAttribute("usuario");
 		if(user!=null)
-			session.removeAttribute("usuarior");
+			session.removeAttribute("usuario");
 		
 		response.sendRedirect("/");
 	}
