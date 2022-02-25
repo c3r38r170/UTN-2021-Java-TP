@@ -30,7 +30,7 @@
  Desde  las  3:00 AM estamos esperandolo </p>
 
 <div class=indice>
-	<a href="Entradas.jsp">Reserva tu entrada aquí!</a>
+	<a href="Noches.jsp">Reserva tu entrada aquí!</a>
 	<a href="Historial.jsp">Historial</a>
 	<a href="/">Editar datos</a>
 	<a href="../Logout" class=salir>Salir</a>

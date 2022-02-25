@@ -1,5 +1,6 @@
 package entidades;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -143,7 +144,34 @@ public class Noche {
 	public int getID() {
 		return id;
 	}
-	
+
+	public static LinkedList<Noche> habilitadasPara(int clienteID){
+		LinkedList<Noche> habilitadas=new LinkedList<Noche>();
+		ResultSet rs = null;
+		PreparedStatement ps= null;
+		try 
+		{
+			Conexion cn = new Conexion();
+			String query="select n.ID,n.fecha"
+					+ " from noche n"
+					+ " LEFT join acceso ac on"
+					+ " ac.nocheID = n.ID"
+					+ " AND ac.estadoID=1"
+					+ " AND n.inscripcion = 1"
+					+ " AND ac.clienteID="+clienteID
+					+ " WHERE ac.clienteID IS NULL";
+			rs=cn.executeSelect(query);
+			
+		 		while(rs.next())
+		 		{
+		 			Noche u = new Noche(rs.getInt(1),rs.getDate(2),true);
+		 			habilitadas.add(u);
+		 		}
+		}
+		catch(Exception e){System.out.println(e.getMessage());}
+	 
+	      return habilitadas;
+	}
 
 }
 
