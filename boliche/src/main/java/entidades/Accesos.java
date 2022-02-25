@@ -92,6 +92,7 @@ public class Accesos {
 		}
 	}
 	public void completarAcceso(int clienteID,int nocheID,int seguridadID,int estado,String comentario) {
+		// TODO reescribir usando la clase Acceso
 		completarAcceso(clienteID,nocheID,seguridadID,estado);
 		if(comentario==null || comentario.isBlank())
 			return;

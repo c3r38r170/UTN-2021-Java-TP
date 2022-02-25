@@ -85,6 +85,7 @@ public class Login extends HttpServlet {
 
 			int rol = Usuario.getUserRol(contrasena,user.getNombre()); 
 			HttpSession session = request.getSession();
+			//TODO eliminar usuarior
 			session.setAttribute("usuarior", user );
 			session.setAttribute("usuario", user );
 			String redirección="";

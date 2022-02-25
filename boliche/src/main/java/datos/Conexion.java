@@ -110,4 +110,8 @@ public class Conexion{
 		return s.executeUpdate();
 	}
 	
+	public int lastInsertID() throws SQLException {
+		ResultSet rs = executeSelect("SELECT LAST_INSERT_ID();");
+		return rs.getInt(1);
+	}
 }
