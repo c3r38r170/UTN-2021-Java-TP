@@ -119,8 +119,7 @@ public class Conexion{
 	
 	public int lastInsertID() throws SQLException {
 		//TODO reemplazar en todos lados
-		ResultSet rs = executeSelect("SELECT LAST_INSERT_ID();");
-		return rs.getInt(1);
+		return primerFila("SELECT LAST_INSERT_ID();").getInt(1);
 	}
 	
 	public ResultSet primerFila(String query) throws SQLException {
@@ -128,5 +127,7 @@ public class Conexion{
 		rs.next();
 		return rs;
 	}
+	
+	
 	
 }
