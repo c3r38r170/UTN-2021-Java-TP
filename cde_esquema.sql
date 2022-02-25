@@ -150,7 +150,7 @@ LOCK TABLES `usuarios` WRITE;
 INSERT INTO `usuarios` VALUES
 	(1,'admin','admin123','admin',2,1,'admin@admin.adm',1,NULL)
 	,(2,'seguridad','seguridad','seguridad',3,1,'seguridad@seguridad.seg',1,NULL)
-	,(3,'cliente','cliente12','cliente',4,NULL,'cliente@cliente.cli',1,NULL);
+	,(3,'cliente','cliente123','cliente',4,NULL,'cliente@cliente.cli',1,NULL);
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
