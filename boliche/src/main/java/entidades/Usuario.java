@@ -226,6 +226,8 @@ public class Usuario {
 						+ " where  nox.fecha = CURDATE()";
         if(estado!=0)
 						query+=" AND ac.estadoID="+estado;
+        query+=" ORDER BY ac.hora ASC";
+        
 				rs=cn.executeSelect(query);
 				
 			 		while(rs.next())

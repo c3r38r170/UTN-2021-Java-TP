@@ -14,6 +14,10 @@
 		
 		response.sendRedirect("/");
 	}
+	String mensajeNoHay=
+		"<tr id=no-hay>"
+			+"<td colspan=2> No hay ingresos en espera. </td>"
+		+"</tr>";
 %>
 <!DOCTYPE html>
 <html>
@@ -26,7 +30,7 @@
 	addEventListener('DOMContentLoaded',()=>{
 		gEt('usuarios-noche').onclick=function(e){
 			let tr=e.target.closest('tr');
-			if(!tr || tr.id='no-hay')
+			if(!tr || tr.id=='no-hay')
 				return;
 			
 			gEt('modal-form').usuario.value=tr.dataset.id;
@@ -53,7 +57,7 @@
 		}
 		gEt('modal-form').onsubmit=function(){
 			let usuarioID=this.usuario.value;
-			sendPOST('accesos',{
+			sendPOST('../accesos',{
 				comentario:this.comentario.value.trim()
 				,accion:this.accionValue
 				,usuarioID
@@ -72,6 +76,9 @@
 						}).showToast();
 						this.parentNode.style.display='none';
 						SqS('tr[data-id="'+usuarioID+'"]').remove();
+						let tbody=SqS('tbody')
+						if(!tbody.children.length)
+							tbody.innerHTML=`<%=mensajeNoHay%>`;
 					}else{
 						Toastify({
 							text: "Ha ocurrido un error, intente nuevamente.",
@@ -150,9 +157,7 @@
 	  }
 	}else{
 	%>
-		<tr id=no-hay>
-			<td colspan=2> No hay ingresos en espera. </td>
-		</tr>
+	<%=mensajeNoHay%>
 	<%
 	}
 	%>
