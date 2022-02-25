@@ -20,7 +20,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>BoliSystem - Accesos</title>
 
-	<%@include file="templates/libs.html" %>
+	<%@include file="../templates/libs.html" %>
 	<script type="text/javascript">
 	addEventListener('DOMContentLoaded',()=>{
 		gEt('usuarios-noche').onclick=function(e){
@@ -51,10 +51,11 @@
 				t.form.accionValue=t.value;
 		}
 		gEt('modal-form').onsubmit=function(){
+			let usuarioID=this.usuario.value;
 			sendPOST('accesos',{
 				comentario:this.comentario.value.trim()
 				,accion:this.accionValue
-				,usuarioID:this.usuario.value
+				,usuarioID
 			})
 				.then(res=>{
 					this.firstElementChild.disabled=false;
@@ -69,7 +70,7 @@
 							}
 						}).showToast();
 						this.parentNode.style.display='none';
-						SqS('tr[data-id="'+this.dataset.id+'"]').remove();
+						SqS('tr[data-id="'+usuarioID+'"]').remove();
 					}else{
 						Toastify({
 							text: "Ha ocurrido un error, intente nuevamente.",
@@ -91,33 +92,24 @@
 	});
 	</script>
 
-	<%@include file="templates/nav-css.html" %>
+	<%@include file="../templates/seguridad-css.html" %>
+	
+	<link rel=stylesheet href=../css/sistema-de-disenio/modal.css type="text/css">
 <style>
+
 	/*Modal*/
-	#modal{
-	  position: absolute;
-    inset: 0px;
-    background: rgba(0, 0, 0, 0.3);
-    display: none;
+#modal-comentario{
+	resize:vertical;
+	display:block;
+	margin:.5rem auto;
+}
+#modal-botones{
+	display: flex;
+	justify-content: space-evenly;
+}
+	#modal-botones > button{
+  	width: 5rem;
 	}
-		#modal-form{
-	    margin: auto;
-	    background: white;
-	    padding: 1.5rem;
-	    border-radius: 1rem;
-   	}
-   		#modal-comentario{
-   			resize:vertical;
-   			display:block;
-   			margin:.5rem auto;
-   		}
-   		#modal-botones{
-	    	display: flex;
-	    	justify-content: space-evenly;
-	    }
-	    	#modal-botones > button{
-			    width: 5rem;
-	    	}
 		
 	</style>
 <meta charset="UTF-8">
@@ -125,7 +117,7 @@
 </head>
 <body>
 	
-	<%@include file="templates/nav-seguridad.html" %>
+	<%@include file="../templates/nav-seguridad.html" %>
 	
 	<div class="tablefix">
     <table class="tableStyle">
@@ -137,7 +129,7 @@
   </thead>
     <tbody id=usuarios-noche>
 	<%
-		List<Usuario> lisUsus = Usuario.GetUsersForTheNight();
+		List<Usuario> lisUsus = Usuario.GetUsersForTheNight(1);//En espera
 	Iterator<Usuario>it = lisUsus.iterator();
 	Usuario us = null;
 	

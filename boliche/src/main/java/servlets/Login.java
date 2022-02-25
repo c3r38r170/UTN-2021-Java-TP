@@ -51,6 +51,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		String contrasena = request.getParameter("password");
 		String nombreUsuario= request.getParameter("username");
@@ -84,22 +85,24 @@ public class Login extends HttpServlet {
 
 			int rol = Usuario.getUserRol(contrasena,user.getNombre()); 
 			HttpSession session = request.getSession();
+			//TODO eliminar usuarior
 			session.setAttribute("usuarior", user );
+			session.setAttribute("usuario", user );
 			String redirección="";
 			
 			switch(rol) 
 			{
 			case 1:
-				redirección="SuperAdmin.jsp";
+				redirección="SuperAdmin";
 				break;
 			case 2:
-				redirección="Administrador.jsp";
+				redirección="Administrador";
 			break;
 			case 3:
-				redirección="Seguridad.jsp";
+				redirección="Seguridad";
 			break;
 			case 4:
-				redirección="Cliente.jsp";
+				redirección="Cliente";
 				break;
 
 			}

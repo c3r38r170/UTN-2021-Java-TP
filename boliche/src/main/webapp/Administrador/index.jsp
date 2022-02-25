@@ -19,15 +19,15 @@
 
 
 
-    <%@include file="templates/libs.html" %>
-
+    <%@include file="../templates/libs.html" %>
+	<%@ include file ="../templates/navbarAdmin.html" %>
 
 
 <style>
 
 
 
-#modal
+.modal
 {
  
   height: 150px;
@@ -38,7 +38,7 @@
    
 }
 
-#modal-form
+.modal-form
 {
 width:30em;
 height: 25vh;
@@ -47,7 +47,7 @@ height: 25vh;
    
 }
 
- #boton
+ .boton
 {
 	width:6em;
 	height:3em;
@@ -55,7 +55,7 @@ height: 25vh;
 	margin-top:2.1em;
 }
 
-#habilita
+.habilita
 {
 	margin-left: 4em;
 }
@@ -74,7 +74,7 @@ height: 25vh;
 
 </head>
 <body>
-
+<%@ include file ="../templates/navbarAdmin-css.html" %>
 
 
 
@@ -90,8 +90,8 @@ height: 25vh;
 </thead>
 <tbody>
 <%
-Noche no = new Noche();
-LinkedList<Noche> noches = no.listar();   
+
+LinkedList<Noche> noches = Noche.listar();   
 Iterator<Noche> it =  noches.iterator();
 Noche ns = null;
 String estado= null;
@@ -100,13 +100,14 @@ while(it.hasNext())
 	ns= it.next();
 
 %>
-<tr  >
+<tr data-id=<%= ns.getId() %>>
 
 			<td><%= ns.getFecha() %> </td>
 			<% if( ns.isInscripciones()==true){estado= "Habilitado";} else{estado= " No habilitado";} %>
 			<td> <%= estado %>  </td>
 									
-			
+			<td > <i class="fa-solid fa-pen-to-square" onclick="editar(this)"></i> </td>
+			<td><i class="fa-solid fa-trash-can" onclick="eliminar(this)"></i></td>
 </tr>
 				
  <%} %>
@@ -114,27 +115,27 @@ while(it.hasNext())
 
 </table> 
 
-<button class="alta"  >Agregar</button>
- <button>Modificar</button>
- <button> Eliminar</button>
+<center> <button class="alta" style="margin-top:50px;"  >Agregar</button></center>
+
+
  
 <br>
 <br>
 
 
 
-<div id="modal">
+<div class="modal" id="modal" >
 
-<form id="modal-form">
+<form class="modal-form" id="modal-form">
 
 <fieldset id=modal-fieldset>
- <input type="submit" id="boton"  value="X" style=" display: block;
+ <input type="submit" class="close"  id="close" value="X" style=" display: block;
   width: 25px;
   height: 25px;
   border-radius: 50%;
   background-color: #FFFFFF;
 float:right;
-" id="close"> 
+"> 
 <br>
 <label> Ingrese Fecha de la fiesta : </label> <input type="date"  name=fecha-noche> <!--  esta linea no la soporta el navegador de eclipse --> 
 <br>
@@ -142,7 +143,7 @@ float:right;
  <label>Habilitda para inscripcion : </label> <input type="checkbox" name = habilitar  >
  <br>
 
-<input type="submit" id="boton"  value="Aceptar">  
+<input type="submit"   class="boton"   value="Aceptar">  
 
 
 
@@ -157,6 +158,37 @@ float:right;
 
 
 
-<script src="Modal.js"></script>
+
+	<div class="modal" id="modal-editar"    >
+
+		<form class="modal-form" id="modal-form-editar">
+
+			<fieldset class=modal-fieldset>
+			
+				<input type="submit" class="close" value="X"
+					style="display: block; width: 25px; height: 25px; border-radius: 50%; background-color: #FFFFFF; float: right;">
+				<br> <label> Ingrese Fecha de la fiesta : </label> <input
+					type="date" name=fecha-noche>
+				<!--  esta linea no la soporta el navegador de eclipse -->
+				<br> <br> <label>Habilitda para inscripcion : </label> <input
+					type="checkbox" name=habilitar> <br> <input
+					type="submit" id="editarBtn" class="boton" onclick="modificar()"
+					value="Aceptar">
+
+
+
+
+
+			</fieldset>
+
+		</form>
+
+
+	</div>
+
+
+
+
+	<script src="Modal.js" defer></script>
 </body>
 </html>

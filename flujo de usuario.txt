@@ -1,0 +1,44 @@
+- Alta de Seguridad
+Accede el administrador
+Tiene un índice de opciones
+Elige dar de alta personal de seguridad
+Sale el administrador
+Accede el personal de seguridad
+Sale el personal de seguridad
+#Aplicable a admin desde dueño
+
+- Acceso completo
+Accede el administrador
+El administrador puede ver las noches que hay dadas de alta, y con un click puede habilitarlas y deshabilitarlas
+El administrador da de alta una noche
+Sale el administrador
+Accede el cliente
+El cliente ve / puede ver todas las anotaciones previas
+El cliente se puede anotar a una nueva noche
+El cliente se anota a la noche previamente dada de alta
+El cliente no puede volverse a anotar a tal noche.
+Sale el cliente
+Un segundo cliente realiza las mismas acciones
+Accede el personal de seguridad
+Va a ver los accesos disponibles (solo puede ver los del día de la fecha)
+Permite al primer cliente
+Rechaza al segundo cliente con comentario
+Sale el personal de seguridad
+Entra el cliente
+El cliente puede ver que ha sido aceptado
+Sale el cliente
+Entra el segundo cliente
+Puede ver que ha sido rechazado
+Sale el segundo cliente
+
+- Registro
+Se registra un nuevo cliente
+Se accede
+
+- Modificación de datos personales
+Accede el cliente
+Ve la opción en el menú
+Entra
+Edita nombre
+Sale
+Mostrar que está la misma opción para seguridad

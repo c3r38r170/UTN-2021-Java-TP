@@ -8,33 +8,20 @@
 	<title>BoliSystem - Acceso</title>
 
 	<%@include file="templates/libs.html" %>
+	
+	<link rel=stylesheet href=css/sistema-de-disenio/modal.css type="text/css">
 	<style type="text/css">
 
-	#modal{
-		display:none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,.3);
+#modal-form > fieldset{
+   display: grid;
+   gap: .5rem;
+}
+#main-botones{
+	display:flex;
+}
+	#registrarse{
+		margin:auto;
 	}
-		#modal-form {
-	    margin: auto;
-	    background: white;
-	    padding: 1rem;
-	    border-radius: 1rem;
-		}
-			#modal-form > fieldset{
-		    display: grid;
-		    gap: .5rem;
-	    }
-	    	#main-botones{
-	    		display:flex;
-	    	}
-	    		#registrarse{
-	    			margin:auto;
-	    		}
 
 	</style>
 	

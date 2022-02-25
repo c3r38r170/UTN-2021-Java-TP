@@ -5,8 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
-
 import entidades.Noche;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -33,23 +33,22 @@ public class Noches extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		String fecha=  request.getParameter("fecha");
-		 Boolean b = Boolean.parseBoolean (request.getParameter("estado"));
-		 int  acceso = Integer.parseInt ( (request.getParameter("acceso") )) ;
-		 
-		 response.getWriter().append(fecha+' '+b.toString());
 
+		 int  acceso = Integer.parseInt ( (request.getParameter("accion") )) ;
+		 
+	
+		 	
 			switch (acceso) {
 			case 1:
 				try {
+					
 					int id = Integer.parseInt((request.getParameter("id")));
+				
 					Noche.eliminar(id);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+
 
 				break;
 
@@ -59,10 +58,11 @@ public class Noches extends HttpServlet {
 					String fechaNoche = request.getParameter("fecha");
 					Boolean estado = Boolean.parseBoolean((request.getParameter("estado")));
 
-					SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
+					SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 
 					Noche.Agregar(sd.parse(fechaNoche), estado);
 				} catch (Exception e) {
+					e.printStackTrace();
 
 				}
 				break;
@@ -73,7 +73,8 @@ public class Noches extends HttpServlet {
 					int id = Integer.parseInt((request.getParameter("id")));
 					String fechaNoche = request.getParameter("fecha");
 					Boolean estado = Boolean.parseBoolean((request.getParameter("estado")));
-					SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
+					SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+
 
 					Noche.Editar(id, sd.parse(fechaNoche), estado);
 				} catch (ParseException e) {

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import datos.Conexion;
 import datos.PSParameter;
-import utils.Correo;
 
 /**
  * Servlet implementation class Registro

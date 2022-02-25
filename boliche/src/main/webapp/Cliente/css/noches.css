@@ -1,0 +1,7 @@
+#modal-botones{
+	display: flex;
+	justify-content: space-evenly;
+}
+	#modal-botones > button{
+  	width: 5rem;
+	}

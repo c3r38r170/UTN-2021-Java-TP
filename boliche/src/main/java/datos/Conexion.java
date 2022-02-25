@@ -45,6 +45,10 @@ public class Conexion{
 		Statement s =conn.createStatement();
 		return s.executeQuery(query);
 	}
+	public int executeQuery(String query) throws SQLException {
+		Statement s =conn.createStatement();
+		return s.executeUpdate(query);
+	}
 
 	public ResultSet preparedSelectStatement(String query,PSParameter parametroUnico) throws SQLException{
 		return this.preparedSelectStatement(query, new PSParameter[] {parametroUnico});
@@ -92,10 +96,22 @@ public class Conexion{
 				case INT:
 			    s.setInt(i+1, (int)param.getParametro());
 					break;
+				case BOOLEAN:
+			    s.setBoolean(i+1, (boolean)param.getParametro());
+					break;
+				case DATE:
+			    s.setDate(i+1, (Date)param.getParametro());
+					break;
+				default:
+				break;
 			}
 		}
 		
 		return s.executeUpdate();
 	}
 	
+	public int lastInsertID() throws SQLException {
+		ResultSet rs = executeSelect("SELECT LAST_INSERT_ID();");
+		return rs.getInt(1);
+	}
 }

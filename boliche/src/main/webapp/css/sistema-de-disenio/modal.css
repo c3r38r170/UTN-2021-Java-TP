@@ -1,0 +1,12 @@
+#modal{
+  position: absolute;
+  inset: 0px;
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
+}
+	#modal-form{
+    margin: auto;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+	}
