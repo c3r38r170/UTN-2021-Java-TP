@@ -86,6 +86,7 @@ public class Accesos {
 				              +",hora=current_time()"
 			              + " where clienteID = "+usuarioID
 			              	+" AND nocheID="+nocheID
+			              	+" AND estadoID=1"
 			          );
 		} catch (SQLException e) {
 			
