@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.Scanner;
 
 public class Conexion{
@@ -69,7 +70,10 @@ public class Conexion{
 			case BOOLEAN: s.setBoolean(i+1, (boolean)param.getParametro());
 				break;
 			case DATE:s.setDate(i+1, (Date)param.getParametro());
-				break;
+			break;
+			case TIME:
+				s.setTime(i+1, (Time)param.getParametro());
+			break;
 			default:
 				break;
 					
@@ -102,6 +106,9 @@ public class Conexion{
 				case DATE:
 			    s.setDate(i+1, (Date)param.getParametro());
 					break;
+				case TIME:
+					s.setTime(i+1, (Time)param.getParametro());
+				break;
 				default:
 				break;
 			}
