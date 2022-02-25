@@ -5,9 +5,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import= "entidades.Acceso" %>
 <%@ page import= "entidades.Estado" %>
+<%@ page import= "entidades.Rol" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
-	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=4){
+	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Administrador){
 		
 		response.sendRedirect("/");
 	}
