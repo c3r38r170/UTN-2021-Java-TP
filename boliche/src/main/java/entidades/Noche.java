@@ -3,10 +3,8 @@ package entidades;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.LinkedList;
-import java.util.List;
-import java.sql.Date;
+
 import datos.Conexion;
 import datos.PSParameter;
 import datos.PSParameter.Types;
@@ -60,18 +58,12 @@ public class Noche {
 	}
 
 
-	public static void Agregar(java.util.Date fecha, boolean estado) {
+	public static void Agregar(java.util.Date fecha, boolean estado) throws Exception {
 
 		var con = new Conexion();
 
-		try {
-			int columnsafected = con.preparedStatement("INSERT INTO noche (fecha,inscripcion) value(?,?) ;  ",
-					new PSParameter[] { new PSParameter( new java.sql.Date(fecha.getTime()), Types.DATE), new PSParameter(estado, Types.BOOLEAN) });
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
+		int columnsafected = con.preparedStatement("INSERT INTO noche (fecha,inscripcion) value(?,?) ;  ",
+				new PSParameter[] { new PSParameter( new java.sql.Date(fecha.getTime()), Types.DATE), new PSParameter(estado, Types.BOOLEAN) });
 	}
 
 	public static  int Editar(int id, java.util.Date fecha, boolean estado) {
