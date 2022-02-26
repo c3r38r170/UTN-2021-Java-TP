@@ -3,10 +3,8 @@ package entidades;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.LinkedList;
-import java.util.List;
-import java.sql.Date;
+
 import datos.Conexion;
 import datos.PSParameter;
 import datos.PSParameter.Types;
@@ -18,7 +16,7 @@ public class Noche {
 		return id;
 	}
 
-
+ 
 	public java.util.Date getFecha() {
 		return fecha;
 	}
@@ -54,7 +52,7 @@ public class Noche {
 			this.fecha=rs.getDate("fecha");
 			this.inscripciones=rs.getBoolean("inscripcion");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
