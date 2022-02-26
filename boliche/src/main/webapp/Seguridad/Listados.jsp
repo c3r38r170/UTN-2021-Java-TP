@@ -66,30 +66,13 @@
 				.then(res=>{
 					this.firstElementChild.disabled=false;
 					if(res.ok){
-						Toastify({
-							duration: 1500
-							,text:' '
-							,stopOnFocus:false
-							,className:'fas fa-check'
-							,style:{
-								background:'lime'
-							}
-						}).showToast();
+						toast.success('✔️');
 						this.parentNode.style.display='none';
 						SqS('tr[data-id="'+accesoID+'"]').remove();
 						let tbody=SqS('tbody')
 						if(!tbody.children.length)
 							tbody.innerHTML=`<%=mensajeNoHay%>`;
-					}else{
-						Toastify({
-							text: "Ha ocurrido un error, intente nuevamente.",
-							duration: 1500
-							,stopOnFocus:false
-							,style:{
-								background:'red'
-							}
-						}).showToast();
-					}
+					}else toast.error("Ha ocurrido un error, intente nuevamente.");
 				});
 			this.firstElementChild.disabled=true;
 			
@@ -189,7 +172,6 @@
        		</fieldset>
        	</form>
        </div>
-       
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 </body>
 </html>	
