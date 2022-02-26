@@ -66,7 +66,7 @@ public class Usuario {
 		this.rol = rol;
 	}
 
-	public boolean isVerificado() {
+	public boolean isVerificado() { 
 		return verificado;
 	}
 
@@ -300,4 +300,56 @@ public class Usuario {
 		}
 	}
 	
-}
+	
+	
+	
+	public static int  TraerIdEmpleado(String nombre, int rol) 
+	{
+		
+		
+		try {
+			Conexion conn = new Conexion();
+
+			ResultSet rs = conn.preparedSelectStatement(
+					"select u.ID from usuarios u where u.usuario =? and u.rolID =? ;",
+					new PSParameter[] { new PSParameter(nombre, Types.STRING), new PSParameter(rol, Types.INT) });
+			
+			
+			return rs.getInt(1);
+			
+		}
+		
+		catch(Exception ex) {System.out.println(ex.getMessage());}
+		return 0;
+	}
+
+		
+	
+	public static void  EliminarEmpleado (int Id) 
+	{
+		
+		try {
+			int columns;
+			Conexion conn = new Conexion();
+
+			columns = conn.preparedStatement("Update usuarios u set u.verificado = 0 where u.ID = ? ",
+					new PSParameter[] { new PSParameter(Id , Types.INT)});
+							
+
+					
+		}
+		catch(Exception ex) {ex.printStackTrace();}
+		
+		
+		
+	}
+	
+	
+	
+	} 
+	 
+	
+	
+	
+
+
