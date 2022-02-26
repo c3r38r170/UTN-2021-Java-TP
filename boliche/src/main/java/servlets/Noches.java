@@ -46,6 +46,7 @@ public class Noches extends HttpServlet {
 				
 					Noche.eliminar(id);
 				} catch (Exception e) {
+					response.setStatus(500);
 					e.printStackTrace();
 				}
 
@@ -62,8 +63,8 @@ public class Noches extends HttpServlet {
 
 					Noche.Agregar(sd.parse(fechaNoche), estado);
 				} catch (Exception e) {
-					e.printStackTrace();
-
+					response.setStatus(500);
+					response.getWriter().write("La fecha ya existe.");
 				}
 				break;
 
@@ -78,7 +79,7 @@ public class Noches extends HttpServlet {
 
 					Noche.Editar(id, sd.parse(fechaNoche), estado);
 				} catch (ParseException e) {
-
+					response.setStatus(500);
 					e.printStackTrace();
 				}
 				break;
