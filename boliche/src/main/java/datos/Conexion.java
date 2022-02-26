@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Conexion{
 
 	private static final String CONTROLADOR = "com.mysql.jdbc.Driver";
-	private static String URL = "jdbc:mysql://localhost:3306/";
+	private static String URL = "jdbc:mysql://";
 	private static String USUARIO ;
 	private static String CLAVE ;
 	private Connection conn;
@@ -21,7 +21,8 @@ public class Conexion{
 	static {
 		try(Scanner s=new Scanner(Thread.currentThread().getContextClassLoader().getResourceAsStream("credenciales/base-de-datos.credenciales"))){
 			Class.forName(CONTROLADOR);
-			Conexion.URL+=s.nextLine();//nombre de la base de datos
+			Conexion.URL+=s.nextLine()+":"+s.nextLine()+"/"+s.nextLine();
+			//host + puerto + nombre de la base de datos
 			Conexion.USUARIO=s.nextLine();
 			Conexion.CLAVE=s.nextLine();
 		} catch (ClassNotFoundException e) {
