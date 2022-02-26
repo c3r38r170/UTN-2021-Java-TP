@@ -20,7 +20,6 @@ public class Conexion{
 	 
 	static {
 		try(Scanner s=new Scanner(Thread.currentThread().getContextClassLoader().getResourceAsStream("credenciales/base-de-datos.credenciales"))){
-		//try(Scanner s=new Scanner(new File("./base-de-datos.credenciales"))){
 			Class.forName(CONTROLADOR);
 			Conexion.URL+=s.nextLine();//nombre de la base de datos
 			Conexion.USUARIO=s.nextLine();
@@ -31,7 +30,7 @@ public class Conexion{
 		}
 	}
 	
-	public Conexion() {//TODO probar date y boolean
+	public Conexion() {
 		try {
 			conn = DriverManager.getConnection(URL, USUARIO, CLAVE);
 		} catch (SQLException e) {
@@ -48,6 +47,8 @@ public class Conexion{
 		return s.executeUpdate(query);
 	}
 
+	//TODO preparedStatementPreparation
+	
 	public ResultSet preparedSelectStatement(String query,PSParameter parametroUnico) throws SQLException{
 		return this.preparedSelectStatement(query, new PSParameter[] {parametroUnico});
 	}
@@ -115,7 +116,6 @@ public class Conexion{
 	}
 	
 	public int lastInsertID() throws SQLException {
-		//TODO reemplazar en todos lados
 		return primerFila("SELECT LAST_INSERT_ID();").getInt(1);
 	}
 	

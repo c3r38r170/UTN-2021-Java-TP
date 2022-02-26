@@ -51,7 +51,7 @@
 					.then(texto=>{
 						if(estadoOk)
 							W.location=texto;
-						else alert(texto);
+						else toast.error(texto);
 					})
 					.finally(()=>fs.disabled=false);
 				return false;
@@ -76,11 +76,11 @@
 						return res.text();
 					})
 					.then(texto=>{
-						alert(texto);
 						if(ok){
+							toast.success(texto);
 							cerrarRegistro();
 							this.reset();
-						}
+						}else toast.error(texto);
 					})
 					.finally(()=>fs.disabled=false);
 				return false;
@@ -90,7 +90,6 @@
 </head>
 <body>
 
-<!-- TODO: buscar un diseño copado con esas etiquetas que se van para arriba -->
 <fieldset id=main>
 	<form id=main-form>
 		<label for="user">Nombre de usuario</label>

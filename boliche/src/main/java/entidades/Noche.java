@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import datos.Conexion;
 import datos.PSParameter;
 import datos.PSParameter.Types;
-@SuppressWarnings("unused")
 
 public class Noche {
 
@@ -119,7 +118,6 @@ public class Noche {
 		Conexion conn = new Conexion();
 		try {
 
-			@SuppressWarnings("unused")
 			int columns = conn.preparedStatement("Delete from noche where ID = ?;",
 					new PSParameter[] { new PSParameter(id, Types.INT)
 

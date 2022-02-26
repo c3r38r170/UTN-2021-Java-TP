@@ -1,7 +1,6 @@
 var modal = document.getElementById('modal')
 var alta = document.querySelector('.alta').addEventListener('click', function() { modal.style.display = 'flex' })
 
-//var close = document.getElementById('close').addEventListener('click',function(){ modal.style.display='none'})
 function cerrarModalPropio() {
 	this.closest(".modal").style.display = "none";
 	return false;

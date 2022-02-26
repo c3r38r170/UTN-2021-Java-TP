@@ -16,13 +16,7 @@ import entidades.Noche;
 @WebServlet("/Noches")
 public class Noches extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    
 
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -81,10 +75,6 @@ public class Noches extends HttpServlet {
 				}
 				break;
 			}
-			// response.getWriter().append(fecha);
-
-			// SimpleDateFormat formato = new SimpleDateFormat("YYYY/MM/DD");
-			// Date fech = null;
 
 		}
 
