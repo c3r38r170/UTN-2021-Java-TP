@@ -90,7 +90,6 @@
 </head>
 <body>
 
-<!-- TODO: buscar un diseño copado con esas etiquetas que se van para arriba -->
 <fieldset id=main>
 	<form id=main-form>
 		<label for="user">Nombre de usuario</label>
