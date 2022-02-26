@@ -89,8 +89,8 @@ public class Registro extends HttpServlet {
 			for(int i=0;i<75;i++)
 				secreto.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz".charAt((int)Math.floor(Math.random()*62)));*/
 			var correo=request.getParameter("correo");
-			//con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`secreto`) VALUES (?,?,?,4,?,'"+secreto.toString()+"')", new PSParameter[] {
-			con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`verificado`) VALUES (?,?,?,4,?,1)", new PSParameter[] {
+			//con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`secreto`) VALUES (?,?,?,3,?,'"+secreto.toString()+"')", new PSParameter[] {
+			con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`verificado`) VALUES (?,?,?,3,?,1)", new PSParameter[] {
 					new PSParameter(nombreUsuario)
 					,new PSParameter(contraseña)
 					,new PSParameter(nickname)
