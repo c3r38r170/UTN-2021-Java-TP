@@ -14,24 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 import datos.Conexion;
 import datos.PSParameter;
 
-/**
- * Servlet implementation class Registro
- */
+
 @WebServlet("/Registro")
 @MultipartConfig
 public class Registro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public Registro() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		var secreto=request.getParameter("secreto");
 		if(secreto==null)
@@ -49,15 +43,13 @@ public class Registro extends HttpServlet {
 				con.preparedStatement("UPDATE `usuarios` SET `verificado`=1 WHERE `ID`=?;", new PSParameter(usuarioAVerificar.getInt(1)));
 				request.getRequestDispatcher("/registrado.jsp");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		

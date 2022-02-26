@@ -1,8 +1,5 @@
 package datos;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -20,7 +17,7 @@ public class Conexion{
 	private static String USUARIO ;
 	private static String CLAVE ;
 	private Connection conn;
-	
+	 
 	static {
 		try(Scanner s=new Scanner(Thread.currentThread().getContextClassLoader().getResourceAsStream("credenciales/base-de-datos.credenciales"))){
 			Class.forName(CONTROLADOR);

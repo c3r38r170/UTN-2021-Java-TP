@@ -1,6 +1,5 @@
 package entidades;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +18,7 @@ public class Acceso {
 		return clienteID;
 	}
 
-
+ 
 	private Noche noche;
 	public Noche getNoche() {
 		return noche;

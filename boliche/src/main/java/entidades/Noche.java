@@ -15,7 +15,7 @@ public class Noche {
 		return id;
 	}
 
-
+ 
 	public java.util.Date getFecha() {
 		return fecha;
 	}
@@ -51,7 +51,7 @@ public class Noche {
 			this.fecha=rs.getDate("fecha");
 			this.inscripciones=rs.getBoolean("inscripcion");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
