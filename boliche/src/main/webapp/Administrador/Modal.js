@@ -49,11 +49,13 @@ document.getElementById('modal-form').onsubmit = function(e) {
 							]
 						}]))
 						
-			}
-			else { }//TODO
-		});
+				this.parentNode.style.display='none';
 		
-		this.parentNode.style.display='none';
+			}
+			else {
+				toast.error("Ha ocurrido un error inesperado, reintente más tarde.");
+			}//TODO
+		});
 		
 	return false;
 }
@@ -95,7 +97,8 @@ document.getElementById('modal-form-editar').onsubmit = function() {
 				editado.children[0].innerText=fecha;
 				editado.children[1].dataset.habilitado=+estado;
 				editado.children[1].innerText=estado?'Habilitado':'No habilitado';
-						
+		
+				this.parentNode.style.display='none';
 			}
 			else {
 				res.text().then(txt=>{		
@@ -103,8 +106,6 @@ document.getElementById('modal-form-editar').onsubmit = function() {
 				})
 			}//TODO
 		});
-		
-		this.parentNode.style.display='none';
 		
 		return false;
 }
