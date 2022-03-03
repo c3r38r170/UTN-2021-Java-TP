@@ -1,6 +1,5 @@
 package entidades;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -33,35 +32,6 @@ public class Noche {
 
 	}
 
-
-	public static LinkedList<Noche> habilitadasPara(int clienteID){
-		LinkedList<Noche> habilitadas=new LinkedList<Noche>();
-		ResultSet rs = null;
-		PreparedStatement ps= null;
-		try 
-		{
-			Conexion cn = new Conexion();
-			String query="select n.ID,n.fecha"
-					+ " from noche n"
-					+ " LEFT join acceso ac on"
-					+ " ac.nocheID = n.ID"
-					+ " AND ac.estadoID=1"
-					+ " AND n.inscripcion = 1"
-					+ " AND ac.clienteID="+clienteID
-					+ " WHERE ac.clienteID IS NULL";
-			rs=cn.executeSelect(query);
-			
-		 		while(rs.next())
-		 		{
-		 			Noche u = new Noche(rs.getInt(1),rs.getDate(2),true);
-		 			habilitadas.add(u);
-		 		}
-		}
-		catch(Exception e){System.out.println(e.getMessage());}
-	 
-	      return habilitadas;
-	}
-
 	public static Noche hoy() {
 		Conexion con=new Conexion();
 		ResultSet rs;
@@ -89,11 +59,9 @@ public class Noche {
 				int id = rs.getInt(1);
 				Date fecha = rs.getDate(2);
 				boolean inscripciones = rs.getBoolean(3);
-				Noche f = new Noche(id, fecha, inscripciones);
-				listFiesta.add(f);
+				listFiesta.add(new Noche(id, fecha, inscripciones));
 				
 			}
-			if(listFiesta== null) {System.out.println("es nulo");}
 			return listFiesta;
 
 		} catch (Exception e) {
@@ -145,10 +113,9 @@ public class Noche {
 	
 	public void eliminar() throws SQLException {
 
-		ResultSet rs = null;
 		Conexion conn = new Conexion();
 
-			int columns = conn.preparedStatement("Delete from noche where ID = ?;",
+		conn.preparedStatement("Delete from noche where ID = ?;",
 					new PSParameter[] { new PSParameter(this.id, Types.INT)
 
 					});

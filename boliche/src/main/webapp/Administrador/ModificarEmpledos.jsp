@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page import= "entidades.Rol" %>
+<%@ page import= "entidades.Usuario" %>
+<%
+	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Administrador){
+		response.sendRedirect("/");
+	}else{
+%><!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -85,7 +91,7 @@
  
 </select>
  
- <input  type="submit"   id="submi" >   <button class="ocultar" id ="cerrar">Cerrar</button >
+ <input  type="submit"   id="submi" >
  
 <div id="fila">
  <button class="fa-solid fa-plus" value=1  name="btn" id="alta"  ></button>
@@ -101,3 +107,6 @@
  <script src="EmpleadosABM.js"></script>
 </body>
 </html>
+<%
+	}
+%>

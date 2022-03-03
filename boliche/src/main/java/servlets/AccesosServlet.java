@@ -1,7 +1,5 @@
 package servlets;
 
-import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -9,30 +7,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Usuario;
+import entidades.Rol;
 import logica.Accesos;
+import logica.Sesion;
 
 @WebServlet("/accesos")
 @MultipartConfig
 public class AccesosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public AccesosServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		var sesion=new Sesion(request.getSession());
+		var res=sesion.verificarUsuario(Rol.Seguridad);
+		if(res!=null) {
+			res.responder(response);
+			return;
+		}
+		
+		var accesoID=request.getParameter("accesoID");
+		var accion=request.getParameter("accion");
+		if(accesoID==null || accion==null) {
+			response.setStatus(400);
+			return;
+		}
+		
 		new Accesos().evaluar(
-				Integer.parseInt(request.getParameter("accesoID"))
+				Integer.parseInt(accesoID)
 				,request.getParameter("comentario")
-				,Integer.parseInt(   request.getParameter("accion")  )==1?2:3
-				,(Usuario) request.getSession().getAttribute("usuario")
+				,Integer.parseInt(accion)==1?2:3
+				,sesion.getUsuario()
 		).responder(response);
 	}
 }

@@ -11,9 +11,15 @@ public class Sesion {
 	public Sesion(HttpSession sesion) {
 		super();
 		this.sesion = sesion;
+		this.usuario=(Usuario) sesion.getAttribute("usuario");
 	}
 
 	private HttpSession sesion;
+	private Usuario usuario;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
 	public RespuestaHttp login(String nombreUsuario, String contrasena) {
 		
@@ -43,6 +49,7 @@ public class Sesion {
 			
 		
 			sesion.setAttribute("usuario", user );
+			this.usuario=user;
 			String redirección="";
 			
 			switch(rol) 
@@ -73,11 +80,24 @@ public class Sesion {
 	}
 
 	public RedireccionHttp logout() {
-		var user = (Usuario)sesion.getAttribute("usuario");
-		if(user!=null)
+		//var user = (Usuario)sesion.getAttribute("usuario");
+		if(usuario!=null)
 			sesion.removeAttribute("usuario");
 		
 		return new RedireccionHttp("index.jsp");
 	}
 
+	public RespuestaHttp verificarUsuario() {
+		return usuario==null?
+				new RespuestaHttp(401)
+				:null;
+	}
+
+	public RespuestaHttp verificarUsuario(Rol rol) {
+		if(usuario==null)
+			return new RespuestaHttp(401);
+		if(usuario.getRol()!=rol)
+			return new RespuestaHttp(403);
+		return null;
+	}
 }

@@ -13,6 +13,9 @@ public class RespuestaHttp implements IRespondeHttp{
 	public RespuestaHttp() {
 		super();
 	}
+	public RespuestaHttp(int codigo) {
+		this.codigoDeEstado=codigo;
+	}
 	int codigoDeEstado=200;
 	public void setCodigoDeEstado(int statusCode) {
 		this.codigoDeEstado = statusCode;

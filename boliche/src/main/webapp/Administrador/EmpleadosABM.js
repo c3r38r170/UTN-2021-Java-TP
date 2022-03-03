@@ -42,9 +42,8 @@ var alta = document.getElementById("alta").onclick= function()
 	contrasena.style.display= "block";
 	select.style.display= "block";
 
-	var submi = document.getElementById("submi").disabled = false
-		
 	
+	 submi.disabled = true
 		
 	return false
  }
@@ -57,6 +56,7 @@ var baja = document.getElementById("baja").onclick= function()
 	nombre.style.display= "block";	
 	select.style.display= "block";
 	//submi.style.display= "block";
+	 submi.disabled = true
 	return false
 }
 
@@ -70,11 +70,13 @@ function modificar()
 var modificar= document.getElementById("modificar").onclick= function()
 {
 	
+	
 	lblselec.style.display= "block";	
 	lblcontra.style.display= "block";	
 	lblmail.style.display= "block";	
 	lblnickname.style.display= "block";	
 	lblnombre.style.display= "block"
+	
 	
 	nombre.style.display= "block";	
 	nickname.style.display= "block";
@@ -82,5 +84,7 @@ var modificar= document.getElementById("modificar").onclick= function()
 	contrasena.style.display= "block";
 	select.style.display= "block";
 	//submi.style.display= "block";
+	 submi.disabled = true
 	return false
+	
 }
