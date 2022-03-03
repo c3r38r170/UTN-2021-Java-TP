@@ -14,11 +14,11 @@ import entidades.Usuario;
 
 
 @WebServlet("/Cambios")
-public class Cambios extends HttpServlet {
+public class CambiosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
      
-    public Cambios() {
+    public CambiosServlet() {
         super();
        
     }

@@ -78,19 +78,14 @@ public class Acceso {
 		}
 	}
 	
-	public Acceso(int clienteID, int nocheID) {
+	public Acceso(int clienteID, int nocheID) throws SQLException {
 		this.clienteID=clienteID;
 		this.noche=new Noche(nocheID);
 		Time t=new Time(Instant.now().toEpochMilli());
 		this.hora=t;
 		
 		Conexion con=new Conexion();
-		try {
-			con.preparedStatement("INSERT INTO acceso (clienteID,nocheID,hora) VALUES ("+clienteID+","+nocheID+",?)",new PSParameter(t));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		con.preparedStatement("INSERT INTO acceso (clienteID,nocheID,hora) VALUES ("+clienteID+","+nocheID+",?)",new PSParameter(t));
 		
 	}
 

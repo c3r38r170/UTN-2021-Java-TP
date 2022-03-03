@@ -10,33 +10,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Usuario;
+import logica.Accesos;
 
-
-@WebServlet("/Logout")
+@WebServlet("/accesos")
 @MultipartConfig
-public class Logout extends HttpServlet {
+public class AccesosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
-    public Logout() {
+
+    public AccesosServlet() {
         super();
-       
+        // TODO Auto-generated constructor stub
     }
 
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		var session=request.getSession();
-		var user = (Usuario)session.getAttribute("usuario");
-		if(user!=null)
-			session.removeAttribute("usuario");
-		
-		response.sendRedirect("index.jsp");
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		doGet(request, response);
+		new Accesos().evaluar(
+				Integer.parseInt(request.getParameter("accesoID"))
+				,request.getParameter("comentario")
+				,Integer.parseInt(   request.getParameter("accion")  )==1?2:3
+				,(Usuario) request.getSession().getAttribute("usuario")
+		).responder(response);
 	}
-
 }

@@ -5,7 +5,7 @@
   <%@page import="java.sql.Date"%>
 <%@page import="java.util.Iterator"%>
 <%@ page import="java.util.List" %>
-<%@ page import="servlets.Login" %>
+<%@ page import="servlets.LoginServlet" %>
 <%@ page import= "javax.servlet.http.*" %>
 <%@ page import= "entidades.Noche" %>
 <%@ page import= "java.util.LinkedList" %>
@@ -86,7 +86,7 @@ while(it.hasNext())
 	ns= it.next();
 
 %>
-<tr data-id=<%= ns.getId() %>>
+<tr data-id=<%= ns.getID() %>>
 
 			<td><%= ns.getFecha() %> </td>
 			<% // TODO reemplazar por un tick y ordenar de mayor a menor %>

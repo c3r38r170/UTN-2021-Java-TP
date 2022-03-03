@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -11,41 +10,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entidades.Acceso;
+import entidades.Rol;
 import entidades.Usuario;
+import logica.Sesion;
 
-@WebServlet("/accesos")
+/**
+ * Servlet implementation class Login
+ */
+@WebServlet("/Login")
 @MultipartConfig
-public class Accesos extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public Accesos() {
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int accesoID=Integer.parseInt(request.getParameter("accesoID"));
-		String comentario=request.getParameter("comentario");
-		int accion= Integer.parseInt(   request.getParameter("accion")  );
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
-		//TODO revisar parámetros y sesión
-		HttpSession sessio = request.getSession();
-
-		Acceso ac= new Acceso(accesoID);
-		try {
-			ac.setEstado(accion==1?2:3,((Usuario) sessio.getAttribute("usuario")).getID());
-			if(!(comentario==null || comentario.isBlank()))
-				ac.setComentario(comentario);
-		} catch (SQLException e) {
-			response.setStatus(500);
-			response.getWriter().write(e.getMessage());
-		}
-		
+		new Sesion(request.getSession()).login(
+				request.getParameter("username")
+				,request.getParameter("password")
+		).responder(response);
 	}
 }

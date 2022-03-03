@@ -12,11 +12,11 @@ import entidades.Usuario;
 
 
 @WebServlet("/Empleados")
-public class Empleados extends HttpServlet {
+public class EmpleadosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public Empleados() {
+    public EmpleadosServlet() {
         super();
        
     }
