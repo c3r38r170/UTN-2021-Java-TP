@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-public class RedireccionHttp implements RespondeHttp{
+public class RedireccionHttp implements IRespondeHttp{
 	public RedireccionHttp(String ruta) {
 		super();
 		this.ruta = ruta;

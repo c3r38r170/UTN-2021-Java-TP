@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-public class RespuestaHttp implements RespondeHttp{
+public class RespuestaHttp implements IRespondeHttp{
 	public RespuestaHttp(int codigoDeEstado, String mensaje) {
 		super();
 		this.codigoDeEstado = codigoDeEstado;
