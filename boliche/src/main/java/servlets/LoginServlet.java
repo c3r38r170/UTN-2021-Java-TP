@@ -8,10 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import entidades.Rol;
-import entidades.Usuario;
+import logica.RespuestaHttp;
 import logica.Sesion;
 
 /**
@@ -45,9 +43,13 @@ public class LoginServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		new Sesion(request.getSession()).login(
+		var usuario=request.getParameter("username");
+		var contrasenia=request.getParameter("password");
+		if(usuario==null || contrasenia==null) {
+			new RespuestaHttp(401).responder(response);
+		}else new Sesion(request.getSession()).login(
 				request.getParameter("username")
 				,request.getParameter("password")
-		).responder(response);
+			).responder(response);
 	}
 }
