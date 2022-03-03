@@ -20,8 +20,8 @@ public class Noches {
 
 	public static RespuestaHttp agregar(String fecha, boolean inscripcionesAbiertas) {
 		try {
-			new Noche(new SimpleDateFormat("yyyy-MM-dd").parse(fecha),inscripcionesAbiertas);
-			return new RespuestaHttp();
+			var n=new Noche(new SimpleDateFormat("yyyy-MM-dd").parse(fecha),inscripcionesAbiertas);
+			return new RespuestaHttp(200,""+n.getID());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return new RespuestaHttp(400,"La fecha ya existe.");

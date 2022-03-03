@@ -39,14 +39,23 @@ document.getElementById('modal-form').onsubmit = function(e) {
 		.then(idfecha => {
 			if(ok){
 			// TODO lógica de posicionamiento según fecha, ir de arriba a abajo preguntando si es menor
-						SqS("tbody").prepend(createElement(["TR", {
-							dataset: { id: idfecha }, children: [
-								["TD", { innerText: valuefecha }],
-								["TD", { innerText: habilitado ? "Habilitado" : "No habilitado " , dataset:{habilitado:+habilitado} }],
-								["TD",{children:[["i",{classList:["fa-solid","fa-pen-to-square"],onclick:function(){editar(this)} }]]}],
-								["TD",{children:[["i",{classList:["fa-solid","fa-trash-can"],onclick:function(){eliminar(this)} }]]}],
-							]
-						}]))
+				let i=0
+					,trs=SqS("tbody").children
+					,fechaMilliseconds=+new Date(valuefecha)
+					,tr=createElement(["TR", {
+						dataset: { id: idfecha }, children: [
+							["TD", { innerText: valuefecha }],
+							["TD", { innerText: habilitado ? "Habilitado" : "No habilitado " , dataset:{habilitado:+habilitado} }],
+							["TD",{children:[["i",{classList:["fa-solid","fa-pen-to-square"],onclick:function(){editar(this)} }]]}],
+							["TD",{children:[["i",{classList:["fa-solid","fa-trash-can"],onclick:function(){eliminar(this)} }]]}],
+						]
+					}]);
+				
+				while(trs[i] && (+new Date(trs[i].children[0].innerText))>fechaMilliseconds)
+					i++;
+				if(trs[i])
+					trs[i].before(tr);
+				else trs[trs.lenght-1].after(tr);
 						
 				this.parentNode.style.display='none';
 		
