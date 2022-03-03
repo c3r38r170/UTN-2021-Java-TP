@@ -32,7 +32,7 @@
 <div class=indice>
 	<a href="Noches.jsp">Reserva tu entrada aquí!</a>
 	<a href="Historial.jsp">Historial</a>
-	<a href="/">Editar datos</a>
+	<a href="../CambioDatosPersonales.jsp">Editar datos</a>
 	<a href="../Logout" class=salir>Salir</a>
 </div>
 

@@ -49,7 +49,7 @@
 	}
 	
 	.ocultar{display: none;}
-	
+	.ocultarsubmi{visibility: hidden;}
 	#lblnombre, #lblnickname, #lblmail,#lblcontra,#lblselec
 	{
 	display: none;
@@ -60,7 +60,7 @@
 <body>
 <body>
 				<h1 id="Titulo">Empleados</h1>
- <form action="Empleados" id="formulario" method="post">
+ <form action="../Empleados" id="formulario" method="post">
  <fieldset>
  
  
@@ -85,11 +85,11 @@
  
 </select>
  
- <input  type="submit"  class="ocultar" id="submi" >
+ <input  type="submit"   id="submi" >   <button class="ocultar" id ="cerrar">Cerrar</button >
  
 <div id="fila">
- <button class="fa-solid fa-plus" value=1  name="btn" id="alta" ></button>
-  <button class="fa-solid fa-arrows-rotate" value=2  name="btn" id="modificar"></button>
+ <button class="fa-solid fa-plus" value=1  name="btn" id="alta"  ></button>
+  <button class="fa-solid fa-arrows-rotate" value=2  name="btn" id="modificar"   ></button>
   <button class="fa-solid fa-trash" value=3 name="btn" id="baja" ></button></div>
  
 
