@@ -1,5 +1,7 @@
 package logica;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpSession;
 
 import entidades.Rol;
@@ -16,13 +18,12 @@ public class Sesion {
 	public RespuestaHttp login(String nombreUsuario, String contrasena) {
 		
 		
-		Usuario user= Usuario.checkUsernameExistence(nombreUsuario);
-		
-		if(user == null) 
-		{
+		Usuario user;
+		try {
+			user = new Usuario(nombreUsuario);
+		} catch (SQLException e) {
 			return new RespuestaHttp(404,"Nombre de usuario incorrecto.");
 		}
-		
 		
 
 
