@@ -17,16 +17,6 @@ import logica.Accesos;
 public class AccesosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public AccesosServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		new Accesos().evaluar(
 				Integer.parseInt(request.getParameter("accesoID"))
