@@ -6,7 +6,7 @@
 <%
 	if(session.getAttribute("usuario")==null){
 		response.sendRedirect("/");
-	}
+	}else{
 %><!DOCTYPE html>
 <html>
 <head>
@@ -99,3 +99,6 @@
 
 </body>
 </html>
+<%
+	}
+%>

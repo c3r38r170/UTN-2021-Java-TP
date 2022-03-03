@@ -5,7 +5,7 @@
 <%
 	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Administrador){
 		response.sendRedirect("/");
-	}
+	}else{
 %><!DOCTYPE html>
 <html>
 <head>
@@ -107,3 +107,6 @@
  <script src="EmpleadosABM.js"></script>
 </body>
 </html>
+<%
+	}
+%>

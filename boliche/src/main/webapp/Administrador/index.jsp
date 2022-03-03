@@ -16,7 +16,7 @@
 <%
 	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Administrador){
 		response.sendRedirect("/");
-	}
+	}else{
 %>
 
 <!DOCTYPE html>
@@ -180,3 +180,6 @@ float:right;
 	<script src="Modal.js" defer></script>
 </body>
 </html>
+<%
+	}
+%>

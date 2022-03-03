@@ -5,7 +5,7 @@
 <%
 	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Seguridad){
 		response.sendRedirect("/");
-	}
+	}else{
 %><!DOCTYPE html>
 <html>
 <head>
@@ -23,3 +23,6 @@
 
 </body>
 </html>
+<%
+	}
+%>

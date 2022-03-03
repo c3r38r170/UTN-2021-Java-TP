@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Usuario;
 import logica.Sesion;
 
 
@@ -18,21 +17,8 @@ import logica.Sesion;
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public LogoutServlet() {
-        super();
-       
-    }
-
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		new Sesion(request.getSession()).logout().responder(response);
-	}
-
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		doGet(request, response);
 	}
 
 }
