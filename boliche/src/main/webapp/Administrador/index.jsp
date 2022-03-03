@@ -10,9 +10,13 @@
 <%@ page import= "entidades.Noche" %>
 <%@ page import= "java.util.LinkedList" %>
 <%@ page import= "java.util.HashMap" %>  
+<%@ page import= "entidades.Rol" %>
+<%@ page import= "entidades.Usuario" %>
 
 <%
-	// TODO evitar usuarios no logueados y que no sean admins 
+	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Administrador){
+		response.sendRedirect("/");
+	}
 %>
 
 <!DOCTYPE html>

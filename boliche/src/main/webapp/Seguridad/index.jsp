@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page import= "entidades.Rol" %>
+<%@ page import= "entidades.Usuario" %>
+<%
+	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Seguridad){
+		response.sendRedirect("/");
+	}
+%><!DOCTYPE html>
 <html>
 <head>
 	

@@ -5,13 +5,13 @@
 <%@ page import="servlets.LoginServlet" %>
 <%@ page import= "javax.servlet.http.*" %>
 <%@ page import= "entidades.Usuario" %>
+<%@ page import= "entidades.Rol" %>
 <% 
-		HttpSession sessio = request.getSession();
-		Usuario us =(Usuario)session.getAttribute("usuario");
-		if(us==null)
+		Object u =session.getAttribute("usuario");
+		if(u==null || ((Usuario)u).getRol()!=Rol.Cliente)
 			response.sendRedirect("/");
 		else{
-		
+			Usuario us=(Usuario)u;
 %>
 <!DOCTYPE html>
 <html>
