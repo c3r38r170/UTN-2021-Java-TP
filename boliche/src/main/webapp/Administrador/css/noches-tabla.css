@@ -1,0 +1,16 @@
+@charset "UTF-8";
+[data-habilitado]:before{
+   font-family: 'Font Awesome 6 Free';
+   font-weight: bold;
+   width: 2rem;
+   display: inline-block;
+   text-align: center;
+}
+	[data-habilitado="0"]:before{
+			content: '\f00d';
+   	color: crimson;
+	}
+	[data-habilitado="1"]:before{
+    content: '\f00c';
+   	color: darkgreen;
+	}

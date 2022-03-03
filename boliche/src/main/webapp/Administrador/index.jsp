@@ -26,6 +26,7 @@
 	<%@ include file ="templates/nav.html" %>
 
 <link rel=stylesheet type=text/css href=../css/sistema-de-disenio/modal.css>
+<link rel=stylesheet type=text/css href=css/noches-tabla.css>
 
 <style>
 
