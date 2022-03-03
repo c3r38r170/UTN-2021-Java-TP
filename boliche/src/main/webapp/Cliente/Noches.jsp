@@ -44,7 +44,7 @@
 		%><div class=indice><%
 		do{
 			nox=it.next();
-			%><button value=<%=nox.getId()%>><%=new SimpleDateFormat("dd/MM/yyyy").format(nox.getFecha()) %></button><%
+			%><button value=<%=nox.getID()%>><%=new SimpleDateFormat("dd/MM/yyyy").format(nox.getFecha()) %></button><%
 		}while(it.hasNext());
 		%></div><%
 	}else{

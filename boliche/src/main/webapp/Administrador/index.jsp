@@ -86,7 +86,7 @@ while(it.hasNext())
 	ns= it.next();
 
 %>
-<tr data-id=<%= ns.getId() %>>
+<tr data-id=<%= ns.getID() %>>
 
 			<td><%= ns.getFecha() %> </td>
 			<% // TODO reemplazar por un tick y ordenar de mayor a menor %>
