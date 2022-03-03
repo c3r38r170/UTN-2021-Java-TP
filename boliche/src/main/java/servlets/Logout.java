@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Usuario;
+import logica.Sesion;
 
 
 @WebServlet("/Logout")
@@ -25,12 +26,7 @@ public class Logout extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		var session=request.getSession();
-		var user = (Usuario)session.getAttribute("usuario");
-		if(user!=null)
-			session.removeAttribute("usuario");
-		
-		response.sendRedirect("index.jsp");
+		new Sesion(request.getSession()).logout().responder(response);
 	}
 
 	

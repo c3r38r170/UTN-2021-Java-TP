@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import entidades.Rol;
 import entidades.Usuario;
+import logica.Sesion;
 
 /**
  * Servlet implementation class Login
@@ -44,74 +45,9 @@ public class Login extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		String contrasena = request.getParameter("password");
-		String nombreUsuario= request.getParameter("username");
-
-
-		Usuario user= Usuario.checkUsernameExistence(nombreUsuario);
-		
-		if(user == null) 
-		{
-			response.getWriter().write("Nombre de usuario incorrecto.");
-			response.setStatus(404);
-			return;
-		}
-		
-		
-
-
-		if(user.isVerificado() == false   )
-		{
-			response.getWriter().write("Su usuario se encuentra deshabilitado, verifique su mail.");
-			System.out.println();
-			response.setStatus(403);
-			return;
-		}
-		
-			;
-		
-			String contraUsuario= user.getContraseña();
-			// TODO hashing y eso
-		if( contraUsuario.equals(contrasena) ) 
-		{
-
-			Rol rol = user.getRol(); 
-			HttpSession session = request.getSession();
-			
-		
-			session.setAttribute("usuario", user );
-			String redirección="";
-			
-			switch(rol) 
-			{
-			case Administrador:
-				redirección="Administrador";
-			break;
-			case Seguridad:
-				redirección="Seguridad";
-			break;
-			case Cliente:
-				redirección="Cliente";
-				break;
-			case Desconocido:
-					response.setStatus(500);
-					break;
-			default: // Para que pase esto esta clase tiene que estar desactualizada.
-				response.setStatus(501);
-				break;
-			}
-			response.getWriter().write(redirección);
-
-		}
-		else 
-		{
-			response.getWriter().write("Contraseña incorrecta.");
-			response.setStatus(403);
-			return;
-		}
-
-
-
-
+		new Sesion(request.getSession()).login(
+				request.getParameter("username")
+				,request.getParameter("password")
+		).responder(response);
 	}
 }
