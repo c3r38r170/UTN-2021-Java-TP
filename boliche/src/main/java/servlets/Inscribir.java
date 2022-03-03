@@ -33,9 +33,10 @@ public class Inscribir extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession sess = request.getSession();
-		Acceso ac=new Acceso(((Usuario) sess.getAttribute("usuario")).getID(),Integer.parseInt(request.getParameter("nocheID")));
-		response.getWriter().append(""+ac.getID());
+		new logica.Accesos().generar(
+				(Usuario) request.getSession().getAttribute("usuario")
+				,Integer.parseInt(request.getParameter("nocheID"))
+		).responder(response);
 	}
 
 }
