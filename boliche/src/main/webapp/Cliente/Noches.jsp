@@ -5,6 +5,7 @@
 <%@ page import= "entidades.Usuario" %>
 <%@ page import= "entidades.Rol" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import= "logica.Noches" %>
 <%@ page import= "entidades.Noche" %>
 <%
 	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Cliente){
@@ -36,7 +37,7 @@
 <h1>Elegí a qué noche querés anotarte.</h1>
 <%
 
-	List<Noche> nochesHabilitadas = Noche.habilitadasPara(usuarioActual.getID());
+	List<Noche> nochesHabilitadas = Noches.habilitadasPara(usuarioActual.getID());
 	Iterator<Noche>it = nochesHabilitadas.iterator();
 	Noche nox = null;
 	
