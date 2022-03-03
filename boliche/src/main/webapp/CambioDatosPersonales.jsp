@@ -81,7 +81,7 @@
  <fieldset>
  <label>Ingrese nuevo nombre completo :  </label> <input type="text"  minlength="5" name="nombre"  value ="<%=usuario.getNombre()%>">
  
- <label>Ingrese nuevo nickname🍆:  </label> <input type="text"  minlength="3" name="nickname" value ="<%=usuario.getNickname()%>"      >
+ <label>Ingrese nuevo nickname:  </label> <input type="text"  minlength="3" name="nickname" value ="<%=usuario.getNickname()%>"      >
  <br>
  <label>Ingrese nuevo email asociado:   </label> <input type="email"  minlength="8" name="email"  value ="<%=usuario.getMail()%>" >
  <br>

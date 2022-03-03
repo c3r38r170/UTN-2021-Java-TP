@@ -1,3 +1,5 @@
+
+
 var nombre = document.getElementById("nombre")
 var nickname = document.getElementById("nickname")
 var mail = document.getElementById("mail")
@@ -5,6 +7,7 @@ var contrasena = document.getElementById("contrasena")
 var select = document.getElementById("selec")
 
 
+var formulario = document.getElementById("formulario")
 
 var submi = document.getElementById("submi").disabled = true
 
@@ -57,7 +60,14 @@ var baja = document.getElementById("baja").onclick= function()
 	return false
 }
 
-var baja = document.getElementById("modificar").onclick= function()
+function modificar()
+
+
+{
+	
+}
+
+var modificar= document.getElementById("modificar").onclick= function()
 {
 	
 	

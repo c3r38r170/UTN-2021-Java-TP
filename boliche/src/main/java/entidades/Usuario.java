@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import datos.Conexion;
 import datos.PSParameter;
 import datos.PSParameter.Types;
+import logica.RespuestaHttp;
 
 public class Usuario {
 	private String nombre;
@@ -195,6 +196,37 @@ public class Usuario {
 		
 		
 	}
+	
+	
+	
+	
+	
+	public static int  verificarExistenciaUsuario(String nombreUsuario) 
+	{
+		
+			Conexion con = new Conexion();
+			try {
+				var usuarios=con.preparedSelectStatement("SELECT COUNT(*) FROM `usuarios` WHERE `usuario`=?",new PSParameter(nombreUsuario));
+			
+				if(usuarios.getInt(1)>0) 
+				{
+					return 1;
+				}
+			
+				return 0;
+			
+			
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			return 0;
+			
+			
+	    
+	}
+	
+	
 	
 	
 	

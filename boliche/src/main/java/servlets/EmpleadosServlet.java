@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entidades.Usuario;
+import logica.Usuarios;
 
 
 @WebServlet("/Empleados")
@@ -43,24 +44,48 @@ public class EmpleadosServlet extends HttpServlet {
 		switch(btn) 
 		{
 		case 1: 
-			Usuario.agregar(nombre, nickname ,contrasena, email, true,usuario.getID() , seleccionado);
+			try {
+				Usuarios.agregarEmpleado(nombre, nickname ,contrasena, email, true,usuario.getID() , seleccionado);
+			} catch (IOException e2) {
+				
+				e2.printStackTrace();
+				response.sendError(403);
+			}
 			
 			break;
 		
 		case 2: 
 			
-			int id =Usuario.TraerIdEmpleado(nombre, seleccionado);
-			
-			Usuario.ActualizarUsuario(id, nombre, nickname, contrasena, email);
+			try {
+				int id =Usuario.TraerIdEmpleado(nombre, seleccionado);
+				
+				Usuarios.Modificar(id, nombre, nickname, contrasena, email);
+			} catch (Exception e1) {
+				
+				e1.printStackTrace();
+				response.sendError(403);
+			}
 			
 			break;
 		
 		
 		case 3: 
-			int id1 =Usuario.TraerIdEmpleado(nombre, seleccionado);
+			int id1;
+			try {
+				id1 = Usuarios.traerIDempleado(nombre, seleccionado);
+				if(id1==0) 
+				
+				{
+					response.sendError(403);
+				}
+				Usuarios.eliminar (id1) ;
+			} catch (Exception e) {
 			
-			Usuario.ActualizarUsuario(id1, nombre, nickname, contrasena, email);
-			Usuario.EliminarEmpleado (id1) ;
+				e.printStackTrace();
+				response.sendError(403);
+			}
+			
+			
 			break;
 			
 		}

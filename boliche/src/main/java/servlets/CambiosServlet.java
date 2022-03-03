@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import entidades.Rol;
 import entidades.Usuario;
+import logica.Usuarios;
 
 
 @WebServlet("/Cambios")
@@ -65,7 +66,7 @@ public class CambiosServlet extends HttpServlet {
 				String nickname = request.getParameter("nickname");
 				String email = request.getParameter("email");
 
-				Usuario.ActualizarUsuario(usuario.getID(),nombre,nickname,nuevaContrasena,email);
+				Usuarios.Modificar(usuario.getID(),nombre,nickname,nuevaContrasena,email);
 				response.sendRedirect("index.jsp");
 				response.getWriter().write("Sus Datos han cambiado");
 				
@@ -87,7 +88,7 @@ public class CambiosServlet extends HttpServlet {
 			int rol = Integer.parseInt(request.getParameter("rol")) ;
 			
 			
-			Usuario.agregar(nombre,nickname,contraseña11,email,true,usuario.getID(),rol);
+			Usuarios.agregarEmpleado(nombre,nickname,nuevaContrasena,email,true,1,rol);
 					
 			response.setContentType("text/html");
 			
