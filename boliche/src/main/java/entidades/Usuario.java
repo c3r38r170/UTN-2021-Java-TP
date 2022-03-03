@@ -1,6 +1,4 @@
 package entidades;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -82,7 +80,6 @@ public class Usuario {
 	{
 		 LinkedList<Usuario> linkusuario = new    LinkedList<Usuario> ();
 			ResultSet rs = null;
-			PreparedStatement ps= null;
 			try 
 			{
 				Conexion cn = new Conexion();
@@ -125,10 +122,9 @@ public class Usuario {
 	{
 		
 		try {
-			int columns;
 			Conexion conn = new Conexion();
 
-			columns = conn.preparedStatement("Update usuarios u set u.contraseña =? , u.usuario =?, u.nickname =?,u.correo=?   where u.ID = ? ",
+			conn.preparedStatement("Update usuarios u set u.contraseña =? , u.usuario =?, u.nickname =?,u.correo=?   where u.ID = ? ",
 					new PSParameter[] { new PSParameter(Contrasena , Types.STRING), new PSParameter(Usuario, Types.STRING),
 							new PSParameter(nickname, Types.STRING), new PSParameter( email, Types.STRING) ,new PSParameter(id , Types.INT)
 
@@ -146,7 +142,7 @@ public class Usuario {
 		var con = new Conexion();
 
 		try {
-			int columnsafected = con.preparedStatement("INSERT INTO usuarios (usuario,nickname,contraseña,correo,verificado,creadorID,rolID) value(?,?,?,?,?,?,?) ;  ",
+			con.preparedStatement("INSERT INTO usuarios (usuario,nickname,contraseña,correo,verificado,creadorID,rolID) value(?,?,?,?,?,?,?) ;  ",
 					new PSParameter[] { new PSParameter( Usuario, Types.STRING),new PSParameter( nickname , Types.STRING) ,
 							new PSParameter( Contrasena , Types.STRING), new PSParameter(email , Types.STRING),
 							new PSParameter( verificado, Types.BOOLEAN),new PSParameter( creador, Types.INT) ,new PSParameter( rol, Types.INT)
@@ -186,10 +182,9 @@ public class Usuario {
 	{
 		
 		try {
-			int columns;
 			Conexion conn = new Conexion();
 
-			columns = conn.preparedStatement("Update usuarios u set u.verificado = 0 where u.ID = ? ",
+			conn.preparedStatement("Update usuarios u set u.verificado = 0 where u.ID = ? ",
 					new PSParameter[] { new PSParameter(Id , Types.INT)});
 							
 

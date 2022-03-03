@@ -59,11 +59,9 @@ public class Noche {
 				int id = rs.getInt(1);
 				Date fecha = rs.getDate(2);
 				boolean inscripciones = rs.getBoolean(3);
-				Noche f = new Noche(id, fecha, inscripciones);
-				listFiesta.add(f);
+				listFiesta.add(new Noche(id, fecha, inscripciones));
 				
 			}
-			if(listFiesta== null) {System.out.println("es nulo");}
 			return listFiesta;
 
 		} catch (Exception e) {
@@ -115,10 +113,9 @@ public class Noche {
 	
 	public void eliminar() throws SQLException {
 
-		ResultSet rs = null;
 		Conexion conn = new Conexion();
 
-			int columns = conn.preparedStatement("Delete from noche where ID = ?;",
+		conn.preparedStatement("Delete from noche where ID = ?;",
 					new PSParameter[] { new PSParameter(this.id, Types.INT)
 
 					});
