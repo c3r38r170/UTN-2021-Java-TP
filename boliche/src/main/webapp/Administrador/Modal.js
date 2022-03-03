@@ -73,7 +73,8 @@ function eliminar(icono) {
 	})
 		.then(res => {
 			if (res.ok) { tr.remove() }
-
+			else res.text().then(toast.error())
+			//TODO even better
 		}
 		)
 }
