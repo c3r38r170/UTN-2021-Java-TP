@@ -72,7 +72,7 @@
 
 		<th> Noche  </th>
 
-		<th> habilitada </th>
+		<th> Inscripción </th>
 </tr>
 </thead>
 <tbody>
@@ -91,8 +91,7 @@ while(it.hasNext())
 
 			<td><%= ns.getFecha() %> </td>
 			<% // TODO reemplazar por un tick y ordenar de mayor a menor %>
-			<% if( ns.isInscripciones()){estado= "Habilitado";} else{estado= " No habilitado";} %>
-			<td data-habilitado=<%= ns.isInscripciones()?1:0 %>> <%= estado %>  </td>
+			<td data-habilitada=<%= ns.isInscripciones()?1:0 %>></td>
 									
 			<td > <i class="fa-solid fa-pen-to-square" onclick="editar(this)"></i> </td>
 			<td><i class="fa-solid fa-trash-can" onclick="eliminar(this)"></i></td>
@@ -122,10 +121,10 @@ while(it.hasNext())
 float:right;
 "> 
 <br>
-<label> Ingrese Fecha de la fiesta : </label> <input type="date"  name=fecha-noche> <!--  esta linea no la soporta el navegador de eclipse --> 
+<label> Ingrese fecha de la fiesta : </label> <input type="date"  name=fecha-noche> <!--  esta linea no la soporta el navegador de eclipse --> <!-- Y bueno no lo uses. -->
 <br>
 <br>
- <label>Habilitda para inscripcion : </label> <input type="checkbox" name = habilitar  >
+ <label>Habilitada para inscripción : </label> <input type="checkbox" name = habilitar  >
  <br>
 
 <input type="submit"   class="boton"   value="Aceptar">  

@@ -16,19 +16,19 @@ function editar(icono) {
 		
 	let formulario = gEt("modal-form-editar")
 	formulario["fecha-noche"].value = tr.children[0].innerText
-	formulario["habilitar"].checked = !!+tr.children[1].dataset.habilitado
+	formulario["habilitar"].checked = !!+tr.children[1].dataset.habilitada
 	
 	modal.style.display = "flex";
 }
 var datosformularios = new FormData();
 
 document.getElementById('modal-form').onsubmit = function(e) {
-	var habilitado = this['habilitar'].checked;
+	var habilitada = this['habilitar'].checked;
 	var valuefecha = this['fecha-noche'].value;
 	let ok;
 	sendPOST('../Noches', {
 		fecha: valuefecha,
-		estado: habilitado,
+		estado: habilitada,
 		accion: 2
 	})
 		.then(res => {
@@ -45,7 +45,7 @@ document.getElementById('modal-form').onsubmit = function(e) {
 					,tr=createElement(["TR", {
 						dataset: { id: idfecha }, children: [
 							["TD", { innerText: valuefecha }],
-							["TD", { innerText: habilitado ? "Habilitado" : "No habilitado " , dataset:{habilitado:+habilitado} }],
+							["TD", {dataset:{habilitada:+habilitada} }],
 							["TD",{children:[["i",{classList:["fa-solid","fa-pen-to-square"],onclick:function(){editar(this)} }]]}],
 							["TD",{children:[["i",{classList:["fa-solid","fa-trash-can"],onclick:function(){eliminar(this)} }]]}],
 						]
@@ -104,8 +104,7 @@ document.getElementById('modal-form-editar').onsubmit = function() {
 			if(res.ok){
 				let editado=SqS('tr[data-id="'+id+'"]');
 				editado.children[0].innerText=fecha;
-				editado.children[1].dataset.habilitado=+estado;
-				editado.children[1].innerText=estado?'Habilitado':'No habilitado';
+				editado.children[1].dataset.habilitada=+estado;
 		
 				this.parentNode.style.display='none';
 			}
