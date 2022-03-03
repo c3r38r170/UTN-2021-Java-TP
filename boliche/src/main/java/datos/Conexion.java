@@ -127,7 +127,11 @@ public class Conexion{
 		rs.next();
 		return rs;
 	}
-	
-	
+
+	public ResultSet primerFila(String query,PSParameter parametroUnico) throws SQLException {
+		ResultSet rs=preparedSelectStatement(query, new PSParameter[] {parametroUnico});
+		rs.next();
+		return rs;
+	}
 	
 }
