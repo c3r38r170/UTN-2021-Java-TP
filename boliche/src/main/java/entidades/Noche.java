@@ -48,7 +48,8 @@ public class Noche {
 					+ " AND ac.estadoID=1"
 					+ " AND n.inscripcion = 1"
 					+ " AND ac.clienteID="+clienteID
-					+ " WHERE ac.clienteID IS NULL";
+					+ " WHERE ac.clienteID IS NULL"
+					+ " ORDER BY n.fecha DESC";
 			rs=cn.executeSelect(query);
 			
 		 		while(rs.next())
