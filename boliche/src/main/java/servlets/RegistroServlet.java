@@ -17,11 +17,11 @@ import datos.PSParameter;
 
 @WebServlet("/Registro")
 @MultipartConfig
-public class Registro extends HttpServlet {
+public class RegistroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-    public Registro() {
+    public RegistroServlet() {
         super();
     }
 

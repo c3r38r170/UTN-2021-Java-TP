@@ -15,11 +15,11 @@ import logica.Sesion;
 
 @WebServlet("/Logout")
 @MultipartConfig
-public class Logout extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public Logout() {
+    public LogoutServlet() {
         super();
        
     }

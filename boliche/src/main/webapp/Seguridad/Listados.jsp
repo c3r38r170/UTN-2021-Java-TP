@@ -3,7 +3,7 @@
 <%@page import="java.sql.Date"%>
 
 <%@ page import="java.util.List" %>
-<%@ page import="servlets.Login" %>
+<%@ page import="servlets.LoginServlet" %>
 <%@ page import= "javax.servlet.http.*" %>
 <%@ page import= "entidades.Usuario" %>
 <%@ page import= "entidades.Acceso" %>
