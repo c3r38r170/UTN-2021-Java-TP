@@ -66,7 +66,7 @@
 <body>
 <body>
 				<h1 id="Titulo">Empleados</h1>
- <form action="Empleados" id="formulario" method="post">
+ <form action="../Empleados" id="formulario" method="post">
  <fieldset>
  
  
@@ -91,7 +91,7 @@
  
 </select>
  
- <input  type="submit"  class="ocultar" id="submi" >
+ <input  type="submit"   id="submi" >
  
 <div id="fila">
  <button class="fa-solid fa-plus" value=1  name="btn" id="alta" ></button>
