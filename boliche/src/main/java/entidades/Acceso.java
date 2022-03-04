@@ -1,6 +1,5 @@
 package entidades;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -98,7 +97,6 @@ public class Acceso {
 
 		LinkedList<Acceso> historial=new LinkedList<Acceso>();
 		ResultSet rs = null;
-		PreparedStatement ps= null;
 		try 
 		{
 			Conexion cn = new Conexion();
@@ -123,7 +121,6 @@ public class Acceso {
 	public static LinkedList<Acceso> pendientesEstaNoche(){
 		LinkedList<Acceso> pendientesEstaNoche = new    LinkedList<> ();
 		ResultSet rs = null;
-		PreparedStatement ps= null;
 		try 
 		{
 			Conexion cn = new Conexion();
@@ -158,6 +155,8 @@ public class Acceso {
 
 	public void setEstado(int estadoID, int quien) throws SQLException {
 		Conexion conn=new Conexion();
+		this.estadoID=estadoID;
+		this.seguridadID=quien;
 		conn.executeQuery(
       "Update acceso set"
         + " seguridadID="+quien

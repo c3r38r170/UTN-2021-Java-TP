@@ -1,5 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import= "entidades.Rol" %>
+<%@ page import= "entidades.Usuario" %>
+<%
+	if(session.getAttribute("usuario")!=null){
+		String ruta;
+		switch(((Usuario)session.getAttribute("usuario")).getRol()){
+		case Cliente:
+			ruta="Cliente";
+			break;
+		case Seguridad:
+			ruta="Seguridad";
+			break;
+		case Administrador:
+			ruta="Administrador";
+			break;
+		default:
+			ruta="Logout";
+			break;
+		}
+		response.sendRedirect(ruta);
+	}else{
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,3 +143,6 @@
 
 </body>
 </html>
+<%
+	}
+%>

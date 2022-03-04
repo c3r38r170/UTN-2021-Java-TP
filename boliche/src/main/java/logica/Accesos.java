@@ -2,8 +2,6 @@ package logica;
 
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpServletResponse;
-
 import entidades.Acceso;
 import entidades.Usuario;
 

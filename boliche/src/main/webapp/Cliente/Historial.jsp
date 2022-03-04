@@ -11,7 +11,7 @@
 	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Cliente){
 		
 		response.sendRedirect("/");
-	}
+	}else{
 	Usuario usuarioActual=((Usuario)session.getAttribute("usuario"));
 %>
 <!DOCTYPE html>
@@ -89,3 +89,6 @@ while(estIt.hasNext()){
 
 </body>
 </html>
+<%
+	}
+%>

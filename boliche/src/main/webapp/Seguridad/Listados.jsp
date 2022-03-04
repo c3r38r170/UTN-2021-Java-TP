@@ -14,7 +14,7 @@
 	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Seguridad){
 		
 		response.sendRedirect("/");
-	}
+	}else{
 	String mensajeNoHay=
 		"<tr id=no-hay>"
 			+"<td colspan=2> No hay ingresos en espera. </td>"
@@ -175,3 +175,6 @@
 
 </body>
 </html>	
+<%
+	}
+%>
