@@ -1,11 +1,6 @@
-- Alta de Seguridad
-Accede el administrador
-Tiene un índice de opciones
-Elige dar de alta personal de seguridad
-Sale el administrador
-Accede el personal de seguridad
-Sale el personal de seguridad
-#Aplicable a admin desde dueño
+- Registro
+Se registra un nuevo cliente
+Se accede
 
 - Acceso completo
 Accede el administrador
@@ -31,9 +26,13 @@ Entra el segundo cliente
 Puede ver que ha sido rechazado
 Sale el segundo cliente
 
-- Registro
-Se registra un nuevo cliente
-Se accede
+- Alta de Seguridad
+Accede el administrador
+Tiene un índice de opciones
+Elige dar de alta personal de seguridad
+Sale el administrador
+Accede el personal de seguridad
+Sale el personal de seguridad
 
 - Modificación de datos personales
 Accede el cliente
