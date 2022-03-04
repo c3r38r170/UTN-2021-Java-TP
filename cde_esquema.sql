@@ -49,7 +49,7 @@ CREATE TABLE `estado` (
 --
 
 LOCK TABLES `estado` WRITE;
-/*!40000 ALTER TABLE `rol` DISABLE KEYS */;
+/*!40000 ALTER TABLE `estado` DISABLE KEYS */;
 INSERT INTO `estado` VALUES (1,'En espera','FFFF00'),(2,'Aceptado','00FF00'),(3,'Rechazado','FF0000');
 /*!40000 ALTER TABLE `estado` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -170,7 +170,7 @@ CREATE TABLE `acceso` (
   CONSTRAINT `acceso_ibfk_2` FOREIGN KEY (`seguridadID`) REFERENCES `usuarios` (`ID`),
   CONSTRAINT `acceso_ibfk_3` FOREIGN KEY (`estadoID`) REFERENCES `estado` (`ID`),
   CONSTRAINT `acceso_ibfk_4` FOREIGN KEY (`comentarioID`) REFERENCES `comentario` (`ID`),
-  CONSTRAINT `acceso_ibfk_5` FOREIGN KEY (`nocheID`) REFERENCES `noche` (`ID`)
+  CONSTRAINT `acceso_ibfk_5` FOREIGN KEY (`nocheID`) REFERENCES `noche` (`ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
