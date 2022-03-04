@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page import= "entidades.Rol" %>
+<%@ page import= "entidades.Usuario" %>
+<%
+	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Administrador){
+		response.sendRedirect("/");
+	}else{
+%><!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -49,7 +55,7 @@
 	}
 	
 	.ocultar{display: none;}
-	
+	.ocultarsubmi{visibility: hidden;}
 	#lblnombre, #lblnickname, #lblmail,#lblcontra,#lblselec
 	{
 	display: none;
@@ -60,7 +66,7 @@
 <body>
 <body>
 				<h1 id="Titulo">Empleados</h1>
- <form action="Empleados" id="formulario" method="post">
+ <form action="../Empleados" id="formulario" method="post">
  <fieldset>
  
  
@@ -85,11 +91,11 @@
  
 </select>
  
- <input  type="submit"  class="ocultar" id="submi" >
+ <input  type="submit"   id="submi" >
  
 <div id="fila">
- <button class="fa-solid fa-plus" value=1  name="btn" id="alta" ></button>
-  <button class="fa-solid fa-arrows-rotate" value=2  name="btn" id="modificar"></button>
+ <button class="fa-solid fa-plus" value=1  name="btn" id="alta"  ></button>
+  <button class="fa-solid fa-arrows-rotate" value=2  name="btn" id="modificar"   ></button>
   <button class="fa-solid fa-trash" value=3 name="btn" id="baja" ></button></div>
  
 
@@ -101,3 +107,6 @@
  <script src="EmpleadosABM.js"></script>
 </body>
 </html>
+<%
+	}
+%>

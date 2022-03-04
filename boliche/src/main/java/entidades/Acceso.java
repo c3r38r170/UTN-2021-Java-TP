@@ -1,6 +1,5 @@
 package entidades;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -78,19 +77,14 @@ public class Acceso {
 		}
 	}
 	
-	public Acceso(int clienteID, int nocheID) {
+	public Acceso(int clienteID, int nocheID) throws SQLException {
 		this.clienteID=clienteID;
 		this.noche=new Noche(nocheID);
 		Time t=new Time(Instant.now().toEpochMilli());
 		this.hora=t;
 		
 		Conexion con=new Conexion();
-		try {
-			con.preparedStatement("INSERT INTO acceso (clienteID,nocheID,hora) VALUES ("+clienteID+","+nocheID+",?)",new PSParameter(t));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		con.preparedStatement("INSERT INTO acceso (clienteID,nocheID,hora) VALUES ("+clienteID+","+nocheID+",?)",new PSParameter(t));
 		
 	}
 
@@ -103,7 +97,6 @@ public class Acceso {
 
 		LinkedList<Acceso> historial=new LinkedList<Acceso>();
 		ResultSet rs = null;
-		PreparedStatement ps= null;
 		try 
 		{
 			Conexion cn = new Conexion();
@@ -128,7 +121,6 @@ public class Acceso {
 	public static LinkedList<Acceso> pendientesEstaNoche(){
 		LinkedList<Acceso> pendientesEstaNoche = new    LinkedList<> ();
 		ResultSet rs = null;
-		PreparedStatement ps= null;
 		try 
 		{
 			Conexion cn = new Conexion();
@@ -163,6 +155,8 @@ public class Acceso {
 
 	public void setEstado(int estadoID, int quien) throws SQLException {
 		Conexion conn=new Conexion();
+		this.estadoID=estadoID;
+		this.seguridadID=quien;
 		conn.executeQuery(
       "Update acceso set"
         + " seguridadID="+quien

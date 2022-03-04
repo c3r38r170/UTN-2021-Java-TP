@@ -5,12 +5,13 @@
 <%@ page import= "entidades.Usuario" %>
 <%@ page import= "entidades.Rol" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import= "logica.Noches" %>
 <%@ page import= "entidades.Noche" %>
 <%
 	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Cliente){
 		
 		response.sendRedirect("/");
-	}
+	}else{
 	Usuario usuarioActual=((Usuario)session.getAttribute("usuario"));
 %>
 <!DOCTYPE html>
@@ -36,7 +37,7 @@
 <h1>Elegí a qué noche querés anotarte.</h1>
 <%
 
-	List<Noche> nochesHabilitadas = Noche.habilitadasPara(usuarioActual.getID());
+	List<Noche> nochesHabilitadas = Noches.habilitadasPara(usuarioActual.getID());
 	Iterator<Noche>it = nochesHabilitadas.iterator();
 	Noche nox = null;
 	
@@ -44,7 +45,7 @@
 		%><div class=indice><%
 		do{
 			nox=it.next();
-			%><button value=<%=nox.getId()%>><%=new SimpleDateFormat("dd/MM/yyyy").format(nox.getFecha()) %></button><%
+			%><button value=<%=nox.getID()%>><%=new SimpleDateFormat("dd/MM/yyyy").format(nox.getFecha()) %></button><%
 		}while(it.hasNext());
 		%></div><%
 	}else{
@@ -71,3 +72,6 @@
 
 </body>
 </html>
+<%
+	}
+%>

@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import datos.Conexion;
 import datos.PSParameter;
-
+import logica.Usuarios;
 
 @WebServlet("/Registro")
 @MultipartConfig
-public class Registro extends HttpServlet {
+public class RegistroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-    public Registro() {
+    public RegistroServlet() {
         super();
     }
 
@@ -78,17 +78,22 @@ public class Registro extends HttpServlet {
 		var con = new Conexion();
 		
 		try {
-			var usuarios=con.preparedSelectStatement("SELECT COUNT(*) FROM `usuarios` WHERE `usuario`=?",new PSParameter(nombreUsuario));
-			usuarios.next();
-			if(usuarios.getInt(1)>0) {
-				response.getWriter().write("El nombre de usuario ya existe.");
-				response.setStatus(400);
-				return;
-			}
-			/*var secreto=new StringBuilder();
+			Usuarios.verificarExistenciaUsuario(nombreUsuario);
+			
+			Usuarios.agregar(nombreUsuario, contraseña, contraseña, nickname);} 
+				catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		
+		
+		
+		
+		
+		/*var secreto=new StringBuilder();
 			for(int i=0;i<75;i++)
 				secreto.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz".charAt((int)Math.floor(Math.random()*62)));*/
-			var correo=request.getParameter("correo");
+			/*var correo=request.getParameter("correo");
 			//con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`secreto`) VALUES (?,?,?,3,?,'"+secreto.toString()+"')", new PSParameter[] {
 			con.preparedStatement("INSERT INTO `usuarios` (`usuario`,`contraseña`,`nickname`,`rolID`,`correo`,`verificado`) VALUES (?,?,?,3,?,1)", new PSParameter[] {
 					new PSParameter(nombreUsuario)
@@ -96,7 +101,7 @@ public class Registro extends HttpServlet {
 					,new PSParameter(nickname)
 					,new PSParameter(correo)
 			});
-			response.getWriter().write("¡Registro completado! Ya puede ingresar al sistema.");
+			response.getWriter().write("¡Registro completado! Ya puede ingresar al sistema.");*/
 			/*try{
 				//Le enviaríamos un correo electrónico con un link que verifique el "secreto", y le mostraríamos un mensaje diciendo que debe revisar su casilla de correo.
 				Correo.enviar(correo, "Registro en el sistema del boliche", "Para completar el registro, diríjase al siguiente <a href=\""+request.getServerName()+"/Registro?secreto="+secreto+"\">enlace</a>.");
@@ -104,10 +109,8 @@ public class Registro extends HttpServlet {
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
 			}*/
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			
+		
 	}
 
 }

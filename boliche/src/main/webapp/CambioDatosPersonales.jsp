@@ -1,10 +1,13 @@
 <%@page import="java.text.NumberFormat.Style"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="entidades.Usuario" %>
-     <%@ page import="entidades.Rol" %>
-    
-<!DOCTYPE html>
+<%@ page import="entidades.Usuario" %>
+ <%@ page import="entidades.Rol" %>
+<%
+	if(session.getAttribute("usuario")==null){
+		response.sendRedirect("/");
+	}else{
+%><!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -42,8 +45,7 @@
 </style>
 
 	<%
-	HttpSession sesionUsuario = (HttpSession) request.getSession();
-	Usuario usuario=(Usuario) sesionUsuario.getAttribute("usuario"); 
+	Usuario usuario=(Usuario) session.getAttribute("usuario"); 
 	
 	
 
@@ -79,7 +81,7 @@
  <fieldset>
  <label>Ingrese nuevo nombre completo :  </label> <input type="text"  minlength="5" name="nombre"  value ="<%=usuario.getNombre()%>">
  
- <label>Ingrese nuevo nickname🍆:  </label> <input type="text"  minlength="3" name="nickname" value ="<%=usuario.getNickname()%>"      >
+ <label>Ingrese nuevo nickname:  </label> <input type="text"  minlength="3" name="nickname" value ="<%=usuario.getNickname()%>"      >
  <br>
  <label>Ingrese nuevo email asociado:   </label> <input type="email"  minlength="8" name="email"  value ="<%=usuario.getMail()%>" >
  <br>
@@ -97,3 +99,6 @@
 
 </body>
 </html>
+<%
+	}
+%>

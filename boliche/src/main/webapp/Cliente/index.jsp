@@ -2,16 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="servlets.Login" %>
+<%@ page import="servlets.LoginServlet" %>
 <%@ page import= "javax.servlet.http.*" %>
 <%@ page import= "entidades.Usuario" %>
+<%@ page import= "entidades.Rol" %>
 <% 
-		HttpSession sessio = request.getSession();
-		Usuario us =(Usuario)session.getAttribute("usuario");
-		if(us==null)
+		Object u =session.getAttribute("usuario");
+		if(u==null || ((Usuario)u).getRol()!=Rol.Cliente)
 			response.sendRedirect("/");
 		else{
-		
+			Usuario us=(Usuario)u;
 %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +32,7 @@
 <div class=indice>
 	<a href="Noches.jsp">Reserva tu entrada aquí!</a>
 	<a href="Historial.jsp">Historial</a>
-	<a href="/">Editar datos</a>
+	<a href="../CambioDatosPersonales.jsp">Editar datos</a>
 	<a href="../Logout" class=salir>Salir</a>
 </div>
 

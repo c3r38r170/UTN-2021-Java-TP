@@ -9,34 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Usuario;
+import logica.Sesion;
 
 
 @WebServlet("/Logout")
 @MultipartConfig
-public class Logout extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public Logout() {
-        super();
-       
-    }
-
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		var session=request.getSession();
-		var user = (Usuario)session.getAttribute("usuario");
-		if(user!=null)
-			session.removeAttribute("usuario");
-		
-		response.sendRedirect("index.jsp");
-	}
-
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		doGet(request, response);
+		new Sesion(request.getSession()).logout().responder(response);
 	}
 
 }

@@ -3,7 +3,7 @@
 <%@page import="java.sql.Date"%>
 
 <%@ page import="java.util.List" %>
-<%@ page import="servlets.Login" %>
+<%@ page import="servlets.LoginServlet" %>
 <%@ page import= "javax.servlet.http.*" %>
 <%@ page import= "entidades.Usuario" %>
 <%@ page import= "entidades.Acceso" %>
@@ -14,7 +14,7 @@
 	if(session.getAttribute("usuario")==null || ((Usuario)session.getAttribute("usuario")).getRol()!=Rol.Seguridad){
 		
 		response.sendRedirect("/");
-	}
+	}else{
 	String mensajeNoHay=
 		"<tr id=no-hay>"
 			+"<td colspan=2> No hay ingresos en espera. </td>"
@@ -175,3 +175,6 @@
 
 </body>
 </html>	
+<%
+	}
+%>
