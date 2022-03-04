@@ -42,14 +42,9 @@ var alta = document.getElementById("alta").onclick= function()
 	contrasena.style.display= "block";
 	select.style.display= "block";
 
-<<<<<<< HEAD
    
 			
 
-=======
-	
-	 submi.disabled = true
->>>>>>> 780235913e9525fa4feecce59547c4a400f2b2bf
 		
 	return false
 		
@@ -89,7 +84,6 @@ var modificar= document.getElementById("modificar").onclick= function()
 	//submi.style.display= "block";
 	 submi.disabled = true
 	return false
-<<<<<<< HEAD
 }*/
 
 
@@ -122,7 +116,3 @@ function mostrarEliminar()
 }
 
 
-=======
-	
-}
->>>>>>> 780235913e9525fa4feecce59547c4a400f2b2bf
