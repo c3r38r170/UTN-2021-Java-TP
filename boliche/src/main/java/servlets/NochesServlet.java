@@ -28,11 +28,11 @@ public class NochesServlet extends HttpServlet {
 
 		res = new RespuestaHttp(400, "Acción inválida.");
 
-		String acceso = request.getParameter("accion");
-		if (acceso == null)
+		String accion = request.getParameter("accion");
+		if (accion == null)
 			res = new RespuestaHttp(401);
 		else
-			switch (Integer.parseInt(acceso)) {
+			switch (Integer.parseInt(accion)) {
 			case 1:
 				res = Noches.eliminar(Integer.parseInt((request.getParameter("id"))));
 				break;
