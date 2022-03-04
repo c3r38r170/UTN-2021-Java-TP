@@ -1,18 +1,13 @@
 package logica;
 
 import java.io.IOException;
-import java.net.http.HttpResponse.ResponseInfo;
 import java.sql.SQLException;
-import java.text.ParseException;
+import java.util.LinkedList;
 import java.util.regex.Pattern;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.RespuestaHttp;
+
+import datos.Conexion;
 import entidades.Usuario;
 
 public class Usuarios {
@@ -182,13 +177,24 @@ public class Usuarios {
 		
 		
 	}
+
+	public static LinkedList<Usuario> clientes() throws SQLException{
+		var lista=new LinkedList<Usuario>();
+		
+		var rs=new Conexion().executeSelect("SELECT * FROM usuarios WHERE rolID=3 ORDER BY nickname ASC");
+		while(rs.next()) {
+			lista.add(new Usuario(rs));
 		}
 		
-
+		return lista;
+	}
 	
-	
-	
-         
-		
-
-
+	public static RespuestaHttp habilitar(int clienteID,boolean habilitado) {
+		try {
+			new Usuario(clienteID).setVerificado(habilitado);
+			return new RespuestaHttp();
+		} catch (SQLException e) {
+			return new RespuestaHttp(500,e.getLocalizedMessage());
+		}
+	}
+}

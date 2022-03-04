@@ -50,8 +50,8 @@ public class Usuario {
 	}
 
 	public Usuario(ResultSet rs) throws SQLException {
-		this(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-				rs.getBoolean(6), rs.getInt(7));
+		this(rs.getInt("ID"), rs.getString("usuario"), rs.getString("contraseña"), rs.getString("nickname"), rs.getString("correo"),
+				rs.getBoolean("verificado"), rs.getInt("rolID"));
 	}
 	
 	public Usuario(int ID, String nombre, String contraseña, String nickname, String mail, boolean verificado,
@@ -224,6 +224,17 @@ public class Usuario {
 			
 			
 	    
+	}
+
+	public void setVerificado(boolean habilitado) throws SQLException {
+		this.verificado=habilitado;
+			Conexion conn = new Conexion();
+
+			conn.preparedStatement("Update usuarios u set u.verificado = ? where u.ID = ? ",
+					new PSParameter[] {
+							new PSParameter(habilitado),
+							new PSParameter(this.ID)
+					});
 	}
 	
 	
