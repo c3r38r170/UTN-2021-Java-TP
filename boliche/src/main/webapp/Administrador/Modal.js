@@ -38,9 +38,9 @@ document.getElementById('modal-form').onsubmit = function(e) {
 		})
 		.then(idfecha => {
 			if(ok){
-			// TODO lógica de posicionamiento según fecha, ir de arriba a abajo preguntando si es menor
+				let tbody=SqS("tbody");
 				let i=0
-					,trs=SqS("tbody").children
+					,trs=tbody.children
 					,fechaMilliseconds=+new Date(valuefecha)
 					,tr=createElement(["TR", {
 						dataset: { id: idfecha }, children: [
@@ -53,7 +53,9 @@ document.getElementById('modal-form').onsubmit = function(e) {
 				
 				while(trs[i] && (+new Date(trs[i].children[0].innerText))>fechaMilliseconds)
 					i++;
-				if(trs[i])
+				if(!i)
+					tbody.append(tr);
+				else if(trs[i])
 					trs[i].before(tr);
 				else trs[trs.lenght-1].after(tr);
 						
@@ -62,7 +64,7 @@ document.getElementById('modal-form').onsubmit = function(e) {
 			}
 			else {
 				toast.error("Ha ocurrido un error inesperado, reintente más tarde.");
-			}//TODO
+			}
 		});
 		
 	return false;
