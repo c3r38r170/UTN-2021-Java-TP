@@ -29,7 +29,7 @@ public class InscribirServlet extends HttpServlet {
 			return;
 		}
 
-		var nocheID=request.getParameter("accion");
+		var nocheID=request.getParameter("nocheID");
 		if(nocheID==null) {
 			response.setStatus(400);
 			return;
