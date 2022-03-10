@@ -12,7 +12,7 @@ public class Accesos {
 
 		Acceso ac= new Acceso(accesoID);
 		try {
-			ac.setEstado(accion==1?2:3,seguridad.getID());
+			ac.setEstado(accion,seguridad.getID());
 			if(!(comentario==null || comentario.isBlank()))
 				ac.setComentario(comentario);
 		} catch (SQLException e) {
